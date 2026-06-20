@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nueva Categoría</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/categoryForm.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <!-- Formulario -->
+        <div class="form-container">
+
+            <h1>
+
+                🏷️ Nueva Categoría
+
+            </h1>
+
+            <form th:action="@{/saveCategory}"
+                  th:object="${category}"
+                  method="post">
+
+                <!-- Id oculto -->
+                <input type="hidden"
+                       th:field="*{id}">
+
+
+                <!-- Nombre -->
+                <label>
+
+                    Nombre
+
+                </label>
+
+                <input type="text"
+                       th:field="*{name}"
+                       required>
+
+
+                <!-- Color -->
+                <label>
+
+                    Color
+
+                </label>
+
+                <input type="text"
+                       th:field="*{color}"
+                       placeholder="Azul, Verde, Morado...">
+
+
+                <!-- Icono -->
+                <label>
+
+                    Icono
+
+                </label>
+
+                <input type="text"
+                       th:field="*{icon}"
+                       placeholder="📚 💪 🎬 ✈️">
+
+
+                <!-- Botón -->
+                <button type="submit">
+
+                    Guardar categoría
+
+                </button>
+
+
+                <!-- Volver -->
+                <a th:href="@{/categoriesPage}">
+
+                    Volver a categorías
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
