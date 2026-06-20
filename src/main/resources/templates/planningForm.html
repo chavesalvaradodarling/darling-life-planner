@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nueva Planificación</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- Formulario -->
+    <link rel="stylesheet"
+          th:href="@{/css/planningForm.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="form-container">
+
+            <h1>
+
+                📅 Nueva Planificación
+
+            </h1>
+
+            <form th:action="@{/savePlanning}"
+                  th:object="${planning}"
+                  method="post">
+
+                <!-- Id oculto -->
+                <input type="hidden"
+                       th:field="*{id}">
+
+
+                <!-- Nombre -->
+                <label>
+
+                    Nombre
+
+                </label>
+
+                <input type="text"
+                       th:field="*{name}">
+
+
+                <!-- Descripción -->
+                <label>
+
+                    Descripción
+
+                </label>
+
+                <input type="text"
+                       th:field="*{description}">
+
+
+                <!-- Objetivo -->
+                <label>
+
+                    Objetivo
+
+                </label>
+
+                <input type="text"
+                       th:field="*{goal}">
+
+
+                <!-- Tipo -->
+                <label>
+
+                    Tipo
+
+                </label>
+
+                <select th:field="*{type}">
+
+                    <option value="WEEKLY">
+
+                        Semanal
+
+                    </option>
+
+                    <option value="MONTHLY">
+
+                        Mensual
+
+                    </option>
+
+                    <option value="BIMONTHLY">
+
+                        Bimestral
+
+                    </option>
+
+                    <option value="SEMESTER">
+
+                        Semestral
+
+                    </option>
+
+                </select>
+
+
+                <!-- Fecha inicio -->
+                <label>
+
+                    Fecha de inicio
+
+                </label>
+
+                <input type="date"
+                       th:field="*{startDate}">
+
+
+                <!-- Fecha final -->
+                <label>
+
+                    Fecha final
+
+                </label>
+
+                <input type="date"
+                       th:field="*{endDate}">
+
+
+                <!-- Botón -->
+                <button type="submit">
+
+                    Guardar planificación
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

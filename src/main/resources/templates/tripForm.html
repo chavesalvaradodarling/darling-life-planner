@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nuevo Viaje</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- Formulario -->
+    <link rel="stylesheet"
+          th:href="@{/css/tripForm.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="form-container">
+
+            <h1>
+
+                ✈️ Nuevo Viaje
+
+            </h1>
+
+            <form th:action="@{/saveTrip}"
+                  th:object="${trip}"
+                  method="post">
+
+                <!-- Id oculto -->
+                <input type="hidden"
+                       th:field="*{id}">
+
+
+                <!-- Destino -->
+                <label>
+
+                    Destino
+
+                </label>
+
+                <input type="text"
+                       th:field="*{destination}">
+
+
+                <!-- Fecha de salida -->
+                <label>
+
+                    Fecha de salida
+
+                </label>
+
+                <input type="date"
+                       th:field="*{departureDate}">
+
+
+                <!-- Fecha de regreso -->
+                <label>
+
+                    Fecha de regreso
+
+                </label>
+
+                <input type="date"
+                       th:field="*{returnDate}">
+
+
+                <!-- Botón -->
+                <button type="submit">
+
+                    Guardar viaje
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

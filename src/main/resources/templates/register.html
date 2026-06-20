@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- Permite caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Adaptable a dispositivos móviles -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la página -->
+    <title>Registro - Darling Life Planner</title>
+
+    <!-- Conecta con register.css -->
+    <link rel="stylesheet"
+          th:href="@{/css/register.css}">
+
+</head>
+
+<body>
+
+    <!-- Contenedor principal -->
+    <div class="register-container">
+
+        <!-- Nombre de la aplicación -->
+        <h1>Darling Life Planner 🌸</h1>
+
+        <!-- Mensaje principal -->
+        <h2>Crear una cuenta</h2>
+
+        <!-- Formulario -->
+        <form>
+
+            <!-- Nombre -->
+            <label>Nombre completo</label>
+
+            <input
+                    type="text"
+                    placeholder="Ingrese su nombre">
+
+            <!-- Correo -->
+            <label>Correo electrónico</label>
+
+            <input
+                    type="email"
+                    placeholder="Ingrese su correo">
+
+            <!-- Contraseña -->
+            <label>Contraseña</label>
+
+            <input
+                    type="password"
+                    placeholder="Ingrese su contraseña">
+
+            <!-- Confirmar contraseña -->
+            <label>Confirmar contraseña</label>
+
+            <input
+                    type="password"
+                    placeholder="Repita la contraseña">
+
+            <!-- Botón -->
+            <button type="submit">
+
+                Registrarse
+
+            </button>
+
+        </form>
+
+        <!-- Enlace hacia login -->
+        <p>
+
+            ¿Ya tienes una cuenta?
+
+            <a href="#">
+
+                Iniciar sesión
+
+            </a>
+
+        </p>
+
+    </div>
+
+</body>
+
+</html>

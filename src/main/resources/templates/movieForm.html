@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nueva Película</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- Formulario -->
+    <link rel="stylesheet"
+          th:href="@{/css/movieForm.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="form-container">
+
+            <h1>
+
+                🎬 Nueva Película
+
+            </h1>
+
+            <form th:action="@{/saveMovie}"
+                  th:object="${movie}"
+                  method="post">
+
+                <!-- Id oculto -->
+                <input type="hidden"
+                       th:field="*{id}">
+
+
+                <!-- Título -->
+                <label>
+
+                    Título
+
+                </label>
+
+                <input type="text"
+                       th:field="*{title}">
+
+
+                <!-- Género -->
+                <label>
+
+                    Género
+
+                </label>
+
+                <input type="text"
+                       th:field="*{genre}">
+
+
+                <!-- Duración -->
+                <label>
+
+                    Duración (minutos)
+
+                </label>
+
+                <input type="number"
+                       th:field="*{duration}">
+
+
+                <!-- Imagen -->
+                <label>
+
+                    Imagen o URL
+
+                </label>
+
+                <input type="text"
+                       th:field="*{image}">
+
+
+                <!-- Botón -->
+                <button type="submit">
+
+                    Guardar película
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

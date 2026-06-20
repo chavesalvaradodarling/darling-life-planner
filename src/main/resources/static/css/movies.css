@@ -1,0 +1,193 @@
+/*
+=========================================
+CONTENEDOR PRINCIPAL
+=========================================
+*/
+
+.activities-container{
+
+    padding:30px;
+
+}
+
+
+/*
+=========================================
+TÍTULO
+=========================================
+*/
+
+.activities-container h1{
+
+    color:#7C6A91;
+
+    margin-bottom:25px;
+
+}
+
+
+/*
+=========================================
+BOTÓN NUEVA PELÍCULA
+=========================================
+*/
+
+.new-activity{
+
+    display:inline-block;
+
+    background-color:#C9A7EB;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:15px 25px;
+
+    border-radius:15px;
+
+    margin-bottom:30px;
+
+    font-size:16px;
+
+    transition:0.3s;
+
+}
+
+
+.new-activity:hover{
+
+    background-color:#B48AD6;
+
+}
+
+
+/*
+=========================================
+TABLA
+=========================================
+*/
+
+table{
+
+    width:100%;
+
+    background-color:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0px 4px 12px rgba(0,0,0,0.08);
+
+    border-collapse:collapse;
+
+}
+
+
+/*
+=========================================
+ENCABEZADOS
+=========================================
+*/
+
+th{
+
+    background-color:#F4E7F7;
+
+    color:#7C6A91;
+
+    padding:20px;
+
+}
+
+
+/*
+=========================================
+FILAS
+=========================================
+*/
+
+td{
+
+    padding:20px;
+
+    text-align:center;
+
+    color:#666;
+
+}
+
+
+tr{
+
+    border-bottom:1px solid #EEE;
+
+}
+
+
+tbody tr:hover{
+
+    background-color:#FAF7FC;
+
+}
+
+
+/*
+=========================================
+BOTÓN EDITAR
+=========================================
+*/
+
+.action-edit{
+
+    text-decoration:none;
+
+    background-color:#D6E4FF;
+
+    color:#4A73B8;
+
+    padding:10px 15px;
+
+    border-radius:12px;
+
+    transition:0.3s;
+
+}
+
+
+.action-edit:hover{
+
+    background-color:#BFD5FF;
+
+}
+
+
+/*
+=========================================
+BOTÓN ELIMINAR
+=========================================
+*/
+
+.action-delete{
+
+    text-decoration:none;
+
+    background-color:#FFD6D6;
+
+    color:#D84B4B;
+
+    padding:10px 15px;
+
+    border-radius:12px;
+
+    transition:0.3s;
+
+}
+
+
+.action-delete:hover{
+
+    background-color:#FFC2C2;
+
+}

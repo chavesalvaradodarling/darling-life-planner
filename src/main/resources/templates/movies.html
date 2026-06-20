@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mis Películas</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- Movies -->
+    <link rel="stylesheet"
+          th:href="@{/css/movies.css}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}">
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+
+            <!-- Navbar -->
+            <div th:replace="~{fragments/navbar :: navbar}">
+            </div>
+
+            <!-- Contenedor -->
+            <div class="activities-container">
+
+                <h1>
+
+                    🎬 Mis Películas
+
+                </h1>
+
+                <!-- Botón -->
+                <a th:href="@{/newMovie}"
+                   class="new-activity">
+
+                    + Nueva película
+
+                </a>
+
+                <!-- Tabla -->
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Título</th>
+
+                            <th>Género</th>
+
+                            <th>Duración</th>
+
+                            <th>Imagen</th>
+
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr th:each="movie : ${movies}">
+
+                            <!-- Título -->
+                            <td th:text="${movie.title}">
+                            </td>
+
+                            <!-- Género -->
+                            <td th:text="${movie.genre}">
+                            </td>
+
+                            <!-- Duración -->
+                            <td>
+
+                                <span th:text="${movie.duration}">
+                                </span>
+
+                                min
+
+                            </td>
+
+                            <!-- Imagen -->
+                            <td th:text="${movie.image}">
+                            </td>
+
+                            <!-- Acciones -->
+                            <td>
+
+                                <!-- Editar -->
+                                <a class="action-edit"
+                                   th:href="@{/editMovie/{id}(id=${movie.id})}">
+
+                                    ✏️ Editar
+
+                                </a>
+
+                                &nbsp;
+
+                                <!-- Eliminar -->
+                                <a class="action-delete"
+                                   th:href="@{/deleteMovie/{id}(id=${movie.id})}"
+
+                                   onclick="return confirm('¿Desea eliminar esta película?')">
+
+                                    🗑️ Eliminar
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

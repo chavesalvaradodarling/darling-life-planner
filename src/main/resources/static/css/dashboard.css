@@ -1,0 +1,32 @@
+/*
+=====================================
+SECCIÓN CENTRAL DEL DASHBOARD
+=====================================
+*/
+
+.dashboard-content{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:25px;
+
+    padding:25px;
+
+}
+
+
+/*
+PANEL DERECHO
+*/
+
+.right-panel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}

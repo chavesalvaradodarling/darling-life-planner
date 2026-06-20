@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- Permite usar caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Hace que la página sea adaptable a celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Iniciar sesión - Darling Life Planner</title>
+
+    <!-- Conecta este HTML con el archivo login.css -->
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+
+</head>
+
+<body>
+
+    <!-- Contenedor principal del login -->
+    <div class="login-container">
+
+        <!-- Nombre de la aplicación -->
+        <h1>Darling Life Planner 🌸</h1>
+
+        <!-- Mensaje de bienvenida -->
+        <h2>Bienvenido de nuevo</h2>
+
+        <!-- Formulario de inicio de sesión -->
+        <form>
+
+            <!-- Campo correo -->
+            <label>Correo electrónico</label>
+
+            <input
+                    type="email"
+                    placeholder="Ingrese su correo">
+
+            <!-- Campo contraseña -->
+            <label>Contraseña</label>
+
+            <input
+                    type="password"
+                    placeholder="Ingrese su contraseña">
+
+            <!-- Botón para iniciar sesión -->
+            <button type="submit">
+
+                Iniciar sesión
+
+            </button>
+
+        </form>
+
+        <!-- Enlace para registrarse -->
+        <p>
+
+            ¿No tienes cuenta?
+
+            <a href="#">
+
+                Registrarse
+
+            </a>
+
+        </p>
+
+    </div>
+
+</body>
+
+</html>

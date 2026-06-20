@@ -1,0 +1,95 @@
+/*
+=========================================
+MENÚ FLOTANTE
+=========================================
+*/
+
+.floating-menu{
+
+    position:fixed;
+
+    bottom:40px;
+
+    right:40px;
+
+}
+
+
+/*
+BOTÓN +
+*/
+
+.floating-button{
+
+    width:70px;
+
+    height:70px;
+
+    background-color:#C9A7EB;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:40px;
+
+    cursor:pointer;
+
+    box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+
+}
+
+
+/*
+OPCIONES
+*/
+
+.floating-options{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    margin-bottom:20px;
+
+}
+
+
+/*
+CADA OPCIÓN
+*/
+
+.option{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+
+    color:#666;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+.option:hover{
+
+    background-color:#F4E7F7;
+
+    color:#7C6A91;
+
+}

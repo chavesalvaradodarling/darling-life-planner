@@ -1,0 +1,86 @@
+/*
+=========================================
+CONTENEDOR DE TARJETAS
+=========================================
+*/
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+    padding:30px;
+
+}
+
+
+/*
+=========================================
+TARJETAS
+=========================================
+*/
+
+.card{
+
+    background-color:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0px 4px 12px rgba(0,0,0,0.08);
+
+    transition:0.3s;
+
+}
+
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+/*
+ICONO
+*/
+
+.card-icon{
+
+    font-size:25px;
+
+    margin-bottom:15px;
+
+}
+
+
+/*
+TÍTULO
+*/
+
+.card h3{
+
+    color:#8B7AA8;
+
+    font-size:16px;
+
+    margin-bottom:15px;
+
+}
+
+
+/*
+VALOR
+*/
+
+.card h2{
+
+    color:#444;
+
+    font-size:35px;
+
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- Caracteres especiales -->
+    <meta charset="UTF-8">
+
+    <!-- Responsive -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <!-- Título -->
+    <title>Darling Life Planner</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- CSS del menú lateral -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- CSS de la barra superior -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- CSS de las tarjetas -->
+    <link rel="stylesheet"
+          th:href="@{/css/cards.css}">
+
+    <!-- CSS del plan del día -->
+    <link rel="stylesheet"
+          th:href="@{/css/dailyplan.css}">
+
+    <!-- CSS de metas -->
+    <link rel="stylesheet"
+          th:href="@{/css/goals.css}">
+
+    <!-- CSS de próximas actividades -->
+    <link rel="stylesheet"
+          th:href="@{/css/upcoming.css}">
+
+    <!-- CSS del dashboard -->
+    <link rel="stylesheet"
+          th:href="@{/css/dashboard.css}">
+
+    <!-- CSS del calendario -->
+    <link rel="stylesheet"
+          th:href="@{/css/calendar.css}">
+
+    <!-- CSS del botón flotante -->
+    <link rel="stylesheet"
+          th:href="@{/css/floatingButton.css}">
+
+</head>
+
+<body>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}">
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+
+            <!-- Navbar -->
+            <div th:replace="~{fragments/navbar :: navbar}">
+            </div>
+
+            <!-- Tarjetas estadísticas -->
+            <div class="cards">
+
+                <!-- Horas de estudio -->
+                <div class="card">
+
+                    <div class="card-icon">
+                        📚
+                    </div>
+
+                    <h3>Horas de estudio</h3>
+
+                    <h2>32.5 h</h2>
+
+                </div>
+
+
+                <!-- Horas de ejercicio -->
+                <div class="card">
+
+                    <div class="card-icon">
+                        💪
+                    </div>
+
+                    <h3>Horas de ejercicio</h3>
+
+                    <h2>8.2 h</h2>
+
+                </div>
+
+
+                <!-- Horas de ocio -->
+                <div class="card">
+
+                    <div class="card-icon">
+                        🎬
+                    </div>
+
+                    <h3>Horas de ocio</h3>
+
+                    <h2>15 h</h2>
+
+                </div>
+
+
+                <!-- Cumplimiento -->
+                <div class="card">
+
+                    <div class="card-icon">
+                        🎯
+                    </div>
+
+                    <h3>Cumplimiento general</h3>
+
+                    <h2>88 %</h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- Sección central -->
+            <div class="dashboard-content">
+
+                <!-- Plan del día -->
+                <div th:replace="~{fragments/dailyplan :: dailyPlan}">
+                </div>
+
+
+                <!-- Panel derecho -->
+                <div class="right-panel">
+
+                    <!-- Metas -->
+                    <div th:replace="~{fragments/goals :: goals}">
+                    </div>
+
+                    <!-- Próximas actividades -->
+                    <div th:replace="~{fragments/upcoming :: upcoming}">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Calendario semanal -->
+            <div th:replace="~{fragments/calendar :: calendar}">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Botón flotante -->
+    <div th:replace="~{fragments/floatingButton :: floatingButton}">
+    </div>
+
+</body>
+
+</html>

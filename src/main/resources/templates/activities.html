@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mis Actividades</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- CSS Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- CSS Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- CSS Activities -->
+    <link rel="stylesheet"
+          th:href="@{/css/activities.css}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}">
+        </div>
+
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+
+            <!-- Navbar -->
+            <div th:replace="~{fragments/navbar :: navbar}">
+            </div>
+
+
+            <!-- Contenedor de actividades -->
+            <div class="activities-container">
+
+                <h1>
+
+                    📋 Mis Actividades
+
+                </h1>
+
+
+                <!-- Botón para crear una actividad -->
+                <a th:href="@{/newActivity}"
+                   class="new-activity">
+
+                    + Nueva actividad
+
+                </a>
+
+
+                <!-- Tabla -->
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Título</th>
+
+                            <th>Fecha</th>
+
+                            <th>Prioridad</th>
+
+                            <th>Estado</th>
+
+                            <th>Horas planificadas</th>
+
+                            <th>Horas reales</th>
+
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <!-- Recorrer actividades -->
+                        <tr th:each="activity : ${activities}">
+
+                            <!-- Título -->
+                            <td th:text="${activity.title}">
+                            </td>
+
+
+                            <!-- Fecha -->
+                            <td th:text="${activity.activityDate}">
+                            </td>
+
+
+                            <!-- Prioridad -->
+                            <td th:text="${activity.priority}">
+                            </td>
+
+
+                            <!-- Estado -->
+                            <td th:text="${activity.status}">
+                            </td>
+
+
+                            <!-- Horas planificadas -->
+                            <td th:text="${activity.plannedHours}">
+                            </td>
+
+
+                            <!-- Horas reales -->
+                            <td th:text="${activity.realHours}">
+                            </td>
+
+
+                            <!-- Acciones -->
+                            <td>
+
+                                <!-- Editar -->
+                                <a class="action-edit"
+                                   th:href="@{/editActivity/{id}(id=${activity.id})}">
+
+                                    ✏️ Editar
+
+                                </a>
+
+                                &nbsp;
+
+                                <!-- Eliminar -->
+                                <a class="action-delete"
+                                   th:href="@{/deleteActivity/{id}(id=${activity.id})}"
+
+                                   onclick="return confirm('¿Desea eliminar esta actividad?')">
+
+                                    🗑️ Eliminar
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

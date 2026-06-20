@@ -1,0 +1,37 @@
+/*
+=========================================
+ESTILOS GENERALES
+=========================================
+*/
+
+body{
+
+    margin:0;
+
+    font-family:Arial, sans-serif;
+
+    background-color:#F9F3F6;
+
+}
+
+
+/*
+CONTENEDOR PRINCIPAL
+*/
+
+.container{
+
+    display:flex;
+
+}
+
+
+/*
+CONTENIDO PRINCIPAL
+*/
+
+.main-content{
+
+    flex:1;
+
+}

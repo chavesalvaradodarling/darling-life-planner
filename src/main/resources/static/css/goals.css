@@ -1,0 +1,120 @@
+/*
+=====================================
+METAS
+=====================================
+*/
+
+.goals{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+
+}
+
+
+/*
+CADA META
+*/
+
+.goal{
+
+    margin-top:25px;
+
+}
+
+
+/*
+TÍTULO Y VALOR
+*/
+
+.goal-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:10px;
+
+}
+
+
+.goal-info h4{
+
+    color:#666;
+
+}
+
+
+.goal-info span{
+
+    color:#7C6A91;
+
+    font-weight:bold;
+
+}
+
+
+/*
+BARRA EXTERIOR
+*/
+
+.progress-bar{
+
+    width:100%;
+
+    height:10px;
+
+    background-color:#F0F0F0;
+
+    border-radius:20px;
+
+}
+
+
+/*
+BARRA INTERIOR
+*/
+
+.progress{
+
+    height:10px;
+
+    border-radius:20px;
+
+}
+
+
+/*
+PORCENTAJES
+*/
+
+.gym-progress{
+
+    width:66%;
+
+    background-color:#CDEAC0;
+
+}
+
+
+.movie-progress{
+
+    width:60%;
+
+    background-color:#FFD6E0;
+
+}
+
+
+.study-progress{
+
+    width:75%;
+
+    background-color:#D6E4FF;
+
+}

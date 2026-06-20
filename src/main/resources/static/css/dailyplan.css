@@ -1,0 +1,105 @@
+/*
+=========================================
+PLAN DEL DÍA
+=========================================
+*/
+
+.daily-plan{
+
+    background-color:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+
+}
+
+
+/*
+ACTIVIDADES
+*/
+
+.task{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:25px;
+
+}
+
+
+/*
+PARTE IZQUIERDA
+*/
+
+.task-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+
+.time{
+
+    color:#7C6A91;
+
+    font-weight:bold;
+
+    min-width:55px;
+
+}
+
+
+.task h4{
+
+    color:#444;
+
+}
+
+
+.task p{
+
+    color:#888;
+
+}
+
+
+/*
+ESTADOS
+*/
+
+.completed{
+
+    color:green;
+
+    font-size:20px;
+
+}
+
+
+.partial{
+
+    color:orange;
+
+    font-size:20px;
+
+}
+
+
+.pending{
+
+    color:#999;
+
+    font-size:20px;
+
+}

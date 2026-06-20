@@ -1,0 +1,40 @@
+/*
+=====================================
+PRÓXIMAS ACTIVIDADES
+=====================================
+*/
+
+.upcoming{
+
+    background:white;
+
+    padding:25px;
+
+    margin-top:25px;
+
+    border-radius:20px;
+
+    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+
+}
+
+
+.event{
+
+    margin-top:20px;
+
+}
+
+
+.event h4{
+
+    color:#7C6A91;
+
+}
+
+
+.event p{
+
+    color:#666;
+
+}

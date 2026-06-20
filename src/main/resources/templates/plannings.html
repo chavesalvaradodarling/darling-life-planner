@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mis Planificaciones</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- CSS de planificaciones -->
+    <link rel="stylesheet"
+          th:href="@{/css/plannings.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="activities-container">
+
+            <h1>
+
+                📅 Mis Planificaciones
+
+            </h1>
+
+            <!-- Botón -->
+            <a th:href="@{/newPlanning}"
+               class="new-activity">
+
+                + Nueva planificación
+
+            </a>
+
+            <!-- Tabla -->
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Nombre</th>
+
+                        <th>Objetivo</th>
+
+                        <th>Tipo</th>
+
+                        <th>Fecha inicio</th>
+
+                        <th>Fecha final</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="planning : ${plannings}">
+
+                        <!-- Nombre -->
+                        <td th:text="${planning.name}">
+                        </td>
+
+                        <!-- Objetivo -->
+                        <td th:text="${planning.goal}">
+                        </td>
+
+                        <!-- Tipo -->
+                        <td th:text="${planning.type}">
+                        </td>
+
+                        <!-- Fecha inicio -->
+                        <td th:text="${planning.startDate}">
+                        </td>
+
+                        <!-- Fecha final -->
+                        <td th:text="${planning.endDate}">
+                        </td>
+
+                        <!-- Acciones -->
+                        <td>
+
+                            <!-- Editar -->
+                            <a class="action-edit"
+                               th:href="@{/editPlanning/{id}(id=${planning.id})}">
+
+                                ✏️ Editar
+
+                            </a>
+
+                            &nbsp;
+
+                            <!-- Eliminar -->
+                            <a class="action-delete"
+                               th:href="@{/deletePlanning/{id}(id=${planning.id})}"
+
+                               onclick="return confirm('¿Desea eliminar esta planificación?')">
+
+                                🗑️ Eliminar
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

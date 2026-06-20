@@ -1,0 +1,95 @@
+/*
+=======================================
+SIDEBAR
+=======================================
+*/
+
+.sidebar{
+
+    width:250px;
+
+    min-height:100vh;
+
+    background-color:white;
+
+    padding:30px;
+
+    box-shadow:0px 0px 15px rgba(0,0,0,0.08);
+
+}
+
+
+/*
+TÍTULO
+*/
+.sidebar h2{
+
+    color:#7C6A91;
+
+    margin-bottom:40px;
+
+    font-size:32px;
+
+}
+
+
+/*
+TÍTULOS DE SECCIÓN
+*/
+.sidebar h4{
+
+    color:#B0A5B9;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    margin-top:30px;
+
+    margin-bottom:15px;
+
+}
+
+
+/*
+LISTAS
+*/
+.sidebar ul{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+
+/*
+ELEMENTOS DEL MENÚ
+*/
+.sidebar li{
+
+    padding:14px 18px;
+
+    margin-bottom:6px;
+
+    border-radius:15px;
+
+    color:#666;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+/*
+EFECTO AL PASAR EL MOUSE
+*/
+.sidebar li:hover{
+
+    background-color:#F4E7F7;
+
+    color:#7C6A91;
+
+}

@@ -1,0 +1,204 @@
+/*
+------------------------------------------------
+ESTILOS GENERALES DE LA PÁGINA
+------------------------------------------------
+*/
+
+/*
+Quita márgenes por defecto
+y centra el contenido.
+*/
+body{
+
+    margin:0;
+
+    /*
+    Fuente elegante y moderna
+    */
+    font-family:Arial, sans-serif;
+
+    /*
+    Color pastel del fondo
+    */
+    background-color:#F9F3F6;
+
+    /*
+    Centra vertical y horizontalmente
+    */
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    /*
+    Altura completa de la pantalla
+    */
+    height:100vh;
+
+}
+
+
+/*
+------------------------------------------------
+CAJA PRINCIPAL DEL LOGIN
+------------------------------------------------
+*/
+
+.login-container{
+
+    background-color:white;
+
+    width:400px;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    /*
+    Sombra suave
+    */
+    box-shadow:0px 4px 15px rgba(0,0,0,0.1);
+
+}
+
+
+/*
+------------------------------------------------
+TÍTULO PRINCIPAL
+------------------------------------------------
+*/
+
+h1{
+
+    text-align:center;
+
+    color:#7C6A91;
+
+}
+
+
+/*
+------------------------------------------------
+SUBTÍTULO
+------------------------------------------------
+*/
+
+h2{
+
+    text-align:center;
+
+    color:#A087B8;
+
+    margin-bottom:30px;
+
+}
+
+
+/*
+------------------------------------------------
+ETIQUETAS
+------------------------------------------------
+*/
+
+label{
+
+    display:block;
+
+    margin-top:15px;
+
+    color:#555;
+
+}
+
+
+/*
+------------------------------------------------
+CAJAS DE TEXTO
+------------------------------------------------
+*/
+
+input{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:8px;
+
+    border:1px solid #DDD;
+
+    border-radius:10px;
+
+    box-sizing:border-box;
+
+}
+
+
+/*
+------------------------------------------------
+BOTÓN
+------------------------------------------------
+*/
+
+button{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background-color:#D8BFD8;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+
+/*
+Efecto al pasar el mouse
+*/
+button:hover{
+
+    background-color:#C7A6D8;
+
+}
+
+
+/*
+------------------------------------------------
+TEXTO INFERIOR
+------------------------------------------------
+*/
+
+p{
+
+    text-align:center;
+
+    margin-top:25px;
+
+}
+
+
+/*
+------------------------------------------------
+ENLACE REGISTRARSE
+------------------------------------------------
+*/
+
+a{
+
+    text-decoration:none;
+
+    color:#A087B8;
+
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nuevo Curso</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- Formulario -->
+    <link rel="stylesheet"
+          th:href="@{/css/courseForm.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="form-container">
+
+            <h1>
+
+                📚 Nuevo Curso
+
+            </h1>
+
+            <form th:action="@{/saveCourse}"
+                  th:object="${course}"
+                  method="post">
+
+                <!-- Id oculto -->
+                <input type="hidden"
+                       th:field="*{id}">
+
+                <!-- Nombre -->
+                <label>
+
+                    Nombre del curso
+
+                </label>
+
+                <input type="text"
+                       th:field="*{name}">
+
+
+                <!-- Código -->
+                <label>
+
+                    Código
+
+                </label>
+
+                <input type="text"
+                       th:field="*{code}">
+
+
+                <!-- Créditos -->
+                <label>
+
+                    Créditos
+
+                </label>
+
+                <input type="number"
+                       th:field="*{credits}">
+
+
+                <!-- Profesor -->
+                <label>
+
+                    Profesor
+
+                </label>
+
+                <input type="text"
+                       th:field="*{teacher}">
+
+
+                <!-- Botón -->
+                <button type="submit">
+
+                    Guardar curso
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
