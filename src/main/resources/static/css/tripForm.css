@@ -77,6 +77,8 @@ INPUTS
 
     font-size:15px;
 
+    box-sizing:border-box;
+
 }
 
 
@@ -112,5 +114,35 @@ BOTÓN GUARDAR
 .form-container button:hover{
 
     background-color:#B48AD6;
+
+}
+
+
+/*
+=========================================
+ENLACE VOLVER
+=========================================
+*/
+
+.form-container a{
+
+    display:inline-block;
+
+    margin-left:20px;
+
+    color:#7C6A91;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+
+.form-container a:hover{
+
+    color:#B48AD6;
 
 }

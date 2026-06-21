@@ -42,7 +42,7 @@ BOTÓN NUEVA PLANIFICACIÓN
 
     text-decoration:none;
 
-    padding:15px 25px;
+    padding:8px 12px;
 
     border-radius:15px;
 
@@ -99,6 +99,8 @@ th{
 
     padding:20px;
 
+    font-size:15px;
+
 }
 
 
@@ -126,6 +128,12 @@ tr{
 }
 
 
+/*
+=========================================
+EFECTO AL PASAR EL MOUSE
+=========================================
+*/
+
 tbody tr:hover{
 
     background-color:#FAF7FC;
@@ -135,7 +143,7 @@ tbody tr:hover{
 
 /*
 =========================================
-BOTÓN EDITAR
+BOTONES DE ACCIONES
 =========================================
 */
 
@@ -147,11 +155,15 @@ BOTÓN EDITAR
 
     color:#4A73B8;
 
-    padding:10px 15px;
+    padding:8px 12px;
 
     border-radius:12px;
 
     transition:0.3s;
+
+    display:inline-block;
+
+    margin-right:10px;
 
 }
 
@@ -163,12 +175,6 @@ BOTÓN EDITAR
 }
 
 
-/*
-=========================================
-BOTÓN ELIMINAR
-=========================================
-*/
-
 .action-delete{
 
     text-decoration:none;
@@ -177,11 +183,13 @@ BOTÓN ELIMINAR
 
     color:#D84B4B;
 
-    padding:10px 15px;
+    padding:8px 12px;
 
     border-radius:12px;
 
     transition:0.3s;
+
+    display:inline-block;
 
 }
 

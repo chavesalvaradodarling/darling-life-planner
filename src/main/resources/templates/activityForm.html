@@ -33,14 +33,12 @@
         <div th:replace="~{fragments/sidebar :: sidebar}">
         </div>
 
-
         <!-- Contenido principal -->
         <div class="main-content">
 
             <!-- Navbar -->
             <div th:replace="~{fragments/navbar :: navbar}">
             </div>
-
 
             <!-- Formulario -->
             <div class="form-container">
@@ -52,6 +50,10 @@
                 <form th:action="@{/saveActivity}"
                       th:object="${activity}"
                       method="post">
+
+                    <!-- Id oculto -->
+                    <input type="hidden"
+                           th:field="*{id}">
 
 
                     <!-- Título -->
@@ -104,6 +106,23 @@
                     <input type="number"
                            step="0.5"
                            th:field="*{realHours}">
+
+
+                    <!-- Categoría -->
+                    <label>Categoría</label>
+
+                    <select th:field="*{category.id}">
+
+                        <option value="">
+                            Seleccione una categoría
+                        </option>
+
+                        <option th:each="category : ${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.icon + ' ' + category.name}">
+                        </option>
+
+                    </select>
 
 
                     <!-- Prioridad -->

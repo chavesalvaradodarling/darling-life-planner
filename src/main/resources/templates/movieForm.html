@@ -30,93 +30,106 @@
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- Sidebar -->
-    <div th:replace="~{fragments/sidebar :: sidebar}">
-    </div>
-
-    <div class="main-content">
-
-        <!-- Navbar -->
-        <div th:replace="~{fragments/navbar :: navbar}">
+        <!-- Sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}">
         </div>
 
-        <div class="form-container">
+        <!-- Contenido principal -->
+        <div class="main-content">
 
-            <h1>
+            <!-- Navbar -->
+            <div th:replace="~{fragments/navbar :: navbar}">
+            </div>
 
-                🎬 Nueva Película
+            <!-- Formulario -->
+            <div class="form-container">
 
-            </h1>
+                <h1>
 
-            <form th:action="@{/saveMovie}"
-                  th:object="${movie}"
-                  method="post">
+                    🎬 Nueva Película
 
-                <!-- Id oculto -->
-                <input type="hidden"
-                       th:field="*{id}">
+                </h1>
 
+                <form th:action="@{/saveMovie}"
+                      th:object="${movie}"
+                      method="post">
 
-                <!-- Título -->
-                <label>
-
-                    Título
-
-                </label>
-
-                <input type="text"
-                       th:field="*{title}">
+                    <!-- Id oculto -->
+                    <input type="hidden"
+                           th:field="*{id}">
 
 
-                <!-- Género -->
-                <label>
+                    <!-- Título -->
+                    <label>
 
-                    Género
+                        Título
 
-                </label>
+                    </label>
 
-                <input type="text"
-                       th:field="*{genre}">
-
-
-                <!-- Duración -->
-                <label>
-
-                    Duración (minutos)
-
-                </label>
-
-                <input type="number"
-                       th:field="*{duration}">
+                    <input type="text"
+                           th:field="*{title}"
+                           required>
 
 
-                <!-- Imagen -->
-                <label>
+                    <!-- Género -->
+                    <label>
 
-                    Imagen o URL
+                        Género
 
-                </label>
+                    </label>
 
-                <input type="text"
-                       th:field="*{image}">
+                    <input type="text"
+                           th:field="*{genre}"
+                           required>
 
 
-                <!-- Botón -->
-                <button type="submit">
+                    <!-- Duración -->
+                    <label>
 
-                    Guardar película
+                        Duración (minutos)
 
-                </button>
+                    </label>
 
-            </form>
+                    <input type="number"
+                           th:field="*{duration}"
+                           required>
+
+
+                    <!-- Imagen -->
+                    <label>
+
+                        URL de la imagen
+
+                    </label>
+
+                    <input type="text"
+                           th:field="*{image}">
+
+
+                    <!-- Botón guardar -->
+                    <button type="submit">
+
+                        Guardar película
+
+                    </button>
+
+
+                    <!-- Regresar -->
+                    <a th:href="@{/moviesPage}">
+
+                        Volver a películas
+
+                    </a>
+
+                </form>
+
+            </div>
 
         </div>
 
     </div>
-
-</div>
 
 </body>
 

@@ -67,7 +67,8 @@
                 </label>
 
                 <input type="text"
-                       th:field="*{name}">
+                       th:field="*{name}"
+                       required>
 
 
                 <!-- Descripción -->
@@ -78,7 +79,8 @@
                 </label>
 
                 <input type="text"
-                       th:field="*{description}">
+                       th:field="*{description}"
+                       required>
 
 
                 <!-- Objetivo -->
@@ -89,7 +91,8 @@
                 </label>
 
                 <input type="text"
-                       th:field="*{goal}">
+                       th:field="*{goal}"
+                       required>
 
 
                 <!-- Tipo -->
@@ -136,7 +139,8 @@
                 </label>
 
                 <input type="date"
-                       th:field="*{startDate}">
+                       th:field="*{startDate}"
+                       required>
 
 
                 <!-- Fecha final -->
@@ -147,7 +151,8 @@
                 </label>
 
                 <input type="date"
-                       th:field="*{endDate}">
+                       th:field="*{endDate}"
+                       required>
 
 
                 <!-- Botón -->
@@ -156,6 +161,14 @@
                     Guardar planificación
 
                 </button>
+
+
+                <!-- Volver -->
+                <a th:href="@{/planningsPage}">
+
+                    Volver a planificaciones
+
+                </a>
 
             </form>
 

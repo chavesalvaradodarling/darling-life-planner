@@ -10,19 +10,23 @@ import com.info.spring.dar.springboot_aplicacion.entity.Activity;
 import com.info.spring.dar.springboot_aplicacion.service.ActivityService;
 
 @Controller
-public class IndexController {
+public class ReportViewController {
 
     private final ActivityService activityService;
 
-    public IndexController(ActivityService activityService) {
+    public ReportViewController(ActivityService activityService) {
         this.activityService = activityService;
     }
 
-    @GetMapping("/")
-    public String index(Model model) {
+    @GetMapping("/reportsPage")
+    public String showReports(Model model) {
 
         List<Activity> activities =
                 activityService.getAllActivities();
+
+        int completed = 0;
+        int partial = 0;
+        int pending = 0;
 
         double studyHours = 0;
         double exerciseHours = 0;
@@ -30,6 +34,26 @@ public class IndexController {
 
         for (Activity activity : activities) {
 
+            // Contar estados
+            if (activity.getStatus().equals("COMPLETED")) {
+
+                completed++;
+
+            }
+
+            else if (activity.getStatus().equals("PARTIALLY_COMPLETED")) {
+
+                partial++;
+
+            }
+
+            else if (activity.getStatus().equals("NOT_COMPLETED")) {
+
+                pending++;
+
+            }
+
+            // Sumar horas por categoría
             if (activity.getCategory() != null) {
 
                 String categoryName =
@@ -58,6 +82,22 @@ public class IndexController {
         }
 
         model.addAttribute(
+                "totalActivities",
+                activities.size());
+
+        model.addAttribute(
+                "completedActivities",
+                completed);
+
+        model.addAttribute(
+                "partialActivities",
+                partial);
+
+        model.addAttribute(
+                "pendingActivities",
+                pending);
+
+        model.addAttribute(
                 "studyHours",
                 studyHours);
 
@@ -69,17 +109,7 @@ public class IndexController {
                 "leisureHours",
                 leisureHours);
 
-        model.addAttribute(
-                "totalActivities",
-                activities.size());
-
-        // NUEVO
-        model.addAttribute(
-                "activities",
-                activities);
-
-        return "index";
-
+        return "reports";
     }
 
 }

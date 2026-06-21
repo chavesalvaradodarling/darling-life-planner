@@ -2,9 +2,7 @@ package com.info.spring.dar.springboot_aplicacion.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.info.spring.dar.springboot_aplicacion.entity.Movie;
 import com.info.spring.dar.springboot_aplicacion.service.MovieService;
@@ -21,7 +19,7 @@ public class MovieViewController {
     }
 
     /*
-     * Muestra todas las películas
+     * Mostrar todas las películas
      */
     @GetMapping("/moviesPage")
     public String showMovies(Model model) {
@@ -34,7 +32,7 @@ public class MovieViewController {
     }
 
     /*
-     * Muestra el formulario para crear una nueva película
+     * Formulario para nueva película
      */
     @GetMapping("/newMovie")
     public String showMovieForm(Model model) {
@@ -47,7 +45,7 @@ public class MovieViewController {
     }
 
     /*
-     * Guarda una película en MySQL
+     * Guardar película
      */
     @PostMapping("/saveMovie")
     public String saveMovie(Movie movie) {
@@ -58,12 +56,11 @@ public class MovieViewController {
     }
 
     /*
-     * Editar una película
+     * Editar película
      */
     @GetMapping("/editMovie/{id}")
-    public String editMovie(
-            @PathVariable Long id,
-            Model model) {
+    public String editMovie(@PathVariable Long id,
+                            Model model) {
 
         Movie movie =
                 movieService.getMovieById(id);
@@ -76,11 +73,10 @@ public class MovieViewController {
     }
 
     /*
-     * Eliminar una película
+     * Eliminar película
      */
     @GetMapping("/deleteMovie/{id}")
-    public String deleteMovie(
-            @PathVariable Long id) {
+    public String deleteMovie(@PathVariable Long id) {
 
         movieService.deleteMovie(id);
 

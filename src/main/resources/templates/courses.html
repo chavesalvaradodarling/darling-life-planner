@@ -10,19 +10,15 @@
 
     <title>Mis Cursos</title>
 
-    <!-- CSS principal -->
     <link rel="stylesheet"
           th:href="@{/css/style.css}">
 
-    <!-- CSS Sidebar -->
     <link rel="stylesheet"
           th:href="@{/css/sidebar.css}">
 
-    <!-- CSS Navbar -->
     <link rel="stylesheet"
           th:href="@{/css/navbar.css}">
 
-    <!-- CSS Courses -->
     <link rel="stylesheet"
           th:href="@{/css/courses.css}">
 
@@ -30,108 +26,106 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Sidebar -->
-        <div th:replace="~{fragments/sidebar :: sidebar}">
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
         </div>
 
-        <!-- Contenido principal -->
-        <div class="main-content">
+        <div class="activities-container">
 
-            <!-- Navbar -->
-            <div th:replace="~{fragments/navbar :: navbar}">
-            </div>
+            <h1>
 
-            <!-- Contenedor de cursos -->
-            <div class="activities-container">
+                📚 Mis Cursos
 
-                <h1>
+            </h1>
 
-                    📚 Mis Cursos
 
-                </h1>
+            <!-- Botón -->
+            <a th:href="@{/newCourse}"
+               class="new-activity">
 
-                <!-- Botón nuevo curso -->
-                <a th:href="@{/newCourse}"
-                   class="new-activity">
+                + Nuevo curso
 
-                    + Nuevo curso
+            </a>
 
-                </a>
 
-                <!-- Tabla -->
-                <table>
+            <!-- Tabla -->
+            <table>
 
-                    <thead>
+                <thead>
 
-                        <tr>
+                    <tr>
 
-                            <th>Nombre</th>
+                        <th>Curso</th>
 
-                            <th>Código</th>
+                        <th>Código</th>
 
-                            <th>Créditos</th>
+                        <th>Créditos</th>
 
-                            <th>Profesor</th>
+                        <th>Profesor</th>
 
-                            <th>Acciones</th>
+                        <th>Acciones</th>
 
-                        </tr>
+                    </tr>
 
-                    </thead>
+                </thead>
 
-                    <tbody>
+                <tbody>
 
-                        <tr th:each="course : ${courses}">
+                    <tr th:each="course : ${courses}">
 
-                            <td th:text="${course.name}">
-                            </td>
+                        <td th:text="${course.name}">
+                        </td>
 
-                            <td th:text="${course.code}">
-                            </td>
+                        <td th:text="${course.code}">
+                        </td>
 
-                            <td th:text="${course.credits}">
-                            </td>
+                        <td th:text="${course.credits}">
+                        </td>
 
-                            <td th:text="${course.teacher}">
-                            </td>
+                        <td th:text="${course.teacher}">
+                        </td>
 
-                            <td>
+                        <td>
 
-                                <!-- Editar -->
-                                <a class="action-edit"
-                                   th:href="@{/editCourse/{id}(id=${course.id})}">
+                            <a class="action-edit"
+                               th:href="@{/editCourse/{id}(id=${course.id})}">
 
-                                    ✏️ Editar
+                                ✏️ Editar
 
-                                </a>
+                            </a>
 
-                                &nbsp;
+                            &nbsp;
 
-                                <!-- Eliminar -->
-                                <a class="action-delete"
-                                   th:href="@{/deleteCourse/{id}(id=${course.id})}"
+                            <a class="action-delete"
+                               th:href="@{/deleteCourse/{id}(id=${course.id})}"
 
-                                   onclick="return confirm('¿Desea eliminar este curso?')">
+                               onclick="return confirm('¿Desea eliminar este curso?')">
 
-                                    🗑️ Eliminar
+                                🗑️ Eliminar
 
-                                </a>
+                            </a>
 
-                            </td>
+                        </td>
 
-                        </tr>
+                    </tr>
 
-                    </tbody>
+                </tbody>
 
-                </table>
-
-            </div>
+            </table>
 
         </div>
 
     </div>
+
+</div>
 
 </body>
 

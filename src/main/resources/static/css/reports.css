@@ -1,0 +1,45 @@
+.reports-container{
+
+    padding:30px;
+
+}
+
+
+.reports-container h1{
+
+    color:#7C6A91;
+
+    margin-bottom:30px;
+
+}
+
+
+.report-card{
+
+    background-color:white;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    border-radius:20px;
+
+    box-shadow:0px 4px 12px rgba(0,0,0,0.08);
+
+}
+
+
+.report-card h3{
+
+    color:#7C6A91;
+
+    margin-bottom:10px;
+
+}
+
+
+.report-card h2{
+
+    color:#666;
+
+}

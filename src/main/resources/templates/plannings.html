@@ -10,19 +10,15 @@
 
     <title>Mis Planificaciones</title>
 
-    <!-- CSS principal -->
     <link rel="stylesheet"
           th:href="@{/css/style.css}">
 
-    <!-- Sidebar -->
     <link rel="stylesheet"
           th:href="@{/css/sidebar.css}">
 
-    <!-- Navbar -->
     <link rel="stylesheet"
           th:href="@{/css/navbar.css}">
 
-    <!-- CSS de planificaciones -->
     <link rel="stylesheet"
           th:href="@{/css/plannings.css}">
 
@@ -36,7 +32,6 @@
     <div th:replace="~{fragments/sidebar :: sidebar}">
     </div>
 
-    <!-- Contenido principal -->
     <div class="main-content">
 
         <!-- Navbar -->
@@ -51,6 +46,7 @@
 
             </h1>
 
+
             <!-- Botón -->
             <a th:href="@{/newPlanning}"
                class="new-activity">
@@ -58,6 +54,7 @@
                 + Nueva planificación
 
             </a>
+
 
             <!-- Tabla -->
             <table>
@@ -68,13 +65,15 @@
 
                         <th>Nombre</th>
 
-                        <th>Objetivo</th>
+                        <th>Descripción</th>
+
+                        <th>Meta</th>
 
                         <th>Tipo</th>
 
-                        <th>Fecha inicio</th>
+                        <th>Inicio</th>
 
-                        <th>Fecha final</th>
+                        <th>Fin</th>
 
                         <th>Acciones</th>
 
@@ -86,30 +85,26 @@
 
                     <tr th:each="planning : ${plannings}">
 
-                        <!-- Nombre -->
                         <td th:text="${planning.name}">
                         </td>
 
-                        <!-- Objetivo -->
+                        <td th:text="${planning.description}">
+                        </td>
+
                         <td th:text="${planning.goal}">
                         </td>
 
-                        <!-- Tipo -->
                         <td th:text="${planning.type}">
                         </td>
 
-                        <!-- Fecha inicio -->
                         <td th:text="${planning.startDate}">
                         </td>
 
-                        <!-- Fecha final -->
                         <td th:text="${planning.endDate}">
                         </td>
 
-                        <!-- Acciones -->
                         <td>
 
-                            <!-- Editar -->
                             <a class="action-edit"
                                th:href="@{/editPlanning/{id}(id=${planning.id})}">
 
@@ -119,7 +114,6 @@
 
                             &nbsp;
 
-                            <!-- Eliminar -->
                             <a class="action-delete"
                                th:href="@{/deletePlanning/{id}(id=${planning.id})}"
 

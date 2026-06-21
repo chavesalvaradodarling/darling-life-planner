@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Reportes</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/reports.css}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}">
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+
+            <!-- Navbar -->
+            <div th:replace="~{fragments/navbar :: navbar}">
+            </div>
+
+            <div class="reports-container">
+
+                <h1>
+
+                    📊 Reportes
+
+                </h1>
+
+
+                <!-- Total de actividades -->
+                <div class="report-card">
+
+                    <h3>
+
+                        📋 Total de actividades
+
+                    </h3>
+
+                    <h2 th:text="${totalActivities}">
+                    </h2>
+
+                </div>
+
+
+                <!-- Actividades completadas -->
+                <div class="report-card">
+
+                    <h3>
+
+                        ✅ Actividades completadas
+
+                    </h3>
+
+                    <h2 th:text="${completedActivities}">
+                    </h2>
+
+                </div>
+
+
+                <!-- Actividades parciales -->
+                <div class="report-card">
+
+                    <h3>
+
+                        🟡 Actividades parciales
+
+                    </h3>
+
+                    <h2 th:text="${partialActivities}">
+                    </h2>
+
+                </div>
+
+
+                <!-- Actividades pendientes -->
+                <div class="report-card">
+
+                    <h3>
+
+                        ❌ Actividades pendientes
+
+                    </h3>
+
+                    <h2 th:text="${pendingActivities}">
+                    </h2>
+
+                </div>
+
+
+                <!-- Horas de estudio -->
+                <div class="report-card">
+
+                    <h3>
+
+                        📚 Horas de estudio
+
+                    </h3>
+
+                    <h2 th:text="${studyHours} + ' h'">
+                    </h2>
+
+                </div>
+
+
+                <!-- Horas de ejercicio -->
+                <div class="report-card">
+
+                    <h3>
+
+                        💪 Horas de ejercicio
+
+                    </h3>
+
+                    <h2 th:text="${exerciseHours} + ' h'">
+                    </h2>
+
+                </div>
+
+
+                <!-- Horas de ocio -->
+                <div class="report-card">
+
+                    <h3>
+
+                        🎬 Horas de ocio
+
+                    </h3>
+
+                    <h2 th:text="${leisureHours} + ' h'">
+                    </h2>
+
+                </div>
+
+
+                <!-- Estadísticas generales -->
+                <h1>
+
+                    📈 Estadísticas generales
+
+                </h1>
+
+
+                <div class="report-card">
+
+                    <h3>
+
+                        📚 Porcentaje de estudio
+
+                    </h3>
+
+                    <h2>
+
+                        <span th:text="${studyHours}">
+                        </span>
+
+                        horas
+
+                    </h2>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <h3>
+
+                        💪 Porcentaje de ejercicio
+
+                    </h3>
+
+                    <h2>
+
+                        <span th:text="${exerciseHours}">
+                        </span>
+
+                        horas
+
+                    </h2>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <h3>
+
+                        🎬 Porcentaje de ocio
+
+                    </h3>
+
+                    <h2>
+
+                        <span th:text="${leisureHours}">
+                        </span>
+
+                        horas
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

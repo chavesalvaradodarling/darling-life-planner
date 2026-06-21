@@ -30,82 +30,94 @@
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- Sidebar -->
-    <div th:replace="~{fragments/sidebar :: sidebar}">
-    </div>
-
-    <div class="main-content">
-
-        <!-- Navbar -->
-        <div th:replace="~{fragments/navbar :: navbar}">
+        <!-- Sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}">
         </div>
 
-        <div class="form-container">
+        <div class="main-content">
 
-            <h1>
+            <!-- Navbar -->
+            <div th:replace="~{fragments/navbar :: navbar}">
+            </div>
 
-                ✈️ Nuevo Viaje
+            <!-- Formulario -->
+            <div class="form-container">
 
-            </h1>
+                <h1>
 
-            <form th:action="@{/saveTrip}"
-                  th:object="${trip}"
-                  method="post">
+                    ✈️ Nuevo Viaje
 
-                <!-- Id oculto -->
-                <input type="hidden"
-                       th:field="*{id}">
+                </h1>
 
+                <form th:action="@{/saveTrip}"
+                      th:object="${trip}"
+                      method="post">
 
-                <!-- Destino -->
-                <label>
-
-                    Destino
-
-                </label>
-
-                <input type="text"
-                       th:field="*{destination}">
+                    <!-- Id oculto -->
+                    <input type="hidden"
+                           th:field="*{id}">
 
 
-                <!-- Fecha de salida -->
-                <label>
+                    <!-- Destino -->
+                    <label>
 
-                    Fecha de salida
+                        Destino
 
-                </label>
+                    </label>
 
-                <input type="date"
-                       th:field="*{departureDate}">
-
-
-                <!-- Fecha de regreso -->
-                <label>
-
-                    Fecha de regreso
-
-                </label>
-
-                <input type="date"
-                       th:field="*{returnDate}">
+                    <input type="text"
+                           th:field="*{destination}"
+                           required>
 
 
-                <!-- Botón -->
-                <button type="submit">
+                    <!-- Fecha de salida -->
+                    <label>
 
-                    Guardar viaje
+                        Fecha de salida
 
-                </button>
+                    </label>
 
-            </form>
+                    <input type="date"
+                           th:field="*{departureDate}"
+                           required>
+
+
+                    <!-- Fecha de regreso -->
+                    <label>
+
+                        Fecha de regreso
+
+                    </label>
+
+                    <input type="date"
+                           th:field="*{returnDate}"
+                           required>
+
+
+                    <!-- Botón guardar -->
+                    <button type="submit">
+
+                        Guardar viaje
+
+                    </button>
+
+
+                    <!-- Regresar -->
+                    <a th:href="@{/tripsPage}">
+
+                        Volver a viajes
+
+                    </a>
+
+                </form>
+
+            </div>
 
         </div>
 
     </div>
-
-</div>
 
 </body>
 

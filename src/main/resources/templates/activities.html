@@ -75,6 +75,8 @@
 
                             <th>Fecha</th>
 
+                            <th>Categoría</th>
+
                             <th>Prioridad</th>
 
                             <th>Estado</th>
@@ -105,13 +107,75 @@
                             </td>
 
 
+                            <!-- Categoría -->
+                            <td>
+
+                                <span
+                                        th:if="${activity.category != null}"
+                                        th:text="${activity.category.icon + ' ' + activity.category.name}">
+                                </span>
+
+                                <span
+                                        th:if="${activity.category == null}">
+
+                                    Sin categoría
+
+                                </span>
+
+                            </td>
+
+
                             <!-- Prioridad -->
-                            <td th:text="${activity.priority}">
+                            <td>
+
+                                <span class="high-priority"
+                                      th:if="${activity.priority == 'HIGH'}">
+
+                                    🔴 Alta
+
+                                </span>
+
+                                <span class="medium-priority"
+                                      th:if="${activity.priority == 'MEDIUM'}">
+
+                                    🟠 Media
+
+                                </span>
+
+                                <span class="low-priority"
+                                      th:if="${activity.priority == 'LOW'}">
+
+                                    🟢 Baja
+
+                                </span>
+
                             </td>
 
 
                             <!-- Estado -->
-                            <td th:text="${activity.status}">
+                            <td>
+
+                                <span class="completed"
+                                      th:if="${activity.status == 'COMPLETED'}">
+
+                                    ✅ Completada
+
+                                </span>
+
+                                <span class="partial"
+                                      th:if="${activity.status == 'PARTIALLY_COMPLETED'}">
+
+                                    🟡 Parcialmente completada
+
+                                </span>
+
+                                <span class="not-completed"
+                                      th:if="${activity.status == 'NOT_COMPLETED'}">
+
+                                    ❌ No completada
+
+                                </span>
+
                             </td>
 
 
@@ -136,7 +200,7 @@
 
                                 </a>
 
-                                &nbsp;
+                                <br><br>
 
                                 <!-- Eliminar -->
                                 <a class="action-delete"

@@ -5,7 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.info.spring.dar.springboot_aplicacion.entity.Activity;
+import com.info.spring.dar.springboot_aplicacion.entity.Category;
 import com.info.spring.dar.springboot_aplicacion.service.ActivityService;
+import com.info.spring.dar.springboot_aplicacion.service.CategoryService;
 
 @Controller
 public class ActivityViewController {
@@ -13,9 +15,16 @@ public class ActivityViewController {
     // Servicio de actividades
     private final ActivityService activityService;
 
+    // Servicio de categorías
+    private final CategoryService categoryService;
+
     // Constructor
-    public ActivityViewController(ActivityService activityService) {
+    public ActivityViewController(
+            ActivityService activityService,
+            CategoryService categoryService) {
+
         this.activityService = activityService;
+        this.categoryService = categoryService;
     }
 
     /*
@@ -41,6 +50,10 @@ public class ActivityViewController {
                 "activity",
                 new Activity());
 
+        model.addAttribute(
+                "categories",
+                categoryService.getAllCategories());
+
         return "activityForm";
     }
 
@@ -48,7 +61,14 @@ public class ActivityViewController {
      * Guardar actividad
      */
     @PostMapping("/saveActivity")
-    public String saveActivity(Activity activity) {
+    public String saveActivity(
+            Activity activity,
+            @RequestParam("category.id") Long categoryId) {
+
+        Category category =
+                categoryService.getCategoryById(categoryId);
+
+        activity.setCategory(category);
 
         activityService.saveActivity(activity);
 
@@ -59,7 +79,8 @@ public class ActivityViewController {
      * Editar una actividad
      */
     @GetMapping("/editActivity/{id}")
-    public String editActivity(@PathVariable Long id,
+    public String editActivity(
+            @PathVariable Long id,
             Model model) {
 
         Activity activity =
@@ -68,6 +89,10 @@ public class ActivityViewController {
         model.addAttribute(
                 "activity",
                 activity);
+
+        model.addAttribute(
+                "categories",
+                categoryService.getAllCategories());
 
         return "activityForm";
     }

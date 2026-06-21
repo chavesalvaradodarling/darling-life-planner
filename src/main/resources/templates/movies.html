@@ -104,7 +104,13 @@
                             </td>
 
                             <!-- Imagen -->
-                            <td th:text="${movie.image}">
+                            <td>
+
+                                <img th:src="${movie.image}"
+                                     width="80"
+                                     height="120"
+                                     style="border-radius:10px;">
+
                             </td>
 
                             <!-- Acciones -->
@@ -123,7 +129,6 @@
                                 <!-- Eliminar -->
                                 <a class="action-delete"
                                    th:href="@{/deleteMovie/{id}(id=${movie.id})}"
-
                                    onclick="return confirm('¿Desea eliminar esta película?')">
 
                                     🗑️ Eliminar

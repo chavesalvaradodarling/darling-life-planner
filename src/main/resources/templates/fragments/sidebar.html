@@ -16,11 +16,21 @@ MENÚ LATERAL DE LA APLICACIÓN
 
     <ul>
 
-        <li>🏠 Inicio</li>
+        <li>
+            <a th:href="@{/}">
+                🏠 Inicio
+            </a>
+        </li>
 
-        <li>📅 Mis Planificaciones</li>
+        <li>
+            <a th:href="@{/planningsPage}">
+                📅 Mis Planificaciones
+            </a>
+        </li>
 
-        <li>🗓 Calendario</li>
+        <li>
+            🗓 Calendario
+        </li>
 
     </ul>
 
@@ -30,13 +40,35 @@ MENÚ LATERAL DE LA APLICACIÓN
 
     <ul>
 
-        <li>📚 Cursos</li>
+        <li>
+            <a th:href="@{/activitiesPage}">
+                📋 Actividades
+            </a>
+        </li>
 
-        <li>🎬 Películas</li>
+        <li>
+            <a th:href="@{/coursesPage}">
+                📚 Cursos
+            </a>
+        </li>
 
-        <li>💪 Ejercicio</li>
+        <li>
+            <a th:href="@{/moviesPage}">
+                🎬 Películas
+            </a>
+        </li>
 
-        <li>✈ Viajes</li>
+        <li>
+            <a th:href="@{/tripsPage}">
+                ✈ Viajes
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/categoriesPage}">
+                🏷 Categorías
+            </a>
+        </li>
 
     </ul>
 
@@ -48,7 +80,15 @@ MENÚ LATERAL DE LA APLICACIÓN
 
         <li>🎯 Metas</li>
 
-        <li>📊 Reportes</li>
+        <li>
+
+    <a th:href="@{/reportsPage}">
+
+        📊 Reportes
+
+    </a>
+
+</li>
 
     </ul>
 

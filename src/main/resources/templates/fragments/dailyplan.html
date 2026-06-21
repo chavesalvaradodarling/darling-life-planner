@@ -1,104 +1,76 @@
 <div class="daily-plan"
      th:fragment="dailyPlan">
 
-    <h2>📋 Plan de hoy</h2>
+    <h2>
 
-    <!-- Actividad 1 -->
-    <div class="task">
+        📋 Plan de hoy
+
+    </h2>
+
+
+    <!-- Recorrer actividades -->
+    <div class="task"
+
+         th:each="activity : ${activities}">
 
         <div class="task-info">
 
-            <span class="time">08:00</span>
+            <!-- Hora -->
+            <span class="time"
+
+                  th:text="${activity.startTime}">
+
+            </span>
+
 
             <div>
 
-                <h4>Redes</h4>
+                <!-- Título -->
+                <h4
 
-                <p>Universidad</p>
+                    th:text="${activity.title}">
+
+                </h4>
+
+
+                <!-- Categoría -->
+                <p
+
+                   th:if="${activity.category != null}"
+
+                   th:text="${activity.category.name}">
+
+                </p>
 
             </div>
 
         </div>
 
-        <span class="completed">
+
+        <!-- Estado completada -->
+        <span class="completed"
+
+              th:if="${activity.status == 'COMPLETED'}">
 
             ✔
 
         </span>
 
-    </div>
 
+        <!-- Estado parcial -->
+        <span class="partial"
 
-    <!-- Actividad 2 -->
-    <div class="task">
-
-        <div class="task-info">
-
-            <span class="time">17:00</span>
-
-            <div>
-
-                <h4>Gym</h4>
-
-                <p>Salud</p>
-
-            </div>
-
-        </div>
-
-        <span class="partial">
+              th:if="${activity.status == 'PARTIALLY_COMPLETED'}">
 
             ◐
 
         </span>
 
-    </div>
 
+        <!-- Estado pendiente -->
+        <span class="pending"
 
-    <!-- Actividad 3 -->
-    <div class="task">
-
-        <div class="task-info">
-
-            <span class="time">20:00</span>
-
-            <div>
-
-                <h4>Cocinar</h4>
-
-                <p>Personal</p>
-
-            </div>
-
-        </div>
-
-        <span class="completed">
-
-            ✔
-
-        </span>
-
-    </div>
-
-
-    <!-- Actividad 4 -->
-    <div class="task">
-
-        <div class="task-info">
-
-            <span class="time">21:00</span>
-
-            <div>
-
-                <h4>Interstellar</h4>
-
-                <p>Ocio</p>
-
-            </div>
-
-        </div>
-
-        <span class="pending">
+              th:if="${activity.status == 'NOT_COMPLETED'}">
 
             …
 

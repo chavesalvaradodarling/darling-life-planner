@@ -83,7 +83,8 @@
 
                     <h3>Horas de estudio</h3>
 
-                    <h2>32.5 h</h2>
+                    <h2 th:text="${studyHours} + ' h'">
+                    </h2>
 
                 </div>
 
@@ -97,7 +98,8 @@
 
                     <h3>Horas de ejercicio</h3>
 
-                    <h2>8.2 h</h2>
+                    <h2 th:text="${exerciseHours} + ' h'">
+                    </h2>
 
                 </div>
 
@@ -111,7 +113,8 @@
 
                     <h3>Horas de ocio</h3>
 
-                    <h2>15 h</h2>
+                    <h2 th:text="${leisureHours} + ' h'">
+                    </h2>
 
                 </div>
 
