@@ -7,45 +7,83 @@
     <meta charset="UTF-8">
 
     <!-- Hace que la página sea adaptable a celulares -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <!-- Título que aparece en la pestaña del navegador -->
+    <!-- Título -->
     <title>Iniciar sesión - Darling Life Planner</title>
 
-    <!-- Conecta este HTML con el archivo login.css -->
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <!-- CSS -->
+    <link rel="stylesheet"
+          th:href="@{/css/login.css}">
 
 </head>
 
 <body>
 
-    <!-- Contenedor principal del login -->
     <div class="login-container">
 
         <!-- Nombre de la aplicación -->
-        <h1>Darling Life Planner 🌸</h1>
+        <h1>
 
-        <!-- Mensaje de bienvenida -->
-        <h2>Bienvenido de nuevo</h2>
+            Darling Life Planner 🌸
 
-        <!-- Formulario de inicio de sesión -->
-        <form>
+        </h1>
 
-            <!-- Campo correo -->
-            <label>Correo electrónico</label>
+        <!-- Mensaje -->
+        <h2>
+
+            Bienvenido de nuevo
+
+        </h2>
+
+        <!-- Mensaje de error -->
+        <p
+            style="color:red"
+            th:if="${param.error}">
+
+            Correo o contraseña incorrectos
+
+        </p>
+
+        <!-- Formulario -->
+        <form
+              th:action="@{/login}"
+              method="post">
+
+            <!-- Correo -->
+            <label>
+
+                Correo electrónico
+
+            </label>
 
             <input
                     type="email"
-                    placeholder="Ingrese su correo">
 
-            <!-- Campo contraseña -->
-            <label>Contraseña</label>
+                    name="email"
+
+                    placeholder="Ingrese su correo"
+
+                    required>
+
+            <!-- Contraseña -->
+            <label>
+
+                Contraseña
+
+            </label>
 
             <input
                     type="password"
-                    placeholder="Ingrese su contraseña">
 
-            <!-- Botón para iniciar sesión -->
+                    name="password"
+
+                    placeholder="Ingrese su contraseña"
+
+                    required>
+
+            <!-- Botón -->
             <button type="submit">
 
                 Iniciar sesión
@@ -54,12 +92,12 @@
 
         </form>
 
-        <!-- Enlace para registrarse -->
+        <!-- Registrarse -->
         <p>
 
             ¿No tienes cuenta?
 
-            <a href="#">
+            <a th:href="@{/register}">
 
                 Registrarse
 

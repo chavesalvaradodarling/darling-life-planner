@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nueva Meta</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- Formulario -->
+    <link rel="stylesheet"
+          th:href="@{/css/goalForm.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="form-container">
+
+            <h1>
+
+                🎯 Nueva Meta
+
+            </h1>
+
+            <form th:action="@{/saveGoal}"
+                  th:object="${goal}"
+                  method="post">
+
+                <!-- Id oculto -->
+                <input type="hidden"
+                       th:field="*{id}">
+
+
+                <!-- Nombre de la meta -->
+                <label>
+
+                    Nombre de la meta
+
+                </label>
+
+                <input type="text"
+                       th:field="*{title}">
+
+
+                <!-- Objetivo -->
+                <label>
+
+                    Cantidad objetivo
+
+                </label>
+
+                <input type="number"
+                       step="0.1"
+                       th:field="*{target}">
+
+
+                <!-- Avance -->
+                <label>
+
+                    Cantidad alcanzada
+
+                </label>
+
+                <input type="number"
+                       step="0.1"
+                       th:field="*{progress}">
+
+
+                <!-- Botón -->
+                <button type="submit">
+
+                    Guardar meta
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

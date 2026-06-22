@@ -1,17 +1,32 @@
 <div class="goals"
      th:fragment="goals">
 
-    <h2>⭐ Metas</h2>
+    <h2>
+
+        ⭐ Metas
+
+    </h2>
 
 
-    <!-- Meta 1 -->
+    <!-- Ejercicio -->
     <div class="goal">
 
         <div class="goal-info">
 
-            <h4>💪 Ejercicio semanal</h4>
+            <h4>
 
-            <span>3 horas</span>
+                💪 Horas de ejercicio
+
+            </h4>
+
+            <span>
+
+                <span th:text="${exerciseHours}">
+                </span>
+
+                h
+
+            </span>
 
         </div>
 
@@ -26,14 +41,25 @@
     </div>
 
 
-    <!-- Meta 2 -->
+    <!-- Ocio -->
     <div class="goal">
 
         <div class="goal-info">
 
-            <h4>🎬 Tiempo de ocio</h4>
+            <h4>
 
-            <span>5 horas</span>
+                🎬 Horas de ocio
+
+            </h4>
+
+            <span>
+
+                <span th:text="${leisureHours}">
+                </span>
+
+                h
+
+            </span>
 
         </div>
 
@@ -48,14 +74,25 @@
     </div>
 
 
-    <!-- Meta 3 -->
+    <!-- Estudio -->
     <div class="goal">
 
         <div class="goal-info">
 
-            <h4>📚 Horas de estudio</h4>
+            <h4>
 
-            <span>20 horas</span>
+                📚 Horas de estudio
+
+            </h4>
+
+            <span>
+
+                <span th:text="${studyHours}">
+                </span>
+
+                h
+
+            </span>
 
         </div>
 
@@ -70,12 +107,16 @@
     </div>
 
 
-    <!-- Meta 4 -->
+    <!-- Actividades -->
     <div class="goal">
 
         <div class="goal-info">
 
-            <h4>✅ Actividades completadas</h4>
+            <h4>
+
+                ✅ Total de actividades
+
+            </h4>
 
             <span th:text="${totalActivities}">
             </span>

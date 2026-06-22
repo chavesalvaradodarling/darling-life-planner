@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mis Metas</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- Metas -->
+    <link rel="stylesheet"
+          th:href="@{/css/goalsPage.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <!-- Contenedor principal -->
+        <div class="activities-container">
+
+            <h1>
+
+                🎯 Mis Metas
+
+            </h1>
+
+
+            <!-- Botón nueva meta -->
+            <a th:href="@{/newGoal}"
+               class="new-activity">
+
+                + Nueva meta
+
+            </a>
+
+
+            <!-- Tabla -->
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Meta</th>
+
+                        <th>Objetivo</th>
+
+                        <th>Progreso</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="goal : ${goals}">
+
+                        <!-- Nombre -->
+                        <td th:text="${goal.title}">
+                        </td>
+
+
+                        <!-- Objetivo -->
+                        <td th:text="${goal.target}">
+                        </td>
+
+
+                        <!-- Progreso -->
+                        <td>
+
+                            <span th:text="${goal.progress}">
+                            </span>
+
+                        </td>
+
+
+                        <!-- Acciones -->
+                        <td>
+
+                            <!-- Editar -->
+                            <a class="action-edit"
+                               th:href="@{/editGoal/{id}(id=${goal.id})}">
+
+                                ✏️ Editar
+
+                            </a>
+
+                            &nbsp;
+
+                            <!-- Eliminar -->
+                            <a class="action-delete"
+                               th:href="@{/deleteGoal/{id}(id=${goal.id})}"
+
+                               onclick="return confirm('¿Desea eliminar esta meta?')">
+
+                                🗑️ Eliminar
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

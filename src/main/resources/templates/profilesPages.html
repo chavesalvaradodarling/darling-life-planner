@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mis Perfiles</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- CSS de perfiles -->
+    <link rel="stylesheet"
+          th:href="@{/css/profilesPage.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="activities-container">
+
+            <h1>
+
+                👤 Mis Perfiles
+
+            </h1>
+
+
+            <!-- Botón -->
+            <a th:href="@{/newProfile}"
+               class="new-activity">
+
+                + Nuevo perfil
+
+            </a>
+
+
+            <!-- Tabla -->
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Nombre</th>
+
+                        <th>Correo</th>
+
+                        <th>Universidad</th>
+
+                        <th>Carrera</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="profile : ${profiles}">
+
+                        <!-- Nombre -->
+                        <td th:text="${profile.fullName}">
+                        </td>
+
+                        <!-- Correo -->
+                        <td th:text="${profile.email}">
+                        </td>
+
+                        <!-- Universidad -->
+                        <td th:text="${profile.university}">
+                        </td>
+
+                        <!-- Carrera -->
+                        <td th:text="${profile.career}">
+                        </td>
+
+                        <!-- Acciones -->
+                        <td>
+
+                            <!-- Editar -->
+                            <a class="action-edit"
+                               th:href="@{/editProfile/{id}(id=${profile.id})}">
+
+                                ✏️ Editar
+
+                            </a>
+
+                            &nbsp;
+
+                            <!-- Eliminar -->
+                            <a class="action-delete"
+                               th:href="@{/deleteProfile/{id}(id=${profile.id})}"
+
+                               onclick="return confirm('¿Desea eliminar este perfil?')">
+
+                                🗑️ Eliminar
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

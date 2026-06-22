@@ -10,35 +10,29 @@
 
     <!-- Recorrer actividades -->
     <div class="task"
-
          th:each="activity : ${activities}">
 
         <div class="task-info">
 
             <!-- Hora -->
             <span class="time"
-
                   th:text="${activity.startTime}">
-
             </span>
-
 
             <div>
 
                 <!-- Título -->
-                <h4
-
-                    th:text="${activity.title}">
-
+                <h4 th:text="${activity.title}">
                 </h4>
 
-
                 <!-- Categoría -->
-                <p
-
-                   th:if="${activity.category != null}"
-
+                <p th:if="${activity.category != null}"
                    th:text="${activity.category.name}">
+                </p>
+
+                <p th:if="${activity.category == null}">
+
+                    Sin categoría
 
                 </p>
 
@@ -47,9 +41,8 @@
         </div>
 
 
-        <!-- Estado completada -->
+        <!-- Estado -->
         <span class="completed"
-
               th:if="${activity.status == 'COMPLETED'}">
 
             ✔
@@ -57,9 +50,7 @@
         </span>
 
 
-        <!-- Estado parcial -->
         <span class="partial"
-
               th:if="${activity.status == 'PARTIALLY_COMPLETED'}">
 
             ◐
@@ -67,9 +58,7 @@
         </span>
 
 
-        <!-- Estado pendiente -->
         <span class="pending"
-
               th:if="${activity.status == 'NOT_COMPLETED'}">
 
             …

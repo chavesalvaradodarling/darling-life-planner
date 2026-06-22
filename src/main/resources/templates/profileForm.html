@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nuevo Perfil</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <!-- Sidebar -->
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <!-- Navbar -->
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <!-- Formulario -->
+    <link rel="stylesheet"
+          th:href="@{/css/profileForm.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="form-container">
+
+            <h1>
+
+                👤 Nuevo Perfil
+
+            </h1>
+
+            <form th:action="@{/saveProfile}"
+                  th:object="${profile}"
+                  method="post">
+
+                <!-- Id oculto -->
+                <input type="hidden"
+                       th:field="*{id}">
+
+
+                <!-- Nombre -->
+                <label>
+
+                    Nombre completo
+
+                </label>
+
+                <input type="text"
+                       th:field="*{fullName}">
+
+
+                <!-- Correo -->
+                <label>
+
+                    Correo electrónico
+
+                </label>
+
+                <input type="email"
+                       th:field="*{email}">
+
+
+                <!-- Universidad -->
+                <label>
+
+                    Universidad
+
+                </label>
+
+                <input type="text"
+                       th:field="*{university}">
+
+
+                <!-- Carrera -->
+                <label>
+
+                    Carrera
+
+                </label>
+
+                <input type="text"
+                       th:field="*{career}">
+
+
+                <!-- Descripción -->
+                <label>
+
+                    Descripción personal
+
+                </label>
+
+                <input type="text"
+                       th:field="*{description}">
+
+
+                <!-- Imagen -->
+                <label>
+
+                    Foto o URL de imagen
+
+                </label>
+
+                <input type="text"
+                       th:field="*{image}">
+
+
+                <!-- Botón -->
+                <button type="submit">
+
+                    Guardar perfil
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

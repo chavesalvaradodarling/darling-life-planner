@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Configuraciones</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/sidebar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/navbar.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/settingsPage.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="main-content">
+
+        <div th:replace="~{fragments/navbar :: navbar}">
+        </div>
+
+        <div class="activities-container">
+
+            <h1>
+
+                ⚙ Configuraciones
+
+            </h1>
+
+            <a th:href="@{/newSettings}"
+               class="new-activity">
+
+                + Nueva configuración
+
+            </a>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Tema</th>
+
+                        <th>Color principal</th>
+
+                        <th>Calendario</th>
+
+                        <th>Gráficos</th>
+
+                        <th>Notificaciones</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="settings : ${settingsList}">
+
+                        <td th:text="${settings.theme}">
+                        </td>
+
+                        <td th:text="${settings.mainColor}">
+                        </td>
+
+                        <td th:text="${settings.showCalendar}">
+                        </td>
+
+                        <td th:text="${settings.showCharts}">
+                        </td>
+
+                        <td th:text="${settings.notifications}">
+                        </td>
+
+                        <td>
+
+                            <a class="action-edit"
+                               th:href="@{/editSettings/{id}(id=${settings.id})}">
+
+                                ✏️ Editar
+
+                            </a>
+
+                            &nbsp;
+
+                            <a class="action-delete"
+                               th:href="@{/deleteSettings/{id}(id=${settings.id})}"
+
+                               onclick="return confirm('¿Desea eliminar esta configuración?')">
+
+                                🗑️ Eliminar
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

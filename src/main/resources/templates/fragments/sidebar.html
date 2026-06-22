@@ -8,101 +8,185 @@ MENÚ LATERAL DE LA APLICACIÓN
      th:fragment="sidebar">
 
     <!-- Nombre de la aplicación -->
-    <h2>Darling Life Planner 🌸</h2>
+    <h2>
+
+        Darling Life Planner 🌸
+
+    </h2>
 
 
     <!-- SECCIÓN INICIO -->
-    <h4>INICIO</h4>
+    <h4>
+
+        INICIO
+
+    </h4>
 
     <ul>
 
         <li>
+
             <a th:href="@{/}">
+
                 🏠 Inicio
+
             </a>
+
         </li>
 
         <li>
+
             <a th:href="@{/planningsPage}">
+
                 📅 Mis Planificaciones
+
             </a>
+
         </li>
 
         <li>
-            🗓 Calendario
+
+            <a th:href="@{/}">
+
+                🗓 Calendario
+
+            </a>
+
         </li>
 
     </ul>
 
 
     <!-- SECCIÓN CATEGORÍAS -->
-    <h4>CATEGORÍAS</h4>
+    <h4>
+
+        CATEGORÍAS
+
+    </h4>
 
     <ul>
 
         <li>
+
             <a th:href="@{/activitiesPage}">
+
                 📋 Actividades
+
             </a>
+
         </li>
 
         <li>
+
             <a th:href="@{/coursesPage}">
+
                 📚 Cursos
+
             </a>
+
         </li>
 
         <li>
+
             <a th:href="@{/moviesPage}">
+
                 🎬 Películas
+
             </a>
+
         </li>
 
         <li>
+
             <a th:href="@{/tripsPage}">
+
                 ✈ Viajes
+
             </a>
+
         </li>
 
         <li>
+
             <a th:href="@{/categoriesPage}">
+
                 🏷 Categorías
+
             </a>
+
         </li>
 
     </ul>
 
 
     <!-- SECCIÓN ANÁLISIS -->
-    <h4>ANÁLISIS</h4>
+    <h4>
+
+        ANÁLISIS
+
+    </h4>
 
     <ul>
 
-        <li>🎯 Metas</li>
+        <li>
+
+            <a th:href="@{/goalsPage}">
+
+                🎯 Metas
+
+            </a>
+
+        </li>
 
         <li>
 
-    <a th:href="@{/reportsPage}">
+            <a th:href="@{/reportsPage}">
 
-        📊 Reportes
+                📊 Reportes
 
-    </a>
+            </a>
 
-</li>
+        </li>
 
     </ul>
 
 
     <!-- SECCIÓN USUARIO -->
-    <h4>USUARIO</h4>
+    <h4>
+
+        USUARIO
+
+    </h4>
 
     <ul>
 
-        <li>👤 Perfil</li>
+        <li>
 
-        <li>⚙ Configuración</li>
+            <a th:href="@{/profilesPage}">
 
-        <li>🚪 Cerrar sesión</li>
+                👤 Perfil
+
+            </a>
+
+        </li>
+
+        <li>
+
+         <a th:href="@{/settingsPage}">
+
+        ⚙ Configuración
+
+         </a>
+
+        </li>
+
+        <li>
+
+            <a th:href="@{/login}">
+        🚪 Cerrar sesión
+            </a>
+
+        </li>
 
     </ul>
 

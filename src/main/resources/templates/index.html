@@ -52,6 +52,10 @@
     <!-- CSS del botón flotante -->
     <link rel="stylesheet"
           th:href="@{/css/floatingButton.css}">
+    
+    <!-- CSS del gráfico -->
+    <link rel="stylesheet"
+      th:href="@{/css/chart.css}">
 
 </head>
 
@@ -164,6 +168,11 @@
             <div th:replace="~{fragments/calendar :: calendar}">
             </div>
 
+
+            <!-- Gráfico -->
+            <div th:replace="~{fragments/chart :: chart}">
+            </div>
+
         </div>
 
     </div>
@@ -172,6 +181,85 @@
     <!-- Botón flotante -->
     <div th:replace="~{fragments/floatingButton :: floatingButton}">
     </div>
+
+
+    <!-- Librería Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- Crear gráfico -->
+    <script th:inline="javascript">
+
+        const studyHours = /*[[${studyHours}]]*/ 0;
+
+        const exerciseHours = /*[[${exerciseHours}]]*/ 0;
+
+        const leisureHours = /*[[${leisureHours}]]*/ 0;
+
+
+        new Chart(
+
+            document.getElementById("hoursChart"),
+
+            {
+
+                type: "pie",
+
+                data: {
+
+                    labels: [
+
+                        "Estudio",
+
+                        "Ejercicio",
+
+                        "Ocio"
+
+                    ],
+
+                    datasets: [
+
+                        {
+
+                            data: [
+
+                                studyHours,
+
+                                exerciseHours,
+
+                                leisureHours
+
+                            ],
+
+                            backgroundColor: [
+
+                                "#C9A7EB",
+
+                                "#A8D8EA",
+
+                                "#FFD6A5"
+
+                            ]
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+            responsive: true,
+
+            maintainAspectRatio: true
+
+            }
+
+            }
+
+        );
+
+    </script>
 
 </body>
 
