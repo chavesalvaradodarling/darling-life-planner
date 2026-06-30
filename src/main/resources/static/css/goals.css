@@ -1,120 +1,86 @@
 /*
 =====================================
-METAS
+TARJETA MIS METAS
 =====================================
 */
 
-.goals{
+.goals { align-items: center; text-align: center; }
 
-    background:white;
+.goals-empty { display: flex; flex-direction: column; align-items: center; padding: 8px 0; }
 
-    padding:25px;
+.goals-empty-icon  { font-size: 26px; opacity: 0.4; margin-bottom: 6px; }
+.goals-empty-title { font-size: 12px; font-weight: 700; color: #7C6A91; margin: 0 0 3px; }
+.goals-empty-sub   { font-size: 11px; color: #bbb; margin: 0 0 10px; }
 
-    border-radius:20px;
+/*
+=====================================
+TÍTULO
+=====================================
+*/
 
-    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+.goals h2{
+
+    color:var(--text-title);
+
+    margin-bottom:5px;
+
+    font-size:14px;
 
 }
 
 
 /*
-CADA META
+=====================================
+DESCRIPCIÓN
+=====================================
 */
 
-.goal{
+.goals-description{
 
-    margin-top:25px;
+    color:var(--text-main);
+
+    line-height:1.5;
+
+    margin-bottom:8px;
+
+    font-size:12px;
 
 }
 
 
 /*
-TÍTULO Y VALOR
+=====================================
+BOTÓN
+=====================================
 */
 
-.goal-info{
+.goals-button{
 
-    display:flex;
+    display:inline-block;
 
-    justify-content:space-between;
+    text-decoration:none;
 
-    margin-bottom:10px;
+    background:#C9A7EB;
 
-}
+    color:white;
 
+    padding:6px 10px;
 
-.goal-info h4{
+    border-radius:18px;
 
-    color:#666;
-
-}
-
-
-.goal-info span{
-
-    color:#7C6A91;
+    font-size:12px;
 
     font-weight:bold;
 
-}
-
-
-/*
-BARRA EXTERIOR
-*/
-
-.progress-bar{
-
-    width:100%;
-
-    height:10px;
-
-    background-color:#F0F0F0;
-
-    border-radius:20px;
+    transition:.3s;
 
 }
 
 
-/*
-BARRA INTERIOR
-*/
+.goals-button:hover{
 
-.progress{
+    background:#B48AD6;
 
-    height:10px;
-
-    border-radius:20px;
-
-}
-
-
-/*
-PORCENTAJES
-*/
-
-.gym-progress{
-
-    width:66%;
-
-    background-color:#CDEAC0;
-
-}
-
-
-.movie-progress{
-
-    width:60%;
-
-    background-color:#FFD6E0;
-
-}
-
-
-.study-progress{
-
-    width:75%;
-
-    background-color:#D6E4FF;
+    transform:translateY(-2px);
 
 }

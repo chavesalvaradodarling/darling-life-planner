@@ -1,137 +1,89 @@
+<!--
+==============================================================================
+File: trips.html
+Project: Darling Life Planner
+------------------------------------------------------------------------------
+Description:
+This page displays the Trips Management module of the Darling Life Planner
+application. It allows users to view, create, edit, and delete their travel
+plans through a structured and user-friendly interface. Trip information is
+retrieved dynamically from the backend and presented in a table using
+Thymeleaf.
+
+Main Features:
+- Displays a complete list of registered trips.
+- Shows the destination, departure date, and return date for each trip.
+- Allows users to create a new trip.
+- Provides options to edit or delete existing trips.
+- Displays a confirmation dialog before deleting a trip.
+- Uses Thymeleaf to dynamically render trip information.
+- Integrates the shared sidebar and navigation bar fragments to maintain a
+  consistent application layout and navigation experience.
+
+
+==============================================================================
+-->
+
+
+
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Viajes</title>
-
-    <!-- CSS principal -->
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
-
-    <!-- Sidebar -->
-    <link rel="stylesheet"
-          th:href="@{/css/sidebar.css}">
-
-    <!-- Navbar -->
-    <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
-
-    <!-- Trips -->
-    <link rel="stylesheet"
-          th:href="@{/css/trips.css}">
-
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/trips.css}">
 </head>
-
 <body>
 
     <div class="container">
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-        <!-- Sidebar -->
-        <div th:replace="~{fragments/sidebar :: sidebar}">
-        </div>
-
-        <!-- Contenido principal -->
         <div class="main-content">
+            <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-            <!-- Navbar -->
-            <div th:replace="~{fragments/navbar :: navbar}">
-            </div>
-
-            <!-- Contenedor -->
             <div class="activities-container">
-
-                <h1>
-
+                <h1 style="color: var(--text-title); transition: color 0.3s ease;">
                     ✈️ Mis Viajes
-
                 </h1>
 
-                <!-- Botón -->
-                <a th:href="@{/newTrip}"
-                   class="new-activity">
-
+                <a th:href="@{/newTrip}" class="new-activity">
                     + Nuevo viaje
-
                 </a>
 
-                <!-- Tabla -->
                 <table>
-
                     <thead>
-
                         <tr>
-
                             <th>Destino</th>
-
                             <th>Fecha de salida</th>
-
                             <th>Fecha de regreso</th>
-
                             <th>Acciones</th>
-
                         </tr>
-
                     </thead>
-
                     <tbody>
-
                         <tr th:each="trip : ${trips}">
-
-                            <!-- Destino -->
-                            <td th:text="${trip.destination}">
-                            </td>
-
-                            <!-- Fecha salida -->
-                            <td th:text="${trip.departureDate}">
-                            </td>
-
-                            <!-- Fecha regreso -->
-                            <td th:text="${trip.returnDate}">
-                            </td>
-
-                            <!-- Acciones -->
+                            <td th:text="${trip.destination}"></td>
+                            <td th:text="${trip.departureDate}"></td>
+                            <td th:text="${trip.returnDate}"></td>
                             <td>
-
-                                <!-- Editar -->
-                                <a class="action-edit"
-                                   th:href="@{/editTrip/{id}(id=${trip.id})}">
-
+                                <a class="action-edit" th:href="@{/editTrip/{id}(id=${trip.id})}">
                                     ✏️ Editar
-
                                 </a>
-
                                 &nbsp;
-
-                                <!-- Eliminar -->
-                                <a class="action-delete"
-                                   th:href="@{/deleteTrip/{id}(id=${trip.id})}"
-
+                                <a class="action-delete" th:href="@{/deleteTrip/{id}(id=${trip.id})}"
                                    onclick="return confirm('¿Desea eliminar este viaje?')">
-
                                     🗑️ Eliminar
-
                                 </a>
-
                             </td>
-
                         </tr>
-
                     </tbody>
-
                 </table>
-
             </div>
-
         </div>
-
     </div>
 
 </body>
-
 </html>

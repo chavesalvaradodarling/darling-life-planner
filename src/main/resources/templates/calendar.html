@@ -1,0 +1,38 @@
+
+<!--
+  Calendar page.
+
+  Thin wrapper that assembles the sidebar, navbar, and the calendar
+  fragment. All calendar data (hours list and activity map) is provided
+  by CalendarViewController via the GET /calendar route.
+-->
+
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sidebar se encarga de aplicar el tema al instante -->
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+            <!-- Calendario Fragment -->
+            <div th:replace="~{fragments/calendar :: calendar}"></div>
+        </div>
+    </div>
+
+</body>
+</html>

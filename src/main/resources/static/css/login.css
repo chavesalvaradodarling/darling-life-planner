@@ -4,40 +4,58 @@ ESTILOS GENERALES DE LA PÁGINA
 ------------------------------------------------
 */
 
-/*
-Quita márgenes por defecto
-y centra el contenido.
-*/
 body{
 
     margin:0;
 
-    /*
-    Fuente elegante y moderna
-    */
     font-family:Arial, sans-serif;
 
-    /*
-    Color pastel del fondo
-    */
-    background-color:#F9F3F6;
-
-    /*
-    Centra vertical y horizontalmente
-    */
     display:flex;
 
     justify-content:center;
 
     align-items:center;
 
-    /*
-    Altura completa de la pantalla
-    */
     height:100vh;
+
+    /* Fondo */
+    background-image:url("/images/Login.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    position:relative;
+
+    overflow:hidden;
 
 }
 
+/*
+------------------------------------------------
+CAPA BLANCA PARA SUAVIZAR EL FONDO
+------------------------------------------------
+*/
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.3);
+
+    backdrop-filter:blur(2px);
+
+    z-index:0;
+
+}
 
 /*
 ------------------------------------------------
@@ -47,21 +65,23 @@ CAJA PRINCIPAL DEL LOGIN
 
 .login-container{
 
-    background-color:white;
+    position:relative;
+
+    z-index:1;
 
     width:400px;
 
     padding:40px;
 
-    border-radius:20px;
+    border-radius:25px;
 
-    /*
-    Sombra suave
-    */
-    box-shadow:0px 4px 15px rgba(0,0,0,0.1);
+    background:rgba(255,255,255,.92);
+
+    box-shadow:0 15px 40px rgba(124,106,145,.18);
+
+    border:1px solid rgba(255,255,255,.7);
 
 }
-
 
 /*
 ------------------------------------------------
@@ -75,8 +95,9 @@ h1{
 
     color:#7C6A91;
 
-}
+    margin-bottom:8px;
 
+}
 
 /*
 ------------------------------------------------
@@ -94,7 +115,6 @@ h2{
 
 }
 
-
 /*
 ------------------------------------------------
 ETIQUETAS
@@ -109,8 +129,9 @@ label{
 
     color:#555;
 
-}
+    font-weight:600;
 
+}
 
 /*
 ------------------------------------------------
@@ -122,18 +143,31 @@ input{
 
     width:100%;
 
-    padding:12px;
+    padding:14px;
 
     margin-top:8px;
 
     border:1px solid #DDD;
 
-    border-radius:10px;
+    border-radius:12px;
 
     box-sizing:border-box;
 
+    background:#EEF4FF;
+
+    transition:.3s;
+
 }
 
+input:focus{
+
+    outline:none;
+
+    border-color:#C9A7EB;
+
+    box-shadow:0 0 8px rgba(201,167,235,.35);
+
+}
 
 /*
 ------------------------------------------------
@@ -147,32 +181,35 @@ button{
 
     margin-top:25px;
 
-    padding:14px;
+    padding:15px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    background-color:#D8BFD8;
+    background:#C9A7EB;
 
     color:white;
 
     font-size:16px;
 
+    font-weight:bold;
+
     cursor:pointer;
 
+    transition:.3s;
+
 }
 
-
-/*
-Efecto al pasar el mouse
-*/
 button:hover{
 
-    background-color:#C7A6D8;
+    background:#B48AD6;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(180,138,214,.35);
 
 }
-
 
 /*
 ------------------------------------------------
@@ -186,12 +223,13 @@ p{
 
     margin-top:25px;
 
-}
+    color:#555;
 
+}
 
 /*
 ------------------------------------------------
-ENLACE REGISTRARSE
+ENLACES
 ------------------------------------------------
 */
 
@@ -200,5 +238,13 @@ a{
     text-decoration:none;
 
     color:#A087B8;
+
+    font-weight:bold;
+
+}
+
+a:hover{
+
+    color:#7C6A91;
 
 }

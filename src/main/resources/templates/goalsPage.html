@@ -1,3 +1,18 @@
+<!--
+  Goals overview page.
+
+  Renders two separate grids built by GoalViewController.showGoals:
+    - ${activeGoals}: goals whose calculated progressPercentage is below 100
+    - ${completedGoals}: goals whose progressPercentage has reached 100
+
+  Each goal card shows its title, associated category name, raw
+  progress/target hours, a visual progress bar (filled via inline
+  width style bound to progressPercentage), and the percentage value.
+  Completed cards get an extra ".completed" class for a distinct border style.
+-->
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,19 +25,15 @@
 
     <title>Mis Metas</title>
 
-    <!-- CSS principal -->
     <link rel="stylesheet"
           th:href="@{/css/style.css}">
 
-    <!-- Sidebar -->
     <link rel="stylesheet"
           th:href="@{/css/sidebar.css}">
 
-    <!-- Navbar -->
     <link rel="stylesheet"
           th:href="@{/css/navbar.css}">
 
-    <!-- Metas -->
     <link rel="stylesheet"
           th:href="@{/css/goalsPage.css}">
 
@@ -42,7 +53,6 @@
         <div th:replace="~{fragments/navbar :: navbar}">
         </div>
 
-        <!-- Contenedor principal -->
         <div class="activities-container">
 
             <h1>
@@ -51,8 +61,6 @@
 
             </h1>
 
-
-            <!-- Botón nueva meta -->
             <a th:href="@{/newGoal}"
                class="new-activity">
 
@@ -60,79 +68,211 @@
 
             </a>
 
+            <!-- ============================= -->
+            <!-- EN PROGRESO -->
+            <!-- ============================= -->
 
-            <!-- Tabla -->
-            <table>
+            <h2>
 
-                <thead>
+                🚀 En progreso
 
-                    <tr>
+            </h2>
 
-                        <th>Meta</th>
+            <div class="goals-grid">
 
-                        <th>Objetivo</th>
+                <div class="goal-card"
+                     th:each="goal : ${activeGoals}">
 
-                        <th>Progreso</th>
+                    <div class="goal-header">
 
-                        <th>Acciones</th>
+                        <h3 th:text="${goal.title}">
+                        </h3>
 
-                    </tr>
+                        <span class="badge-progress">
 
-                </thead>
+                            En progreso
 
-                <tbody>
+                        </span>
 
-                    <tr th:each="goal : ${goals}">
+                    </div>
 
-                        <!-- Nombre -->
-                        <td th:text="${goal.title}">
-                        </td>
+                    <p>
 
+                        <strong>Categoría:</strong>
 
-                        <!-- Objetivo -->
-                        <td th:text="${goal.target}">
-                        </td>
+                        <span th:text="${goal.categoryName}">
+                        </span>
 
+                    </p>
 
-                        <!-- Progreso -->
-                        <td>
+                    <p>
+
+                        <strong>
 
                             <span th:text="${goal.progress}">
                             </span>
 
-                        </td>
+                            /
+
+                            <span th:text="${goal.target}">
+                            </span>
+
+                            h
+
+                        </strong>
+
+                    </p>
+
+                    <div class="progress-bar">
+
+                        <div class="progress-fill"
+
+                             th:style="'width:' + ${goal.progressPercentage} + '%'">
+
+                        </div>
+
+                    </div>
+
+                    <p style="margin-top:10px;">
+
+                        <strong>
+
+                            <span th:text="${goal.progressPercentage}">
+                            </span>%
+
+                        </strong>
+
+                    </p>
+
+                    <div style="margin-top:20px;">
+
+                        <a class="action-edit"
+                           th:href="@{/editGoal/{id}(id=${goal.id})}">
+
+                            ✏️ Editar
+
+                        </a>
+
+                        &nbsp;
+
+                        <a class="action-delete"
+                           th:href="@{/deleteGoal/{id}(id=${goal.id})}"
+
+                           onclick="return confirm('¿Desea eliminar esta meta?')">
+
+                            🗑️ Eliminar
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
 
 
-                        <!-- Acciones -->
-                        <td>
+            <!-- ============================= -->
+            <!-- COMPLETADAS -->
+            <!-- ============================= -->
 
-                            <!-- Editar -->
-                            <a class="action-edit"
-                               th:href="@{/editGoal/{id}(id=${goal.id})}">
+            <h2 style="margin-top:60px;">
 
-                                ✏️ Editar
+                ✅ Completadas
 
-                            </a>
+            </h2>
 
-                            &nbsp;
+            <div class="goals-grid">
 
-                            <!-- Eliminar -->
-                            <a class="action-delete"
-                               th:href="@{/deleteGoal/{id}(id=${goal.id})}"
+                <div class="goal-card completed"
 
-                               onclick="return confirm('¿Desea eliminar esta meta?')">
+                     th:each="goal : ${completedGoals}">
 
-                                🗑️ Eliminar
+                    <div class="goal-header">
 
-                            </a>
+                        <h3 th:text="${goal.title}">
+                        </h3>
 
-                        </td>
+                        <span class="badge-completed">
 
-                    </tr>
+                            Completada
 
-                </tbody>
+                        </span>
 
-            </table>
+                    </div>
+
+                    <p>
+
+                        <strong>Categoría:</strong>
+
+                        <span th:text="${goal.categoryName}">
+                        </span>
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+
+                            <span th:text="${goal.progress}">
+                            </span>
+
+                            /
+
+                            <span th:text="${goal.target}">
+                            </span>
+
+                            h
+
+                        </strong>
+
+                    </p>
+
+                    <div class="progress-bar">
+
+                        <div class="progress-fill"
+
+                             th:style="'width:' + ${goal.progressPercentage} + '%'">
+
+                        </div>
+
+                    </div>
+
+                    <p style="margin-top:10px; color:green;">
+
+                        <strong>
+
+                            <span th:text="${goal.progressPercentage}">
+                            </span>%
+
+                        </strong>
+
+                    </p>
+
+                    <div style="margin-top:20px;">
+
+                        <a class="action-edit"
+                           th:href="@{/editGoal/{id}(id=${goal.id})}">
+
+                            ✏️ Editar
+
+                        </a>
+
+                        &nbsp;
+
+                        <a class="action-delete"
+                           th:href="@{/deleteGoal/{id}(id=${goal.id})}"
+
+                           onclick="return confirm('¿Desea eliminar esta meta?')">
+
+                            🗑️ Eliminar
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 

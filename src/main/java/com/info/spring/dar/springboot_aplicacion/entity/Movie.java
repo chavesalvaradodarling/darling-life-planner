@@ -1,61 +1,71 @@
 package com.info.spring.dar.springboot_aplicacion.entity;
 
-// Importa las anotaciones necesarias de JPA
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-// Indica que esta clase representa una tabla en la base de datos
+/**
+ * Entity representing a movie stored in the 'movies' table.
+ *
+ * Movies are created by the user and can optionally be associated
+ * with activities. The image field stores a URL pointing to the movie poster.
+ * Each movie belongs to one user.
+ */
 @Entity
-
-// Nombre de la tabla
 @Table(name = "movies")
 public class Movie {
 
-    // Llave primaria
+    /** Primary key, auto-generated. */
     @Id
-
-    // El id se genera automáticamente (1,2,3,4...)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Nombre de la película
+    /** Title of the movie. Example: "Interstellar" */
     private String title;
 
-    // Género de la película
+    /** Genre of the movie. Example: "Ficción", "Drama" */
     private String genre;
 
-    // Duración en minutos
+    /** Duration of the movie in minutes. */
     private Integer duration;
 
-    // Imagen o portada de la película
-    // Aquí se podría guardar una URL o la ruta de la imagen
+    /**
+     * URL or path to the movie poster image.
+     * Displayed on the weekly calendar when the activity is linked to this movie.
+     */
     private String image;
 
-    /*
-     * RELACIÓN MANY TO ONE
-     *
-     * Muchas películas pueden pertenecer
-     * a un mismo usuario.
-     *
-     * User 1 -------- * Movie
-     *
-     * Se creará una llave foránea user_id
-     * en la tabla movies.
+    /**
+     * The user who added this movie.
+     * Many movies can belong to one user.
      */
     @ManyToOne
-
-    // Nombre de la llave foránea
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Constructor vacío requerido por JPA
+    /**
+     * List of activities associated with this movie.
+     * One movie can be linked to many activities.
+     */
+    @OneToMany(mappedBy = "movie")
+    private List<Activity> activities = new ArrayList<>();
+
+    /** No-argument constructor required by JPA. */
     public Movie() {
     }
 
-    // Constructor con todos los atributos principales
+    /**
+     * Full constructor.
+     *
+     * @param id       the movie ID
+     * @param title    the movie title
+     * @param genre    the movie genre
+     * @param duration the duration in minutes
+     * @param image    the image URL or path
+     * @param user     the owner of this movie
+     */
     public Movie(Long id, String title, String genre,
-            Integer duration, String image,
-            User user) {
-
+            Integer duration, String image, User user) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -64,56 +74,24 @@ public class Movie {
         this.user = user;
     }
 
-    // ===== GETTERS Y SETTERS =====
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getGenre() { return genre; }
+    public void setGenre(String genre) { this.genre = genre; }
 
-    public String getTitle() {
-        return title;
-    }
+    public Integer getDuration() { return duration; }
+    public void setDuration(Integer duration) { this.duration = duration; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
 
-    public String getGenre() {
-        return genre;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    // Getter de user
-    public User getUser() {
-        return user;
-    }
-
-    // Setter de user
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    public List<Activity> getActivities() { return activities; }
+    public void setActivities(List<Activity> activities) { this.activities = activities; }
 }

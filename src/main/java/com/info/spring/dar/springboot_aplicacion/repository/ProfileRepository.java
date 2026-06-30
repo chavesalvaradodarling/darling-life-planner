@@ -1,49 +1,40 @@
 package com.info.spring.dar.springboot_aplicacion.repository;
 
-// Importa List para devolver varios perfiles
 import java.util.List;
-
-// Importa JpaRepository
 import org.springframework.data.jpa.repository.JpaRepository;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Profile;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
 
-/*
- * Esta interfaz se encargará de acceder
- * a la tabla profiles de la base de datos.
+/**
+ * Repository interface for the Profile entity.
  *
- * Long indica que la llave primaria (id)
- * es de tipo Long.
+ * Extends JpaRepository to inherit standard CRUD operations:
+ * save(), findById(), findAll(), deleteById(), existsById().
  */
-public interface ProfileRepository
-        extends JpaRepository<Profile, Long> {
+public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
-    /*
-     * JpaRepository ya proporciona:
+    /**
+     * Returns all profiles belonging to a specific user.
      *
-     * save()
-     * findById()
-     * findAll()
-     * deleteById()
-     * existsById()
-     */
-
-    /*
-     * Devuelve todos los perfiles
-     * pertenecientes a un usuario.
+     * @param user the user to filter by
+     * @return list of profiles for that user
      */
     List<Profile> findByUser(User user);
 
-    /*
-     * Permite buscar perfiles por nombre.
+    /**
+     * Returns all profiles matching the given full name.
+     *
+     * @param fullName the full name to search for
+     * @return list of matching profiles
      */
     List<Profile> findByFullName(String fullName);
 
-    /*
-     * Permite buscar un perfil por correo.
+    /**
+     * Returns the profile associated with the given email address.
+     * Used by GlobalControllerAdvice to load the active profile.
+     *
+     * @param email the email to search for
+     * @return the matching profile, or null if not found
      */
     Profile findByEmail(String email);
-
 }

@@ -1,48 +1,32 @@
 package com.info.spring.dar.springboot_aplicacion.repository;
 
-// Importa List para devolver varios viajes
 import java.util.List;
-
-// Importa JpaRepository
 import org.springframework.data.jpa.repository.JpaRepository;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Trip;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
 
-/*
- * Esta interfaz se encargará de acceder a la tabla trips
- * de la base de datos.
+/**
+ * Repository interface for the Trip entity.
  *
- * Long indica que la llave primaria (id)
- * es de tipo Long.
+ * Extends JpaRepository to inherit standard CRUD operations:
+ * save(), findById(), findAll(), deleteById(), existsById().
  */
 public interface TripRepository extends JpaRepository<Trip, Long> {
 
-    /*
-     * JpaRepository ya proporciona automáticamente:
+    /**
+     * Returns all trips belonging to a specific user.
      *
-     * save()
-     * findById()
-     * findAll()
-     * deleteById()
-     * existsById()
-     */
-
-    /*
-     * Devuelve todos los viajes
-     * pertenecientes a un usuario.
+     * @param user the user to filter by
+     * @return list of trips for that user
      */
     List<Trip> findByUser(User user);
 
-    /*
-     * Permite buscar viajes por destino.
+    /**
+     * Returns all trips matching the given destination.
+     * Examples: "París", "Japón", "Costa Rica"
      *
-     * Ejemplos:
-     * París
-     * Japón
-     * Costa Rica
+     * @param destination the destination to search for
+     * @return list of matching trips
      */
     List<Trip> findByDestination(String destination);
-
 }

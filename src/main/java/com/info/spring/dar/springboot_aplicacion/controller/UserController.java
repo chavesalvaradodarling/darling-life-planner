@@ -1,86 +1,73 @@
 package com.info.spring.dar.springboot_aplicacion.controller;
 
-// Importa las anotaciones necesarias de Spring Boot
 import org.springframework.web.bind.annotation.*;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa la entidad User
 import com.info.spring.dar.springboot_aplicacion.entity.User;
-
-// Importa el servicio
 import com.info.spring.dar.springboot_aplicacion.service.UserService;
 
-/*
- * Esta clase se encargará de recibir las peticiones HTTP
- * relacionadas con los usuarios.
+/**
+ * REST controller that exposes API endpoints for managing users.
+ * Base URL: /users
  */
 @RestController
-
-// Ruta principal para usuarios
 @RequestMapping("/users")
 public class UserController {
 
-    // Objeto que permitirá acceder a la lógica del servicio
+    /** Service that handles all user-related business logic. */
     private final UserService userService;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param userService the service used to manage users
      */
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    /*
-     * GET
+    /**
+     * Returns all users in the system.
+     * GET /users
      *
-     * Devuelve todos los usuarios.
-     *
-     * URL:
-     * http://localhost:8080/users
+     * @return list of all users
      */
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    /*
-     * GET
+    /**
+     * Returns a single user by their ID.
+     * GET /users/{id}
      *
-     * Devuelve un usuario según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/users/1
+     * @param id the user ID
+     * @return the matching user, or null if not found
      */
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
-    /*
-     * POST
+    /**
+     * Saves a new user.
+     * POST /users
      *
-     * Guarda un nuevo usuario.
-     *
-     * Se recibe un JSON desde Postman o desde el frontend.
+     * @param user the user object received in the request body
+     * @return the saved user
      */
     @PostMapping
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
 
-    /*
-     * DELETE
+    /**
+     * Deletes a user by their ID.
+     * DELETE /users/{id}
      *
-     * Elimina un usuario según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/users/1
+     * @param id the ID of the user to delete
      */
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
-
 }

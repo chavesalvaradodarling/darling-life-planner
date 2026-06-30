@@ -1,122 +1,110 @@
 package com.info.spring.dar.springboot_aplicacion.controller;
 
-// Importa las anotaciones necesarias de Spring Boot
 import org.springframework.web.bind.annotation.*;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Course;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
-
-// Importa el servicio
 import com.info.spring.dar.springboot_aplicacion.service.CourseService;
 
-/*
- * Esta clase se encargará de recibir las peticiones HTTP
- * relacionadas con los cursos.
+/**
+ * REST controller that exposes API endpoints for managing courses.
+ * Base URL: /courses
  */
 @RestController
-
-// Ruta principal para los cursos
 @RequestMapping("/courses")
 public class CourseController {
 
-    // Objeto que permitirá acceder a la lógica del servicio
+    /** Service that handles all course-related business logic. */
     private final CourseService courseService;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param courseService the service used to manage courses
      */
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
 
-    /*
-     * GET
+    /**
+     * Returns all courses in the system.
+     * GET /courses
      *
-     * Devuelve todos los cursos.
-     *
-     * URL:
-     * http://localhost:8080/courses
+     * @return list of all courses
      */
     @GetMapping
     public List<Course> getAllCourses() {
         return courseService.getAllCourses();
     }
 
-    /*
-     * GET
+    /**
+     * Returns a single course by its ID.
+     * GET /courses/{id}
      *
-     * Devuelve un curso según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/courses/1
+     * @param id the course ID
+     * @return the matching course, or null if not found
      */
     @GetMapping("/{id}")
     public Course getCourseById(@PathVariable Long id) {
         return courseService.getCourseById(id);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all courses belonging to a specific user.
+     * GET /courses/user
      *
-     * Devuelve todos los cursos
-     * pertenecientes a un usuario.
+     * @param user the user object sent in the request body
+     * @return list of courses for that user
      */
     @GetMapping("/user")
     public List<Course> getCoursesByUser(@RequestBody User user) {
         return courseService.getCoursesByUser(user);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all courses matching the given name.
+     * GET /courses/name/{name}
      *
-     * Busca cursos por nombre.
-     *
-     * Ejemplo:
-     * http://localhost:8080/courses/name/Cálculo I
+     * @param name the course name to search for
+     * @return list of matching courses
      */
     @GetMapping("/name/{name}")
     public List<Course> getCoursesByName(@PathVariable String name) {
         return courseService.getCoursesByName(name);
     }
 
-    /*
-     * GET
+    /**
+     * Returns a single course matching the given code.
+     * GET /courses/code/{code}
      *
-     * Busca un curso por código.
-     *
-     * Ejemplo:
-     * http://localhost:8080/courses/code/INF-101
+     * @param code the course code (e.g. INF-101)
+     * @return the matching course, or null if not found
      */
     @GetMapping("/code/{code}")
     public Course getCourseByCode(@PathVariable String code) {
         return courseService.getCourseByCode(code);
     }
 
-    /*
-     * POST
+    /**
+     * Saves a new course.
+     * POST /courses
      *
-     * Guarda un nuevo curso.
+     * @param course the course object received in the request body
+     * @return the saved course
      */
     @PostMapping
     public Course saveCourse(@RequestBody Course course) {
         return courseService.saveCourse(course);
     }
 
-    /*
-     * DELETE
+    /**
+     * Deletes a course by its ID.
+     * DELETE /courses/{id}
      *
-     * Elimina un curso según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/courses/1
+     * @param id the ID of the course to delete
      */
     @DeleteMapping("/{id}")
     public void deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
     }
-
 }

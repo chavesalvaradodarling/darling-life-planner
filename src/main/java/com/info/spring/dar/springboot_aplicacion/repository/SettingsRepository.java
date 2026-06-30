@@ -1,49 +1,31 @@
 package com.info.spring.dar.springboot_aplicacion.repository;
 
-// Importa List para devolver varias configuraciones
 import java.util.List;
-
-// Importa JpaRepository
 import org.springframework.data.jpa.repository.JpaRepository;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Settings;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
 
-/*
- * Esta interfaz se encargará de acceder
- * a la tabla settings de la base de datos.
+/**
+ * Repository interface for the Settings entity.
  *
- * Long indica que la llave primaria (id)
- * es de tipo Long.
+ * Extends JpaRepository to inherit standard CRUD operations:
+ * save(), findById(), findAll(), deleteById(), existsById().
  */
-public interface SettingsRepository
-        extends JpaRepository<Settings, Long> {
+public interface SettingsRepository extends JpaRepository<Settings, Long> {
 
-    /*
-     * JpaRepository ya proporciona:
+    /**
+     * Returns all settings records belonging to a specific user.
      *
-     * save()
-     * findById()
-     * findAll()
-     * deleteById()
-     * existsById()
-     */
-
-    /*
-     * Devuelve todas las configuraciones
-     * pertenecientes a un usuario.
+     * @param user the user to filter by
+     * @return list of settings for that user
      */
     List<Settings> findByUser(User user);
 
-    /*
-     * Permite buscar configuraciones por tema.
+    /**
+     * Returns all settings records matching the given theme.
      *
-     * Ejemplos:
-     * Pastel
-     * Oscuro
-     * Claro
+     * @param theme the theme name to filter by (e.g. "Claro", "Oscuro")
+     * @return list of matching settings
      */
     List<Settings> findByTheme(String theme);
-
 }

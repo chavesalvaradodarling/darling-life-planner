@@ -1,5 +1,35 @@
+<!--
+==============================================================================
+File: movies.html
+Project: Darling Life Planner
+------------------------------------------------------------------------------
+Description:
+This page displays the Movie Management module of the Darling Life Planner
+application. It allows users to organize and manage their personal movie
+collection by viewing, creating, editing, and deleting movie records. Each
+movie entry includes information such as its title, genre, duration, and
+poster image. The data is dynamically retrieved and rendered using Thymeleaf.
+
+Main Features:
+- Displays a complete list of registered movies.
+- Shows detailed information for each movie, including:
+  • Movie title
+  • Genre
+  • Duration in minutes
+  • Poster or cover image
+- Allows users to add a new movie to their collection.
+- Provides options to edit or delete existing movie records.
+- Displays a confirmation dialog before deleting a movie.
+- Dynamically renders movie information using Thymeleaf.
+- Integrates the shared sidebar and navigation bar fragments to maintain a
+  consistent application layout and navigation experience.
+
+==============================================================================
+-->
+
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -10,19 +40,15 @@
 
     <title>Mis Películas</title>
 
-    <!-- CSS principal -->
     <link rel="stylesheet"
           th:href="@{/css/style.css}">
 
-    <!-- Sidebar -->
     <link rel="stylesheet"
           th:href="@{/css/sidebar.css}">
 
-    <!-- Navbar -->
     <link rel="stylesheet"
           th:href="@{/css/navbar.css}">
 
-    <!-- Movies -->
     <link rel="stylesheet"
           th:href="@{/css/movies.css}">
 
@@ -30,20 +56,25 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Sidebar -->
-        <div th:replace="~{fragments/sidebar :: sidebar}">
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <div th:replace="~{fragments/navbar :: navbar}">
         </div>
 
-        <!-- Contenido principal -->
-        <div class="main-content">
 
-            <!-- Navbar -->
-            <div th:replace="~{fragments/navbar :: navbar}">
-            </div>
+        <!-- Fondo de películas -->
+        <div class="movies-background">
 
-            <!-- Contenedor -->
+            <!-- Contenido -->
             <div class="activities-container">
 
                 <h1>
@@ -52,7 +83,7 @@
 
                 </h1>
 
-                <!-- Botón -->
+
                 <a th:href="@{/newMovie}"
                    class="new-activity">
 
@@ -60,84 +91,79 @@
 
                 </a>
 
-                <!-- Tabla -->
+
                 <table>
 
                     <thead>
 
-                        <tr>
+                    <tr>
 
-                            <th>Título</th>
+                        <th>Título</th>
 
-                            <th>Género</th>
+                        <th>Género</th>
 
-                            <th>Duración</th>
+                        <th>Duración</th>
 
-                            <th>Imagen</th>
+                        <th>Imagen</th>
 
-                            <th>Acciones</th>
+                        <th>Acciones</th>
 
-                        </tr>
+                    </tr>
 
                     </thead>
 
+
                     <tbody>
 
-                        <tr th:each="movie : ${movies}">
+                    <tr th:each="movie : ${movies}">
 
-                            <!-- Título -->
-                            <td th:text="${movie.title}">
-                            </td>
+                        <td th:text="${movie.title}">
+                        </td>
 
-                            <!-- Género -->
-                            <td th:text="${movie.genre}">
-                            </td>
+                        <td th:text="${movie.genre}">
+                        </td>
 
-                            <!-- Duración -->
-                            <td>
+                        <td>
 
-                                <span th:text="${movie.duration}">
-                                </span>
+                            <span th:text="${movie.duration}">
+                            </span>
 
-                                min
+                            min
 
-                            </td>
+                        </td>
 
-                            <!-- Imagen -->
-                            <td>
+                        <td>
 
-                                <img th:src="${movie.image}"
-                                     width="80"
-                                     height="120"
-                                     style="border-radius:10px;">
+                            <img th:src="${movie.image}"
+                                 width="80"
+                                 height="120"
+                                 style="border-radius:10px;
+                                        object-fit:cover;">
 
-                            </td>
+                        </td>
 
-                            <!-- Acciones -->
-                            <td>
+                        <td>
 
-                                <!-- Editar -->
-                                <a class="action-edit"
-                                   th:href="@{/editMovie/{id}(id=${movie.id})}">
+                            <a class="action-edit"
+                               th:href="@{/editMovie/{id}(id=${movie.id})}">
 
-                                    ✏️ Editar
+                                ✏️ Editar
 
-                                </a>
+                            </a>
 
-                                &nbsp;
+                            &nbsp;
 
-                                <!-- Eliminar -->
-                                <a class="action-delete"
-                                   th:href="@{/deleteMovie/{id}(id=${movie.id})}"
-                                   onclick="return confirm('¿Desea eliminar esta película?')">
+                            <a class="action-delete"
+                               th:href="@{/deleteMovie/{id}(id=${movie.id})}"
+                               onclick="return confirm('¿Desea eliminar esta película?')">
 
-                                    🗑️ Eliminar
+                                🗑️ Eliminar
 
-                                </a>
+                            </a>
 
-                            </td>
+                        </td>
 
-                        </tr>
+                    </tr>
 
                     </tbody>
 
@@ -148,6 +174,8 @@
         </div>
 
     </div>
+
+</div>
 
 </body>
 

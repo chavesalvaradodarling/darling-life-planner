@@ -1,12 +1,22 @@
 /*
 =========================================
+FONDO DE PELÍCULAS
+=========================================
+*/
+
+
+
+/*
+=========================================
 CONTENEDOR PRINCIPAL
 =========================================
 */
 
 .activities-container{
 
-    padding:30px;
+    position:relative;
+
+    z-index:2;
 
 }
 
@@ -19,9 +29,13 @@ TÍTULO
 
 .activities-container h1{
 
-    color:#7C6A91;
+    color:var(--text-title);
 
-    margin-bottom:25px;
+    font-size:28px;
+
+    margin-bottom:18px;
+
+    transition:color .3s ease;
 
 }
 
@@ -36,28 +50,27 @@ BOTÓN NUEVA PELÍCULA
 
     display:inline-block;
 
-    background-color:#C9A7EB;
+    background:#C9A7EB;
 
     color:white;
 
     text-decoration:none;
 
-    padding:15px 25px;
+    padding:10px 18px;
 
-    border-radius:15px;
+    border-radius:10px;
 
-    margin-bottom:30px;
+    margin-bottom:20px;
 
-    font-size:16px;
+    font-size:13px;
 
-    transition:0.3s;
+    transition:.3s;
 
 }
 
-
 .new-activity:hover{
 
-    background-color:#B48AD6;
+    background:#B48AD6;
 
 }
 
@@ -72,15 +85,15 @@ table{
 
     width:100%;
 
-    background-color:white;
+    background:white;
 
-    border-radius:20px;
+    border-radius:18px;
 
     overflow:hidden;
 
-    box-shadow:0px 4px 12px rgba(0,0,0,0.08);
-
     border-collapse:collapse;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
 
 }
 
@@ -93,11 +106,17 @@ ENCABEZADOS
 
 th{
 
-    background-color:#F4E7F7;
+    background:white;
 
-    color:#7C6A91;
+    color:var(--text-title);
 
-    padding:20px;
+    padding:16px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    border-bottom:2px solid #F1EAF9;
 
 }
 
@@ -110,25 +129,25 @@ FILAS
 
 td{
 
-    padding:20px;
+    padding:16px;
 
     text-align:center;
 
-    color:#666;
+    color:var(--text-main);
+
+    font-size:13px;
 
 }
-
 
 tr{
 
-    border-bottom:1px solid #EEE;
+    border-bottom:1px solid #EFE8F7;
 
 }
 
-
 tbody tr:hover{
 
-    background-color:#FAF7FC;
+    background:#FCFAFF;
 
 }
 
@@ -141,24 +160,27 @@ BOTÓN EDITAR
 
 .action-edit{
 
+    display:inline-block;
+
     text-decoration:none;
 
-    background-color:#D6E4FF;
+    background:#D6E4FF;
 
     color:#4A73B8;
 
-    padding:10px 15px;
+    padding:6px 10px;
 
-    border-radius:12px;
+    border-radius:8px;
 
-    transition:0.3s;
+    font-size:12px;
+
+    transition:.3s;
 
 }
 
-
 .action-edit:hover{
 
-    background-color:#BFD5FF;
+    background:#BFD5FF;
 
 }
 
@@ -171,23 +193,26 @@ BOTÓN ELIMINAR
 
 .action-delete{
 
+    display:inline-block;
+
     text-decoration:none;
 
-    background-color:#FFD6D6;
+    background:#FFD6D6;
 
     color:#D84B4B;
 
-    padding:10px 15px;
+    padding:6px 10px;
 
-    border-radius:12px;
+    border-radius:8px;
 
-    transition:0.3s;
+    font-size:12px;
+
+    transition:.3s;
 
 }
 
-
 .action-delete:hover{
 
-    background-color:#FFC2C2;
+    background:#FFC2C2;
 
 }

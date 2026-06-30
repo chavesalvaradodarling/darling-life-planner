@@ -1,57 +1,264 @@
-<div class="calendar"
-     th:fragment="calendar">
+<!--
+========================================================
+WEEKLY CALENDAR FRAGMENT
 
-    <h2>
+Renders a 7-column (Mon-Sun) by N-row (hours) grid.
+Each cell looks up the calendarActivities map using a
+"DAY_HOUR" key (e.g. "MONDAY_09:00") built by the
+CalendarViewController.
 
-        🗓️ Calendario semanal
+Display priority inside each cell (only one applies):
+1. If the activity has a linked course  -> show course name
+2. If the activity has a linked movie   -> show movie title + poster image
+3. If the activity has a linked trip    -> show trip destination
+4. If none of the above are set         -> show the activity's own title
+========================================================
+-->
+<div class="calendar-container" th:fragment="calendar">
 
-    </h2>
-
-
-    <div class="week">
-
-        <!-- Recorrer actividades -->
-        <div class="day"
-
-             th:each="activity : ${activities}">
-
-            <!-- Fecha -->
-            <h3
-
-                th:text="${activity.activityDate}">
-
-            </h3>
-
-
-            <!-- Hora -->
-            <span
-
-                  th:text="${activity.startTime}">
-
-            </span>
-
-
-            <!-- Actividad -->
-            <p>
-
-                <span
-
-                      th:if="${activity.category != null}"
-
-                      th:text="${activity.category.icon + ' '}">
-
-                </span>
-
-                <span
-
-                      th:text="${activity.title}">
-
-                </span>
-
-            </p>
-
-        </div>
-
+    <div class="calendar-header">
+        <h1>
+            🗓 Weekly Calendar
+        </h1>
     </div>
+
+    <table class="calendar-table">
+
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <!-- One row per hour slot (e.g. 05:00, 06:00, ... 24:00) -->
+            <tr th:each="hour : ${hours}">
+
+                <!-- Time label column -->
+                <td th:text="${hour}">
+                </td>
+
+                <!-- MONDAY -->
+                <td>
+                    <div class="event" th:if="${calendarActivities['MONDAY_' + hour] != null}">
+
+                        <!-- Bind the matched activity to a local variable for readability -->
+                        <th:block th:with="activity=${calendarActivities['MONDAY_' + hour]}">
+
+                            <!-- Priority 1: linked course -->
+                            <span th:if="${activity.course != null}"
+                                  th:text="${activity.course.name}">
+                            </span>
+
+                            <!-- Priority 2: linked movie (title + poster) -->
+                            <div th:if="${activity.movie != null}">
+                                <span th:text="${activity.movie.title}"></span>
+                                <br>
+                                <img th:src="${activity.movie.image}" alt="Movie poster">
+                            </div>
+
+                            <!-- Priority 3: linked trip -->
+                            <span th:if="${activity.trip != null}"
+                                  th:text="${activity.trip.destination}">
+                            </span>
+
+                            <!-- Fallback: no associations, show the activity's own title -->
+                            <span th:if="${activity.course == null
+                                          and activity.movie == null
+                                          and activity.trip == null}"
+                                  th:text="${activity.title}">
+                            </span>
+
+                        </th:block>
+                    </div>
+                </td>
+
+                <!-- TUESDAY (same display logic as Monday) -->
+                <td>
+                    <div class="event" th:if="${calendarActivities['TUESDAY_' + hour] != null}">
+                        <th:block th:with="activity=${calendarActivities['TUESDAY_' + hour]}">
+
+                            <span th:if="${activity.course != null}"
+                                  th:text="${activity.course.name}">
+                            </span>
+
+                            <div th:if="${activity.movie != null}">
+                                <span th:text="${activity.movie.title}"></span>
+                                <br>
+                                <img th:src="${activity.movie.image}" alt="Movie poster">
+                            </div>
+
+                            <span th:if="${activity.trip != null}"
+                                  th:text="${activity.trip.destination}">
+                            </span>
+
+                            <span th:if="${activity.course == null
+                                          and activity.movie == null
+                                          and activity.trip == null}"
+                                  th:text="${activity.title}">
+                            </span>
+
+                        </th:block>
+                    </div>
+                </td>
+
+                <!-- WEDNESDAY (same display logic as Monday) -->
+                <td>
+                    <div class="event" th:if="${calendarActivities['WEDNESDAY_' + hour] != null}">
+                        <th:block th:with="activity=${calendarActivities['WEDNESDAY_' + hour]}">
+
+                            <span th:if="${activity.course != null}"
+                                  th:text="${activity.course.name}">
+                            </span>
+
+                            <div th:if="${activity.movie != null}">
+                                <span th:text="${activity.movie.title}"></span>
+                                <br>
+                                <img th:src="${activity.movie.image}" alt="Movie poster">
+                            </div>
+
+                            <span th:if="${activity.trip != null}"
+                                  th:text="${activity.trip.destination}">
+                            </span>
+
+                            <span th:if="${activity.course == null
+                                          and activity.movie == null
+                                          and activity.trip == null}"
+                                  th:text="${activity.title}">
+                            </span>
+
+                        </th:block>
+                    </div>
+                </td>
+
+                <!-- THURSDAY (same display logic as Monday) -->
+                <td>
+                    <div class="event" th:if="${calendarActivities['THURSDAY_' + hour] != null}">
+                        <th:block th:with="activity=${calendarActivities['THURSDAY_' + hour]}">
+
+                            <span th:if="${activity.course != null}"
+                                  th:text="${activity.course.name}">
+                            </span>
+
+                            <div th:if="${activity.movie != null}">
+                                <span th:text="${activity.movie.title}"></span>
+                                <br>
+                                <img th:src="${activity.movie.image}" alt="Movie poster">
+                            </div>
+
+                            <span th:if="${activity.trip != null}"
+                                  th:text="${activity.trip.destination}">
+                            </span>
+
+                            <span th:if="${activity.course == null
+                                          and activity.movie == null
+                                          and activity.trip == null}"
+                                  th:text="${activity.title}">
+                            </span>
+
+                        </th:block>
+                    </div>
+                </td>
+
+                <!-- FRIDAY (same display logic as Monday) -->
+                <td>
+                    <div class="event" th:if="${calendarActivities['FRIDAY_' + hour] != null}">
+                        <th:block th:with="activity=${calendarActivities['FRIDAY_' + hour]}">
+
+                            <span th:if="${activity.course != null}"
+                                  th:text="${activity.course.name}">
+                            </span>
+
+                            <div th:if="${activity.movie != null}">
+                                <span th:text="${activity.movie.title}"></span>
+                                <br>
+                                <img th:src="${activity.movie.image}" alt="Movie poster">
+                            </div>
+
+                            <span th:if="${activity.trip != null}"
+                                  th:text="${activity.trip.destination}">
+                            </span>
+
+                            <span th:if="${activity.course == null
+                                          and activity.movie == null
+                                          and activity.trip == null}"
+                                  th:text="${activity.title}">
+                            </span>
+
+                        </th:block>
+                    </div>
+                </td>
+
+                <!-- SATURDAY (same display logic as Monday) -->
+                <td>
+                    <div class="event" th:if="${calendarActivities['SATURDAY_' + hour] != null}">
+                        <th:block th:with="activity=${calendarActivities['SATURDAY_' + hour]}">
+
+                            <span th:if="${activity.course != null}"
+                                  th:text="${activity.course.name}">
+                            </span>
+
+                            <div th:if="${activity.movie != null}">
+                                <span th:text="${activity.movie.title}"></span>
+                                <br>
+                                <img th:src="${activity.movie.image}" alt="Movie poster">
+                            </div>
+
+                            <span th:if="${activity.trip != null}"
+                                  th:text="${activity.trip.destination}">
+                            </span>
+
+                            <span th:if="${activity.course == null
+                                          and activity.movie == null
+                                          and activity.trip == null}"
+                                  th:text="${activity.title}">
+                            </span>
+
+                        </th:block>
+                    </div>
+                </td>
+
+                <!-- SUNDAY (same display logic as Monday) -->
+                <td>
+                    <div class="event" th:if="${calendarActivities['SUNDAY_' + hour] != null}">
+                        <th:block th:with="activity=${calendarActivities['SUNDAY_' + hour]}">
+
+                            <span th:if="${activity.course != null}"
+                                  th:text="${activity.course.name}">
+                            </span>
+
+                            <div th:if="${activity.movie != null}">
+                                <span th:text="${activity.movie.title}"></span>
+                                <br>
+                                <img th:src="${activity.movie.image}" alt="Movie poster">
+                            </div>
+
+                            <span th:if="${activity.trip != null}"
+                                  th:text="${activity.trip.destination}">
+                            </span>
+
+                            <span th:if="${activity.course == null
+                                          and activity.movie == null
+                                          and activity.trip == null}"
+                                  th:text="${activity.title}">
+                            </span>
+
+                        </th:block>
+                    </div>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
 
 </div>

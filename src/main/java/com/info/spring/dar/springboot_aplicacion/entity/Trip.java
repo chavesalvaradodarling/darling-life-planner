@@ -1,61 +1,68 @@
 package com.info.spring.dar.springboot_aplicacion.entity;
 
-// Importa las anotaciones necesarias de JPA
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-// Indica que esta clase representa una tabla de la base de datos
+/**
+ * Entity representing a trip stored in the 'trips' table.
+ *
+ * Trips are created by the user and can optionally be associated
+ * with activities. When an activity is linked to a trip and has no date set,
+ * the trip's departure date is used automatically.
+ * Each trip belongs to one user.
+ */
 @Entity
-
-// Nombre de la tabla en MySQL
 @Table(name = "trips")
 public class Trip {
 
-    // Llave primaria
+    /** Primary key, auto-generated. */
     @Id
-
-    // El id se genera automáticamente (1,2,3,4...)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Destino del viaje
-    // Ejemplo:
-    // Japón
-    // Guanacaste
-    // Cartago
+    /**
+     * Destination of the trip.
+     * Examples: "París", "Japón", "Costa Rica"
+     */
     private String destination;
 
-    // Fecha de salida
+    /** Departure date of the trip (format: yyyy-MM-dd). */
     private String departureDate;
 
-    // Fecha de regreso
+    /** Return date of the trip (format: yyyy-MM-dd). */
     private String returnDate;
 
-    /*
-     * RELACIÓN MANY TO ONE
-     *
-     * Muchos viajes pueden pertenecer
-     * a un mismo usuario.
-     *
-     * User 1 -------- * Trip
-     *
-     * En la tabla trips se creará
-     * una llave foránea llamada user_id.
+    /**
+     * The user who created this trip.
+     * Many trips can belong to one user.
      */
     @ManyToOne
-
-    // Nombre de la llave foránea
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Constructor vacío requerido por JPA
+    /**
+     * List of activities associated with this trip.
+     * One trip can be linked to many activities.
+     */
+    @OneToMany(mappedBy = "trip")
+    private List<Activity> activities = new ArrayList<>();
+
+    /** No-argument constructor required by JPA. */
     public Trip() {
     }
 
-    // Constructor con los atributos principales
+    /**
+     * Full constructor.
+     *
+     * @param id            the trip ID
+     * @param destination   the destination
+     * @param departureDate the departure date (yyyy-MM-dd)
+     * @param returnDate    the return date (yyyy-MM-dd)
+     * @param user          the owner of this trip
+     */
     public Trip(Long id, String destination,
-            String departureDate, String returnDate,
-            User user) {
-
+            String departureDate, String returnDate, User user) {
         this.id = id;
         this.destination = destination;
         this.departureDate = departureDate;
@@ -63,48 +70,21 @@ public class Trip {
         this.user = user;
     }
 
-    // ===== GETTERS Y SETTERS =====
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getDestination() { return destination; }
+    public void setDestination(String destination) { this.destination = destination; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getDepartureDate() { return departureDate; }
+    public void setDepartureDate(String departureDate) { this.departureDate = departureDate; }
 
-    public String getDestination() {
-        return destination;
-    }
+    public String getReturnDate() { return returnDate; }
+    public void setReturnDate(String returnDate) { this.returnDate = returnDate; }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public String getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(String departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public String getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(String returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    // Getter de user
-    public User getUser() {
-        return user;
-    }
-
-    // Setter de user
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    public List<Activity> getActivities() { return activities; }
+    public void setActivities(List<Activity> activities) { this.activities = activities; }
 }

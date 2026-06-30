@@ -6,7 +6,7 @@ CONTENEDOR PRINCIPAL
 
 .activities-container{
 
-    padding:30px;
+    padding:px;
 
 }
 
@@ -19,9 +19,26 @@ TÍTULO
 
 .activities-container h1{
 
-    color:#7C6A91;
+    color:var(--text-title);
 
     margin-bottom:25px;
+
+}
+
+
+/*
+=========================================
+SUBTÍTULOS
+=========================================
+*/
+
+.activities-container h2{
+
+    color:var(--text-title);
+
+    margin-top:40px;
+
+    margin-bottom:20px;
 
 }
 
@@ -36,7 +53,7 @@ BOTÓN NUEVA META
 
     display:inline-block;
 
-    background-color:#C9A7EB;
+    background:#C9A7EB;
 
     color:white;
 
@@ -46,96 +63,202 @@ BOTÓN NUEVA META
 
     border-radius:15px;
 
-    margin-bottom:30px;
+    margin-bottom:35px;
 
-    font-size:16px;
-
-    transition:0.3s;
+    transition:.3s;
 
 }
 
 
 .new-activity:hover{
 
-    background-color:#B48AD6;
+    background:#B48AD6;
 
 }
 
 
 /*
 =========================================
-TABLA
+GRID
 =========================================
 */
 
-table{
+.goals-grid{
 
-    width:100%;
+    display:grid;
 
-    background-color:white;
+    grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+
+    gap:25px;
+
+}
+
+
+/*
+=========================================
+TARJETA
+=========================================
+*/
+
+.goal-card{
+
+    background:var(--bg-card);
 
     border-radius:20px;
 
+    padding:25px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    border:1px solid #ECECEC;
+
+    transition:.3s;
+
+}
+
+
+.goal-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+
+/*
+=========================================
+ENCABEZADO
+=========================================
+*/
+
+.goal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+
+.goal-header h3{
+
+    margin:0;
+
+    color:var(--text-title);
+
+}
+
+
+/*
+=========================================
+BADGES
+=========================================
+*/
+
+.badge-progress{
+
+    background:#FFF4CC;
+
+    color:#C69200;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+
+.badge-completed{
+
+    background:#D9F7E8;
+
+    color:#1F8D55;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+}
+
+
+/*
+=========================================
+TEXTOS
+=========================================
+*/
+
+.goal-card p{
+
+    margin:12px 0;
+
+    color:var(--text-main);
+
+}
+
+
+/*
+=========================================
+BARRA
+=========================================
+*/
+
+.progress-bar{
+
+    width:100%;
+
+    height:10px;
+
+    background:#ECECEC;
+
+    border-radius:99px;
+
     overflow:hidden;
 
-    box-shadow:0px 4px 12px rgba(0,0,0,0.08);
+    margin-top:18px;
 
-    border-collapse:collapse;
+}
+
+
+.progress-fill{
+
+    height:100%;
+
+    background:#C9A7EB;
+
+    border-radius:99px;
+
+    transition:width .5s;
 
 }
 
 
 /*
 =========================================
-ENCABEZADOS
+META COMPLETADA
 =========================================
 */
 
-th{
+.completed{
 
-    background-color:#F4E7F7;
-
-    color:#7C6A91;
-
-    padding:20px;
+    border:2px solid #C9A7EB;
 
 }
 
 
 /*
 =========================================
-FILAS
-=========================================
-*/
-
-td{
-
-    padding:20px;
-
-    text-align:center;
-
-    color:#666;
-
-}
-
-
-tr{
-
-    border-bottom:1px solid #EEE;
-
-}
-
-
-tbody tr:hover{
-
-    background-color:#FAF7FC;
-
-}
-
-
-/*
-=========================================
-BOTÓN EDITAR
+BOTONES
 =========================================
 */
 
@@ -143,51 +266,62 @@ BOTÓN EDITAR
 
     text-decoration:none;
 
-    background-color:#D6E4FF;
+    background:#D6E4FF;
 
     color:#4A73B8;
 
-    padding:10px 15px;
+    padding:10px 16px;
 
     border-radius:12px;
 
-    transition:0.3s;
+    transition:.3s;
 
 }
 
 
 .action-edit:hover{
 
-    background-color:#BFD5FF;
+    background:#BDD2FF;
 
 }
 
-
-/*
-=========================================
-BOTÓN ELIMINAR
-=========================================
-*/
 
 .action-delete{
 
     text-decoration:none;
 
-    background-color:#FFD6D6;
+    background:#FFD9D9;
 
     color:#D84B4B;
 
-    padding:10px 15px;
+    padding:10px 16px;
 
     border-radius:12px;
 
-    transition:0.3s;
+    transition:.3s;
 
 }
 
 
 .action-delete:hover{
 
-    background-color:#FFC2C2;
+    background:#FFC2C2;
+
+}
+
+
+/*
+=========================================
+RESPONSIVE
+=========================================
+*/
+
+@media(max-width:768px){
+
+    .goals-grid{
+
+        grid-template-columns:1fr;
+
+    }
 
 }

@@ -1,11 +1,44 @@
-<div class="daily-plan"
-     th:fragment="dailyPlan">
 
-    <h2>
+<!--
+  Activity history fragment ("dailyPlan").
 
-        📋 Plan de hoy
+  Despite the fragment name, this currently lists ALL of the user's
+  activities (not filtered to "today"), each with its status
+  represented by one of four possible icons:
+    ✔  COMPLETED
+    ◐  PARTIALLY_COMPLETED
+    ○  PENDING
+    ✕  NOT_COMPLETED
 
-    </h2>
+  Included via: th:replace="~{fragments/dailyplan :: dailyPlan}"
+-->
+
+
+
+<div class="daily-plan" th:fragment="dailyPlan">
+
+
+    <h2>📋 Historial actividades</h2>
+
+    <div class="task" th:each="activity : ${activities}">
+
+        <div class="task-info">
+            <span class="time" th:text="${activity.startTime}"></span>
+            <div>
+                <h4 th:text="${activity.title}"></h4>
+                <p th:if="${activity.category != null}" th:text="${activity.category.name}"></p>
+                <p th:if="${activity.category == null}">Sin categoría</p>
+            </div>
+        </div>
+
+        <span class="status-done" th:if="${activity.status == 'COMPLETED'}">✔</span>
+        <span class="status-partial" th:if="${activity.status == 'PARTIALLY_COMPLETED'}">◐</span>
+        <span class="status-pending" th:if="${activity.status == 'PENDING'}">○</span>
+        <span class="status-no" th:if="${activity.status == 'NOT_COMPLETED'}">✕</span>
+
+    </div>
+
+</div>
 
 
     <!-- Recorrer actividades -->

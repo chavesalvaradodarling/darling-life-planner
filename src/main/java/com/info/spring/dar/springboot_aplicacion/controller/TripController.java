@@ -1,109 +1,98 @@
 package com.info.spring.dar.springboot_aplicacion.controller;
 
-// Importa las anotaciones necesarias de Spring Boot
 import org.springframework.web.bind.annotation.*;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Trip;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
-
-// Importa el servicio
 import com.info.spring.dar.springboot_aplicacion.service.TripService;
 
-/*
- * Esta clase se encargará de recibir las peticiones HTTP
- * relacionadas con los viajes.
+/**
+ * REST controller that exposes API endpoints for managing trips.
+ * Base URL: /trips
  */
 @RestController
-
-// Ruta principal para los viajes
 @RequestMapping("/trips")
 public class TripController {
 
-    // Objeto que permitirá acceder a la lógica del servicio
+    /** Service that handles all trip-related business logic. */
     private final TripService tripService;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param tripService the service used to manage trips
      */
     public TripController(TripService tripService) {
         this.tripService = tripService;
     }
 
-    /*
-     * GET
+    /**
+     * Returns all trips in the system.
+     * GET /trips
      *
-     * Devuelve todos los viajes.
-     *
-     * URL:
-     * http://localhost:8080/trips
+     * @return list of all trips
      */
     @GetMapping
     public List<Trip> getAllTrips() {
         return tripService.getAllTrips();
     }
 
-    /*
-     * GET
+    /**
+     * Returns a single trip by its ID.
+     * GET /trips/{id}
      *
-     * Devuelve un viaje según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/trips/1
+     * @param id the trip ID
+     * @return the matching trip, or null if not found
      */
     @GetMapping("/{id}")
     public Trip getTripById(@PathVariable Long id) {
         return tripService.getTripById(id);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all trips belonging to a specific user.
+     * GET /trips/user
      *
-     * Devuelve todos los viajes pertenecientes
-     * a un usuario.
+     * @param user the user object sent in the request body
+     * @return list of trips for that user
      */
     @GetMapping("/user")
     public List<Trip> getTripsByUser(@RequestBody User user) {
         return tripService.getTripsByUser(user);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all trips matching the given destination.
+     * GET /trips/destination/{destination}
      *
-     * Busca viajes por destino.
-     *
-     * Ejemplo:
-     * http://localhost:8080/trips/destination/Japon
+     * @param destination the destination to search for
+     * @return list of matching trips
      */
     @GetMapping("/destination/{destination}")
     public List<Trip> getTripsByDestination(@PathVariable String destination) {
         return tripService.getTripsByDestination(destination);
     }
 
-    /*
-     * POST
+    /**
+     * Saves a new trip.
+     * POST /trips
      *
-     * Guarda un nuevo viaje.
+     * @param trip the trip object received in the request body
+     * @return the saved trip
      */
     @PostMapping
     public Trip saveTrip(@RequestBody Trip trip) {
         return tripService.saveTrip(trip);
     }
 
-    /*
-     * DELETE
+    /**
+     * Deletes a trip by its ID.
+     * DELETE /trips/{id}
      *
-     * Elimina un viaje según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/trips/1
+     * @param id the ID of the trip to delete
      */
     @DeleteMapping("/{id}")
     public void deleteTrip(@PathVariable Long id) {
         tripService.deleteTrip(id);
     }
-
 }

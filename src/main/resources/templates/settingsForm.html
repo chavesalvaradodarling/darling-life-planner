@@ -1,133 +1,99 @@
+<!--
+==============================================================================
+File: settingsForm.html
+Project: Darling Life Planner
+------------------------------------------------------------------------------
+Description:
+This page provides the application settings interface, allowing users to
+customize the visual appearance of the Darling Life Planner. It includes a
+theme configuration module where users can switch between the available visual
+themes. The selected theme is applied immediately and stored in the browser's
+local storage to preserve the user's preference across future sessions.
+
+Main Features:
+- Displays the application settings form.
+- Allows users to select a preferred visual theme.
+- Saves the selected configuration through a Spring Boot controller.
+- Applies theme changes instantly using JavaScript.
+- Persists the selected theme using the browser's Local Storage.
+- Automatically restores the previously selected theme when the page loads.
+- Integrates the shared sidebar and navigation bar fragments.
+
+Technologies:
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- Thymeleaf
+- Spring Boot MVC
+
+Author: Darling Chaves
+==============================================================================
+-->
+
+
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Nueva Configuración</title>
-
-    <!-- CSS principal -->
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
-
-    <!-- Sidebar -->
-    <link rel="stylesheet"
-          th:href="@{/css/sidebar.css}">
-
-    <!-- Navbar -->
-    <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
-
-    <!-- Formulario -->
-    <link rel="stylesheet"
-          th:href="@{/css/settingsForm.css}">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Tema</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/settingsForm.css}">
 </head>
-
 <body>
 
 <div class="container">
-
-    <!-- Sidebar -->
-    <div th:replace="~{fragments/sidebar :: sidebar}">
-    </div>
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
     <div class="main-content">
-
-        <!-- Navbar -->
-        <div th:replace="~{fragments/navbar :: navbar}">
-        </div>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
 
         <div class="form-container">
+            <h1>⚙️ Editar Configuración</h1>
 
-            <h1>
+            <form th:action="@{/saveSettings}" th:object="${settings}" method="post">
+                <input type="hidden" th:field="*{id}">
 
-                ⚙ Configuración
+                <h3 style="color: var(--text-title); margin-top: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 5px;">🎨 Módulo de Tema</h3>
+                
+                <label for="themeSelect">Selecciona el Tema de la App</label>
+                <select id="themeSelect" th:field="*{theme}" style="width:100%; padding:15px; border:none; border-radius:15px; background-color: var(--bg-input); font-size:15px; color: var(--text-main);">
+                    <option value="Claro">✨ Tema Claro</option>
+                    <option value="Oscuro">🌙 Tema Oscuro</option>
+                    <option value="Pastel">🌸 Tema Pastel</option>
+                </select>
 
-            </h1>
-
-            <form th:action="@{/saveSettings}"
-                  th:object="${settings}"
-                  method="post">
-
-                <!-- Id oculto -->
-                <input type="hidden"
-                       th:field="*{id}">
-
-
-                <!-- Tema -->
-                <label>
-
-                    Tema
-
-                </label>
-
-                <input type="text"
-                       th:field="*{theme}">
-
-
-                <!-- Color principal -->
-                <label>
-
-                    Color principal
-
-                </label>
-
-                <input type="text"
-                       th:field="*{mainColor}">
-
-
-                <!-- Mostrar calendario -->
-                <label>
-
-                    Mostrar calendario
-
-                </label>
-
-                <input type="checkbox"
-                       th:field="*{showCalendar}">
-
-
-                <!-- Mostrar gráficos -->
-                <label>
-
-                    Mostrar gráficos
-
-                </label>
-
-                <input type="checkbox"
-                       th:field="*{showCharts}">
-
-
-                <!-- Notificaciones -->
-                <label>
-
-                    Activar notificaciones
-
-                </label>
-
-                <input type="checkbox"
-                       th:field="*{notifications}">
-
-
-                <button type="submit">
-
-                    Guardar configuración
-
-                </button>
-
+                <button type="submit" style="margin-top: 30px;">Guardar Cambios</button>
             </form>
-
         </div>
-
     </div>
-
 </div>
 
-</body>
+<script>
+    const themeSelect = document.getElementById('themeSelect');
 
+    function actualizarTema(tema) {
+        if (tema === 'Oscuro') {
+            document.documentElement.setAttribute('data-theme', 'Oscuro');
+            localStorage.setItem('theme', 'Oscuro');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'Claro');
+        }
+    }
+
+    // Cambiar en tiempo real al mover el select
+    themeSelect.addEventListener('change', (e) => {
+        actualizarTema(e.target.value);
+    });
+
+    // Leer qué tema está guardado en la memoria al cargar el formulario
+    const temaGuardado = localStorage.getItem('theme') || themeSelect.value;
+    actualizarTema(temaGuardado);
+    themeSelect.value = temaGuardado;
+</script>
+
+</body>
 </html>

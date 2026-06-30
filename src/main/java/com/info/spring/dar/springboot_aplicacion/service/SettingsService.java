@@ -1,84 +1,76 @@
 package com.info.spring.dar.springboot_aplicacion.service;
 
-// Indica que esta clase pertenece a la capa de servicios
 import org.springframework.stereotype.Service;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Settings;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
-
-// Importa el repositorio
 import com.info.spring.dar.springboot_aplicacion.repository.SettingsRepository;
 
-/*
- * Esta clase contiene la lógica relacionada con las configuraciones.
- *
- * Se comunica con SettingsRepository para acceder a la base de datos.
+/**
+ * Service class that contains the business logic for managing application settings.
+ * Communicates with SettingsRepository to access the database.
+ * Currently handles the UI theme selection per user.
  */
 @Service
 public class SettingsService {
 
-    // Objeto que permite acceder a la tabla settings
+    /** Repository used to perform database operations on settings. */
     private final SettingsRepository settingsRepository;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param settingsRepository the repository used to access the settings table
      */
     public SettingsService(SettingsRepository settingsRepository) {
         this.settingsRepository = settingsRepository;
     }
 
-    /*
-     * Guarda una configuración en la base de datos.
+    /**
+     * Saves a settings record to the database.
+     *
+     * @param settings the settings object to save
+     * @return the saved settings
      */
     public Settings saveSettings(Settings settings) {
         return settingsRepository.save(settings);
     }
 
-    /*
-     * Devuelve todas las configuraciones registradas.
+    /**
+     * Returns all settings records in the system.
+     *
+     * @return list of all settings
      */
     public List<Settings> getAllSettings() {
         return settingsRepository.findAll();
     }
 
-    /*
-     * Busca una configuración por su id.
+    /**
+     * Returns a single settings record by its ID, or null if not found.
      *
-     * Si no existe, devuelve null.
+     * @param id the settings ID
+     * @return the matching settings or null
      */
     public Settings getSettingsById(Long id) {
         return settingsRepository.findById(id).orElse(null);
     }
 
-    /*
-     * Devuelve todas las configuraciones
-     * pertenecientes a un usuario.
+    /**
+     * Returns all settings records belonging to a specific user.
+     *
+     * @param user the user to filter by
+     * @return list of settings for that user
      */
     public List<Settings> getSettingsByUser(User user) {
         return settingsRepository.findByUser(user);
     }
 
-    /*
-     * Busca configuraciones por tema.
+    /**
+     * Deletes a settings record by its ID.
      *
-     * Ejemplos:
-     * Pastel
-     * Oscuro
-     * Claro
-     */
-    public List<Settings> getSettingsByTheme(String theme) {
-        return settingsRepository.findByTheme(theme);
-    }
-
-    /*
-     * Elimina una configuración por su id.
+     * @param id the ID of the settings to delete
      */
     public void deleteSettings(Long id) {
         settingsRepository.deleteById(id);
     }
-
 }

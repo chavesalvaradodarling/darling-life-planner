@@ -1,98 +1,86 @@
 package com.info.spring.dar.springboot_aplicacion.controller;
 
-// Importa las anotaciones necesarias de Spring Boot
 import org.springframework.web.bind.annotation.*;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Planning;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
-
-// Importa el servicio
 import com.info.spring.dar.springboot_aplicacion.service.PlanningService;
 
-/*
- * Esta clase se encargará de recibir las peticiones HTTP
- * relacionadas con las planificaciones.
+/**
+ * REST controller that exposes API endpoints for managing plannings.
+ * Base URL: /plannings
  */
 @RestController
-
-// Ruta principal para las planificaciones
 @RequestMapping("/plannings")
 public class PlanningController {
 
-    // Objeto que permitirá acceder a la lógica del servicio
+    /** Service that handles all planning-related business logic. */
     private final PlanningService planningService;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param planningService the service used to manage plannings
      */
     public PlanningController(PlanningService planningService) {
         this.planningService = planningService;
     }
 
-    /*
-     * GET
+    /**
+     * Returns all plannings in the system.
+     * GET /plannings
      *
-     * Devuelve todas las planificaciones.
-     *
-     * URL:
-     * http://localhost:8080/plannings
+     * @return list of all plannings
      */
     @GetMapping
     public List<Planning> getAllPlannings() {
         return planningService.getAllPlannings();
     }
 
-    /*
-     * GET
+    /**
+     * Returns a single planning by its ID.
+     * GET /plannings/{id}
      *
-     * Devuelve una planificación según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/plannings/1
+     * @param id the planning ID
+     * @return the matching planning, or null if not found
      */
     @GetMapping("/{id}")
     public Planning getPlanningById(@PathVariable Long id) {
         return planningService.getPlanningById(id);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all plannings belonging to a specific user.
+     * GET /plannings/user
      *
-     * Devuelve todas las planificaciones de un usuario.
-     *
-     * Ejemplo:
-     * http://localhost:8080/plannings/user
+     * @param user the user object sent in the request body
+     * @return list of plannings for that user
      */
     @GetMapping("/user")
     public List<Planning> getPlanningsByUser(@RequestBody User user) {
         return planningService.getPlanningsByUser(user);
     }
 
-    /*
-     * POST
+    /**
+     * Saves a new planning.
+     * POST /plannings
      *
-     * Guarda una nueva planificación.
+     * @param planning the planning object received in the request body
+     * @return the saved planning
      */
     @PostMapping
     public Planning savePlanning(@RequestBody Planning planning) {
         return planningService.savePlanning(planning);
     }
 
-    /*
-     * DELETE
+    /**
+     * Deletes a planning by its ID.
+     * DELETE /plannings/{id}
      *
-     * Elimina una planificación según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/plannings/1
+     * @param id the ID of the planning to delete
      */
     @DeleteMapping("/{id}")
     public void deletePlanning(@PathVariable Long id) {
         planningService.deletePlanning(id);
     }
-
 }

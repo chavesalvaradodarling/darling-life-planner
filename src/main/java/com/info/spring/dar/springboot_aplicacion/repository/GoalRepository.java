@@ -1,48 +1,32 @@
 package com.info.spring.dar.springboot_aplicacion.repository;
 
-// Importa List para devolver varias metas
 import java.util.List;
-
-// Importa JpaRepository
 import org.springframework.data.jpa.repository.JpaRepository;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Goal;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
 
-/*
- * Esta interfaz se encargará de acceder
- * a la tabla goals de la base de datos.
+/**
+ * Repository interface for the Goal entity.
  *
- * Long indica que la llave primaria (id)
- * es de tipo Long.
+ * Extends JpaRepository to inherit standard CRUD operations:
+ * save(), findById(), findAll(), deleteById(), existsById().
  */
-public interface GoalRepository
-        extends JpaRepository<Goal, Long> {
+public interface GoalRepository extends JpaRepository<Goal, Long> {
 
-    /*
-     * JpaRepository ya proporciona:
+    /**
+     * Returns all goals belonging to a specific user.
      *
-     * save()
-     * findById()
-     * findAll()
-     * deleteById()
-     * existsById()
-     */
-
-    /*
-     * Devuelve todas las metas
-     * pertenecientes a un usuario.
+     * @param user the user to filter by
+     * @return list of goals for that user
      */
     List<Goal> findByUser(User user);
 
-    /*
-     * Permite buscar metas por título.
+    /**
+     * Returns all goals matching the given title.
+     * Examples: "Study 300 hours", "Go to the gym 3 times a week"
      *
-     * Ejemplos:
-     * Estudiar 300 horas
-     * Gym 3 veces por semana
+     * @param title the goal title to search for
+     * @return list of matching goals
      */
     List<Goal> findByTitle(String title);
-
 }

@@ -1,3 +1,37 @@
+<!--
+==============================================================================
+File: goalForm.html
+Project: Darling Life Planner
+------------------------------------------------------------------------------
+Description:
+This page provides the Goal Management form for the Darling Life Planner
+application. It allows users to create or edit personal goals by defining a
+goal title, selecting an associated category, and specifying the target number
+of hours to achieve. The current progress is automatically calculated based on
+the completed activities that belong to the selected category, ensuring that
+goal tracking remains synchronized with the user's activity records.
+
+Main Features:
+- Displays a form for creating or updating a personal goal.
+- Allows users to define the goal title.
+- Enables users to associate the goal with an existing category.
+- Allows users to specify the target number of hours required to complete the
+  goal.
+- Displays the current progress as a read-only value calculated automatically
+  from completed activities.
+- Includes a hidden identifier to support editing existing goals.
+- Submits goal information to the corresponding Spring Boot controller.
+- Uses Thymeleaf to dynamically populate the category list and bind form data.
+- Integrates the shared sidebar and navigation bar fragments to maintain a
+  consistent application layout and user experience.
+
+
+==============================================================================
+-->
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -58,8 +92,7 @@
                 <input type="hidden"
                        th:field="*{id}">
 
-
-                <!-- Nombre de la meta -->
+                <!-- Nombre -->
                 <label>
 
                     Nombre de la meta
@@ -67,32 +100,68 @@
                 </label>
 
                 <input type="text"
-                       th:field="*{title}">
+                       th:field="*{title}"
+                       placeholder="Ej: Estudiar 50 horas"
+                       required>
 
-
-                <!-- Objetivo -->
+                <!-- Categoría -->
                 <label>
 
-                    Cantidad objetivo
+                    Categoría asociada
+
+                </label>
+
+                <select th:field="*{categoryName}" required>
+
+                    <option value="">
+
+                        Seleccione una categoría
+
+                    </option>
+
+                    <option
+                            th:each="category : ${categories}"
+                            th:value="${category.name}"
+                            th:text="${category.icon + ' ' + category.name}">
+                    </option>
+
+                </select>
+
+                <!-- Horas objetivo -->
+                <label>
+
+                    Horas objetivo
 
                 </label>
 
                 <input type="number"
                        step="0.1"
-                       th:field="*{target}">
+                       min="1"
+                       th:field="*{target}"
+                       placeholder="Ej: 50"
+                       required>
 
-
-                <!-- Avance -->
+                <!-- Progreso -->
                 <label>
 
-                    Cantidad alcanzada
+                    Progreso actual
 
                 </label>
 
                 <input type="number"
                        step="0.1"
-                       th:field="*{progress}">
+                       th:field="*{progress}"
+                       readonly>
 
+                <small
+                        style="display:block;
+                               margin-top:-10px;
+                               margin-bottom:20px;
+                               color:#777;">
+
+                    El progreso se calcula automáticamente según las actividades completadas de la categoría seleccionada.
+
+                </small>
 
                 <!-- Botón -->
                 <button type="submit">

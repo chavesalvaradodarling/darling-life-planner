@@ -1,231 +1,127 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!--
+  Activity list page.
 
+  Displays every activity belonging to the logged-in user
+  (provided by ActivityViewController as the "activities" model attribute)
+  in a table, along with category, priority, status, and hour tracking.
+
+  Each row offers actions to edit, mark as completed (only if not
+  already COMPLETED), or delete the activity.
+-->
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Mis Actividades</title>
-
-    <!-- CSS principal -->
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
-
-    <!-- CSS Sidebar -->
-    <link rel="stylesheet"
-          th:href="@{/css/sidebar.css}">
-
-    <!-- CSS Navbar -->
-    <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
-
-    <!-- CSS Activities -->
-    <link rel="stylesheet"
-          th:href="@{/css/activities.css}">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Activities</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/activities.css}">
 </head>
-
 <body>
 
     <div class="container">
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-        <!-- Sidebar -->
-        <div th:replace="~{fragments/sidebar :: sidebar}">
-        </div>
-
-
-        <!-- Contenido principal -->
         <div class="main-content">
+            <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-            <!-- Navbar -->
-            <div th:replace="~{fragments/navbar :: navbar}">
-            </div>
-
-
-            <!-- Contenedor de actividades -->
             <div class="activities-container">
-
-                <h1>
-
-                    📋 Mis Actividades
-
+                <h1 style="color: var(--text-title); transition: color 0.3s ease;">
+                    📋 My Activities
                 </h1>
 
-
-                <!-- Botón para crear una actividad -->
-                <a th:href="@{/newActivity}"
-                   class="new-activity">
-
-                    + Nueva actividad
-
+                <a th:href="@{/newActivity}" class="new-activity">
+                    + New activity
                 </a>
 
-
-                <!-- Tabla -->
                 <table>
-
                     <thead>
-
                         <tr>
-
-                            <th>Título</th>
-
-                            <th>Fecha</th>
-
-                            <th>Categoría</th>
-
-                            <th>Prioridad</th>
-
-                            <th>Estado</th>
-
-                            <th>Horas planificadas</th>
-
-                            <th>Horas reales</th>
-
-                            <th>Acciones</th>
-
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Planned hours</th>
+                            <th>Real hours</th>
+                            <th>Actions</th>
                         </tr>
-
                     </thead>
-
-
                     <tbody>
-
-                        <!-- Recorrer actividades -->
                         <tr th:each="activity : ${activities}">
+                            <td th:text="${activity.title}"></td>
 
-                            <!-- Título -->
-                            <td th:text="${activity.title}">
-                            </td>
+                            <td th:text="${activity.activityDate}"></td>
 
-
-                            <!-- Fecha -->
-                            <td th:text="${activity.activityDate}">
-                            </td>
-
-
-                            <!-- Categoría -->
+                            <!-- Show the category's icon and name, or a placeholder if none assigned -->
                             <td>
-
-                                <span
-                                        th:if="${activity.category != null}"
-                                        th:text="${activity.category.icon + ' ' + activity.category.name}">
+                                <span th:if="${activity.category != null}"
+                                      th:text="${activity.category.icon + ' ' + activity.category.name}">
                                 </span>
-
-                                <span
-                                        th:if="${activity.category == null}">
-
-                                    Sin categoría
-
+                                <span th:if="${activity.category == null}">
+                                    No category
                                 </span>
-
                             </td>
 
-
-                            <!-- Prioridad -->
+                            <!-- Priority badge: only one of these three spans renders, based on the activity's priority field -->
                             <td>
-
-                                <span class="high-priority"
-                                      th:if="${activity.priority == 'HIGH'}">
-
-                                    🔴 Alta
-
+                                <span class="high-priority" th:if="${activity.priority == 'HIGH'}">
+                                    🔴 High
                                 </span>
-
-                                <span class="medium-priority"
-                                      th:if="${activity.priority == 'MEDIUM'}">
-
-                                    🟠 Media
-
+                                <span class="medium-priority" th:if="${activity.priority == 'MEDIUM'}">
+                                    🟠 Medium
                                 </span>
-
-                                <span class="low-priority"
-                                      th:if="${activity.priority == 'LOW'}">
-
-                                    🟢 Baja
-
+                                <span class="low-priority" th:if="${activity.priority == 'LOW'}">
+                                    🟢 Low
                                 </span>
-
                             </td>
 
-
-                            <!-- Estado -->
+                            <!-- Status badge: mirrors the priority pattern, one span per possible status value -->
                             <td>
-
-                                <span class="completed"
-                                      th:if="${activity.status == 'COMPLETED'}">
-
-                                    ✅ Completada
-
+                                <span class="completed" th:if="${activity.status == 'COMPLETED'}">
+                                    ✅ Completed
                                 </span>
-
-                                <span class="partial"
-                                      th:if="${activity.status == 'PARTIALLY_COMPLETED'}">
-
-                                    🟡 Parcialmente completada
-
+                                <span class="partial" th:if="${activity.status == 'PARTIALLY_COMPLETED'}">
+                                    🟡 Partially completed
                                 </span>
-
-                                <span class="not-completed"
-                                      th:if="${activity.status == 'NOT_COMPLETED'}">
-
-                                    ❌ No completada
-
+                                <span class="not-completed" th:if="${activity.status == 'NOT_COMPLETED'}">
+                                    ❌ Not completed
                                 </span>
-
                             </td>
 
+                            <td th:text="${activity.plannedHours}"></td>
 
-                            <!-- Horas planificadas -->
-                            <td th:text="${activity.plannedHours}">
-                            </td>
+                            <td th:text="${activity.realHours}"></td>
 
-
-                            <!-- Horas reales -->
-                            <td th:text="${activity.realHours}">
-                            </td>
-
-
-                            <!-- Acciones -->
                             <td>
-
-                                <!-- Editar -->
-                                <a class="action-edit"
-                                   th:href="@{/editActivity/{id}(id=${activity.id})}">
-
-                                    ✏️ Editar
-
+                                <a class="action-edit" th:href="@{/editActivity/{id}(id=${activity.id})}">
+                                    ✏️ Edit
                                 </a>
-
                                 <br><br>
 
-                                <!-- Eliminar -->
-                                <a class="action-delete"
-                                   th:href="@{/deleteActivity/{id}(id=${activity.id})}"
-
-                                   onclick="return confirm('¿Desea eliminar esta actividad?')">
-
-                                    🗑️ Eliminar
-
+                                <!-- "Complete" action is hidden once the activity is already COMPLETED -->
+                                <a class="action-complete" th:if="${activity.status != 'COMPLETED'}"
+                                   th:href="@{/completeActivity/{id}(id=${activity.id})}"
+                                   onclick="return confirm('Mark this activity as completed?')">
+                                    ✅ Complete
                                 </a>
+                                <div th:if="${activity.status != 'COMPLETED'}">
+                                    <br><br>
+                                </div>
 
+                                <a class="action-delete" th:href="@{/deleteActivity/{id}(id=${activity.id})}"
+                                   onclick="return confirm('Delete this activity?')">
+                                    🗑️ Delete
+                                </a>
                             </td>
-
                         </tr>
-
                     </tbody>
-
                 </table>
-
             </div>
-
         </div>
-
     </div>
 
 </body>
-
 </html>

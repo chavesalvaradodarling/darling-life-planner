@@ -1,97 +1,85 @@
 package com.info.spring.dar.springboot_aplicacion.controller;
 
-// Importa las anotaciones necesarias de Spring Boot
 import org.springframework.web.bind.annotation.*;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa la entidad Category
 import com.info.spring.dar.springboot_aplicacion.entity.Category;
-
-// Importa el servicio
 import com.info.spring.dar.springboot_aplicacion.service.CategoryService;
 
-/*
- * Esta clase se encargará de recibir las peticiones HTTP
- * relacionadas con las categorías.
+/**
+ * REST controller that exposes API endpoints for managing categories.
+ * Base URL: /categories
  */
 @RestController
-
-// Ruta principal para las categorías
 @RequestMapping("/categories")
 public class CategoryController {
 
-    // Objeto que permitirá acceder a la lógica del servicio
+    /** Service that handles all category-related business logic. */
     private final CategoryService categoryService;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param categoryService the service used to manage categories
      */
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
-    /*
-     * GET
+    /**
+     * Returns all categories in the system.
+     * GET /categories
      *
-     * Devuelve todas las categorías.
-     *
-     * URL:
-     * http://localhost:8080/categories
+     * @return list of all categories
      */
     @GetMapping
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
-    /*
-     * GET
+    /**
+     * Returns a single category by its ID.
+     * GET /categories/{id}
      *
-     * Devuelve una categoría según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/categories/1
+     * @param id the category ID
+     * @return the matching category, or null if not found
      */
     @GetMapping("/{id}")
     public Category getCategoryById(@PathVariable Long id) {
         return categoryService.getCategoryById(id);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all categories matching the given name.
+     * GET /categories/name/{name}
      *
-     * Busca categorías por nombre.
-     *
-     * Ejemplo:
-     * http://localhost:8080/categories/name/Ejercicio
+     * @param name the category name to search for
+     * @return list of matching categories
      */
     @GetMapping("/name/{name}")
     public List<Category> getCategoriesByName(@PathVariable String name) {
         return categoryService.getCategoriesByName(name);
     }
 
-    /*
-     * POST
+    /**
+     * Saves a new category.
+     * POST /categories
      *
-     * Guarda una nueva categoría.
+     * @param category the category object received in the request body
+     * @return the saved category
      */
     @PostMapping
     public Category saveCategory(@RequestBody Category category) {
         return categoryService.saveCategory(category);
     }
 
-    /*
-     * DELETE
+    /**
+     * Deletes a category by its ID.
+     * DELETE /categories/{id}
      *
-     * Elimina una categoría según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/categories/1
+     * @param id the ID of the category to delete
      */
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
     }
-
 }

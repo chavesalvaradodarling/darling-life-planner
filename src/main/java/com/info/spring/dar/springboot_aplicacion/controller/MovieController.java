@@ -1,110 +1,97 @@
 package com.info.spring.dar.springboot_aplicacion.controller;
 
-// Importa las anotaciones necesarias de Spring Boot
 import org.springframework.web.bind.annotation.*;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa la entidad Movie
 import com.info.spring.dar.springboot_aplicacion.entity.Movie;
-
-// Importa el servicio
 import com.info.spring.dar.springboot_aplicacion.service.MovieService;
 
-/*
- * Esta clase se encargará de recibir las peticiones HTTP
- * relacionadas con las películas.
+/**
+ * REST controller that exposes API endpoints for managing movies.
+ * Base URL: /movies
  */
 @RestController
-
-// Ruta principal para las películas
 @RequestMapping("/movies")
 public class MovieController {
 
-    // Objeto que permitirá acceder a la lógica del servicio
+    /** Service that handles all movie-related business logic. */
     private final MovieService movieService;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param movieService the service used to manage movies
      */
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
 
-    /*
-     * GET
+    /**
+     * Returns all movies in the system.
+     * GET /movies
      *
-     * Devuelve todas las películas.
-     *
-     * URL:
-     * http://localhost:8080/movies
+     * @return list of all movies
      */
     @GetMapping
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
 
-    /*
-     * GET
+    /**
+     * Returns a single movie by its ID.
+     * GET /movies/{id}
      *
-     * Devuelve una película según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/movies/1
+     * @param id the movie ID
+     * @return the matching movie, or null if not found
      */
     @GetMapping("/{id}")
     public Movie getMovieById(@PathVariable Long id) {
         return movieService.getMovieById(id);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all movies matching the given title.
+     * GET /movies/title/{title}
      *
-     * Busca películas por título.
-     *
-     * Ejemplo:
-     * http://localhost:8080/movies/title/Interstellar
+     * @param title the movie title to search for
+     * @return list of matching movies
      */
     @GetMapping("/title/{title}")
     public List<Movie> getMoviesByTitle(@PathVariable String title) {
         return movieService.getMoviesByTitle(title);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all movies matching the given genre.
+     * GET /movies/genre/{genre}
      *
-     * Busca películas por género.
-     *
-     * Ejemplo:
-     * http://localhost:8080/movies/genre/Ciencia ficcion
+     * @param genre the genre to filter by
+     * @return list of matching movies
      */
     @GetMapping("/genre/{genre}")
     public List<Movie> getMoviesByGenre(@PathVariable String genre) {
         return movieService.getMoviesByGenre(genre);
     }
 
-    /*
-     * POST
+    /**
+     * Saves a new movie.
+     * POST /movies
      *
-     * Guarda una nueva película.
+     * @param movie the movie object received in the request body
+     * @return the saved movie
      */
     @PostMapping
     public Movie saveMovie(@RequestBody Movie movie) {
         return movieService.saveMovie(movie);
     }
 
-    /*
-     * DELETE
+    /**
+     * Deletes a movie by its ID.
+     * DELETE /movies/{id}
      *
-     * Elimina una película según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/movies/1
+     * @param id the ID of the movie to delete
      */
     @DeleteMapping("/{id}")
     public void deleteMovie(@PathVariable Long id) {
         movieService.deleteMovie(id);
     }
-
 }

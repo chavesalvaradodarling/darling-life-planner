@@ -1,137 +1,61 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Categorías</title>
-
-    <!-- CSS principal -->
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
-
-    <!-- Sidebar -->
-    <link rel="stylesheet"
-          th:href="@{/css/sidebar.css}">
-
-    <!-- Navbar -->
-    <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
-
-    <!-- CSS categorías -->
-    <link rel="stylesheet"
-          th:href="@{/css/categories.css}">
-
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/categories.css}">
 </head>
-
 <body>
 
     <div class="container">
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
-        <!-- Sidebar -->
-        <div th:replace="~{fragments/sidebar :: sidebar}">
-        </div>
-
-        <!-- Contenido principal -->
         <div class="main-content">
+            <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-            <!-- Navbar -->
-            <div th:replace="~{fragments/navbar :: navbar}">
-            </div>
-
-            <!-- Contenedor -->
             <div class="activities-container">
-
-                <h1>
-
+                <h1 style="color: var(--text-title); transition: color 0.3s ease;">
                     🏷️ Mis Categorías
-
                 </h1>
 
-                <!-- Botón nueva categoría -->
-                <a th:href="@{/newCategory}"
-                   class="new-activity">
-
+                <a th:href="@{/newCategory}" class="new-activity">
                     + Nueva categoría
-
                 </a>
 
-                <!-- Tabla -->
                 <table>
-
                     <thead>
-
                         <tr>
-
                             <th>Nombre</th>
-
                             <th>Color</th>
-
                             <th>Icono</th>
-
                             <th>Acciones</th>
-
                         </tr>
-
                     </thead>
-
                     <tbody>
-
                         <tr th:each="category : ${categories}">
-
-                            <!-- Nombre -->
-                            <td th:text="${category.name}">
-                            </td>
-
-                            <!-- Color -->
-                            <td th:text="${category.color}">
-                            </td>
-
-                            <!-- Icono -->
-                            <td th:text="${category.icon}">
-                            </td>
-
-                            <!-- Acciones -->
+                            <td th:text="${category.name}"></td>
+                            <td th:text="${category.color}"></td>
+                            <td th:text="${category.icon}"></td>
                             <td>
-
-                                <!-- Editar -->
-                                <a class="action-edit"
-                                   th:href="@{/editCategory/{id}(id=${category.id})}">
-
+                                <a class="action-edit" th:href="@{/editCategory/{id}(id=${category.id})}">
                                     ✏️ Editar
-
                                 </a>
-
                                 &nbsp;
-
-                                <!-- Eliminar -->
-                                <a class="action-delete"
-                                   th:href="@{/deleteCategory/{id}(id=${category.id})}"
-
+                                <a class="action-delete" th:href="@{/deleteCategory/{id}(id=${category.id})}"
                                    onclick="return confirm('¿Desea eliminar esta categoría?')">
-
                                     🗑️ Eliminar
-
                                 </a>
-
                             </td>
-
                         </tr>
-
                     </tbody>
-
                 </table>
-
             </div>
-
         </div>
-
     </div>
 
 </body>
-
 </html>

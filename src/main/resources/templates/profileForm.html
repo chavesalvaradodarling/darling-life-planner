@@ -1,30 +1,82 @@
+<!--
+==============================================================================
+File: profileForm.html
+Project: Darling Life Planner
+------------------------------------------------------------------------------
+Description:
+This page provides the Profile Management form for the Darling Life Planner
+application. It enables users to create or update their personal profile by
+entering academic and personal information, as well as uploading a profile
+picture. The form is integrated with Spring Boot and Thymeleaf to bind profile
+data, handle file uploads, and submit the information securely to the backend.
+
+The page also includes a JavaScript image preview feature, allowing users to
+view their selected profile picture before saving any changes. This improves
+the user experience by providing immediate visual feedback.
+
+Main Features:
+- Displays a form for creating or editing a user profile.
+- Allows users to upload or update a profile picture.
+- Displays the current profile image or a default avatar when no image is
+  available.
+- Provides a real-time image preview before uploading.
+- Allows users to edit personal and academic information, including:
+  • Full name
+  • Email address (read-only)
+  • University
+  • Career
+  • Personal description
+- Uses multipart/form-data to support image uploads.
+- Submits profile information to the corresponding Spring Boot controller.
+- Integrates the shared sidebar and navigation bar fragments to provide a
+  consistent application layout.
+
+
+==============================================================================
+-->
+
+
+
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/profileForm.css}">
 
-    <title>Nuevo Perfil</title>
+    <style>
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
 
-    <!-- CSS principal -->
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
+        #imagePreview {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+        }
 
-    <!-- Sidebar -->
-    <link rel="stylesheet"
-          th:href="@{/css/sidebar.css}">
-
-    <!-- Navbar -->
-    <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
-
-    <!-- Formulario -->
-    <link rel="stylesheet"
-          th:href="@{/css/profileForm.css}">
+        .camera-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
 
 </head>
 
@@ -32,104 +84,75 @@
 
 <div class="container">
 
-    <!-- Sidebar -->
-    <div th:replace="~{fragments/sidebar :: sidebar}">
-    </div>
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
     <div class="main-content">
 
-        <!-- Navbar -->
-        <div th:replace="~{fragments/navbar :: navbar}">
-        </div>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
 
         <div class="form-container">
 
-            <h1>
-
-                👤 Nuevo Perfil
-
-            </h1>
+            <h1>👤 Tu Perfil</h1>
 
             <form th:action="@{/saveProfile}"
                   th:object="${profile}"
-                  method="post">
+                  method="post"
+                  enctype="multipart/form-data">
 
-                <!-- Id oculto -->
-                <input type="hidden"
-                       th:field="*{id}">
+                <input type="hidden" th:field="*{id}">
 
+                <div class="avatar-container">
 
-                <!-- Nombre -->
-                <label>
+                    <img id="imagePreview"
+                         th:src="@{${profile.image != null ? '/uploads/' + profile.image : '/images/default-avatar.png'}}"
+                         alt="Foto de perfil">
 
-                    Nombre completo
+                    <label for="fileInput" class="camera-icon">📷</label>
 
-                </label>
+                    <input
+                            type="file"
+                            name="file"
+                            id="fileInput"
+                            accept="image/*"
+                            style="display:none;"
+                            onchange="previewImage(this)">
 
-                <input type="text"
-                       th:field="*{fullName}">
+                </div>
 
+                <label>Nombre completo</label>
 
-                <!-- Correo -->
-                <label>
+                <input
+                        type="text"
+                        th:field="*{fullName}"
+                        required>
 
-                    Correo electrónico
+                <label>Correo electrónico</label>
 
-                </label>
+                <input
+                        type="email"
+                        th:field="*{email}"
+                        readonly>
 
-                <input type="email"
-                       th:field="*{email}">
+                <label>Universidad</label>
 
+                <input
+                        type="text"
+                        th:field="*{university}">
 
-                <!-- Universidad -->
-                <label>
+                <label>Carrera</label>
 
-                    Universidad
+                <input
+                        type="text"
+                        th:field="*{career}">
 
-                </label>
+                <label>Descripción personal</label>
 
-                <input type="text"
-                       th:field="*{university}">
+                <input
+                        type="text"
+                        th:field="*{description}">
 
-
-                <!-- Carrera -->
-                <label>
-
-                    Carrera
-
-                </label>
-
-                <input type="text"
-                       th:field="*{career}">
-
-
-                <!-- Descripción -->
-                <label>
-
-                    Descripción personal
-
-                </label>
-
-                <input type="text"
-                       th:field="*{description}">
-
-
-                <!-- Imagen -->
-                <label>
-
-                    Foto o URL de imagen
-
-                </label>
-
-                <input type="text"
-                       th:field="*{image}">
-
-
-                <!-- Botón -->
                 <button type="submit">
-
                     Guardar perfil
-
                 </button>
 
             </form>
@@ -140,6 +163,24 @@
 
 </div>
 
-</body>
+<script>
 
+    function previewImage(input) {
+
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                document.getElementById("imagePreview").src = e.target.result;
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+    }
+
+</script>
+
+</body>
 </html>

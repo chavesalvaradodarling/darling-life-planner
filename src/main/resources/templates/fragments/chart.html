@@ -1,14 +1,20 @@
-<div class="chart-container"
-     th:fragment="chart">
+<!--
+========================================================
+HOURS DISTRIBUTION CHART FRAGMENT
+
+Holds the <canvas> element targeted by Chart.js in
+index.html. The actual data binding and chart
+configuration (labels, colors, dataset) happens in
+the inline script of index.html, not here.
+========================================================
+-->
+<div class="chart-container" th:fragment="chart">
 
     <h2>
-
-        📊 Distribución de horas
-
+        📊 Hours distribution
     </h2>
 
     <canvas id="hoursChart">
-
     </canvas>
 
 </div>

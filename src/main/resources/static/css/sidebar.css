@@ -6,15 +6,17 @@ SIDEBAR
 
 .sidebar{
 
-    width:250px;
+    width:200px;
 
     min-height:100vh;
 
-    background-color:white;
+    background-color:var(--bg-card);
 
-    padding:30px;
+    padding:18px;
 
     box-shadow:0px 0px 15px rgba(0,0,0,0.08);
+
+    transition:background-color 0.3s ease;
 
 }
 
@@ -22,13 +24,14 @@ SIDEBAR
 /*
 TÍTULO
 */
+
 .sidebar h2{
 
-    color:#7C6A91;
+    color:var(--text-title);
 
-    margin-bottom:40px;
+    margin-bottom:20px;
 
-    font-size:32px;
+    font-size:20px;
 
 }
 
@@ -36,17 +39,20 @@ TÍTULO
 /*
 TÍTULOS DE SECCIÓN
 */
+
 .sidebar h4{
 
-    color:#B0A5B9;
+    color:var(--text-main);
 
-    font-size:12px;
+    opacity:0.7;
+
+    font-size:11px;
 
     letter-spacing:2px;
 
-    margin-top:30px;
+    margin-top:16px;
 
-    margin-bottom:15px;
+    margin-bottom:8px;
 
 }
 
@@ -54,6 +60,7 @@ TÍTULOS DE SECCIÓN
 /*
 LISTAS
 */
+
 .sidebar ul{
 
     list-style:none;
@@ -66,13 +73,14 @@ LISTAS
 /*
 ELEMENTOS DEL MENÚ
 */
+
 .sidebar li{
 
-    padding:14px 18px;
+    padding:8px 12px;
 
-    margin-bottom:6px;
+    margin-bottom:3px;
 
-    border-radius:15px;
+    border-radius:10px;
 
     transition:0.3s;
 
@@ -82,13 +90,18 @@ ELEMENTOS DEL MENÚ
 /*
 ENLACES DEL MENÚ
 */
+
 .sidebar a{
 
     text-decoration:none;
 
-    color:#666;
+    color:var(--text-main);
 
     display:block;
+
+    font-size:13px;
+
+    transition:color 0.3s ease;
 
 }
 
@@ -96,9 +109,10 @@ ENLACES DEL MENÚ
 /*
 EFECTO AL PASAR EL MOUSE
 */
+
 .sidebar li:hover{
 
-    background-color:#F4E7F7;
+    background-color:var(--border-color);
 
 }
 
@@ -106,8 +120,9 @@ EFECTO AL PASAR EL MOUSE
 /*
 COLOR DEL TEXTO AL PASAR EL MOUSE
 */
+
 .sidebar li:hover a{
 
-    color:#7C6A91;
+    color:var(--text-title);
 
 }

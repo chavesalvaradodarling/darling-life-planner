@@ -8,15 +8,15 @@ CONTENEDOR DEL FORMULARIO
 
     background-color:white;
 
-    padding:40px;
+    width:560px;
 
-    border-radius:25px;
+    margin:16px auto;
+
+    padding:22px;
+
+    border-radius:16px;
 
     box-shadow:0px 4px 15px rgba(0,0,0,0.1);
-
-    width:700px;
-
-    margin:auto;
 
 }
 
@@ -31,7 +31,9 @@ TÍTULO
 
     color:#7C6A91;
 
-    margin-bottom:30px;
+    font-size:24px;
+
+    margin-bottom:18px;
 
 }
 
@@ -46,13 +48,15 @@ LABELS
 
     display:block;
 
-    margin-top:20px;
+    margin-top:10px;
 
-    margin-bottom:10px;
+    margin-bottom:5px;
 
     color:#666;
 
     font-weight:bold;
+
+    font-size:13px;
 
 }
 
@@ -63,19 +67,23 @@ INPUTS
 =========================================
 */
 
-.form-container input{
+.form-container input,
+
+.form-container select,
+
+.form-container textarea{
 
     width:100%;
 
-    padding:15px;
+    padding:9px;
 
     border:none;
 
-    border-radius:15px;
+    border-radius:10px;
 
     background-color:#F8F5FB;
 
-    font-size:15px;
+    font-size:13px;
 
     box-sizing:border-box;
 
@@ -90,7 +98,7 @@ BOTÓN GUARDAR
 
 .form-container button{
 
-    margin-top:30px;
+    margin-top:16px;
 
     background-color:#C9A7EB;
 
@@ -98,11 +106,13 @@ BOTÓN GUARDAR
 
     border:none;
 
-    padding:15px 30px;
+    padding:10px 20px;
 
-    border-radius:15px;
+    border-radius:10px;
 
-    font-size:16px;
+    font-size:14px;
+
+    font-weight:bold;
 
     cursor:pointer;
 
@@ -128,11 +138,15 @@ ENLACE VOLVER
 
     display:inline-block;
 
-    margin-left:20px;
+    margin-left:14px;
+
+    margin-top:16px;
 
     color:#7C6A91;
 
     text-decoration:none;
+
+    font-size:13px;
 
     font-weight:bold;
 

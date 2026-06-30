@@ -1,22 +1,52 @@
 /*
 =========================================
-ESTILOS GENERALES
+ESTILOS GENERALES Y VARIABLES DE COLOR
 =========================================
 */
 
-body{
+/* Colores por defecto: TEMA CLARO / PASTEL */
+:root {
+    --bg-body: #F9F3F6;
+    --bg-content: #F9F3F6;
+    --bg-card: #FFFFFF;
+    --bg-input: #F8F5FB;
+    --text-main: #666666;
+    --text-title: #7C6A91;
+    --border-color: #F4E7F7;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Colores alternativos: TEMA OSCURO */
+[data-theme="Oscuro"] {
+    --bg-body: #121214;
+    --bg-content: #121214;
+    --bg-card: #2d2636;
+    --bg-input: #26262B;
+    --text-main: #E2D9EC;
+    --text-title: #DBC4F0;
+    --border-color: #3d334a;
+    --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+body {
 
     margin:0;
 
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 
-    background-color:#F9F3F6;
+    background-color:var(--bg-body);
+
+    color:var(--text-main);
+
+    transition:background-color .3s ease,
+               color .3s ease;
 
 }
 
-
 /*
+=========================================
 CONTENEDOR PRINCIPAL
+=========================================
 */
 
 .container{
@@ -25,13 +55,147 @@ CONTENEDOR PRINCIPAL
 
 }
 
-
 /*
+=========================================
 CONTENIDO PRINCIPAL
+=========================================
 */
 
 .main-content{
 
     flex:1;
+
+    position:relative;
+
+    overflow-x:hidden;
+
+    overflow-y:auto;
+
+    min-height:100vh;
+
+    background-color:var(--bg-content);
+
+    transition:background-color .3s ease;
+
+}
+
+/*
+=========================================
+FONDO GENERAL
+=========================================
+*/
+
+.main-content::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:url("/images/definitiva.png");
+
+    background-repeat:no-repeat;
+
+    background-size:cover;
+
+    background-position:center;
+
+    opacity:.28;
+
+    z-index:0;
+
+}
+
+/*
+=========================================
+TODO EL CONTENIDO POR ENCIMA DEL FONDO
+=========================================
+*/
+
+.main-content > *{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/*
+=========================================
+SELECTOR TOTAL: COMBATE CONTRA OTROS CSS
+=========================================
+*/
+
+.card,
+.daily-plan,
+.dailyplan-container,
+.goals-container,
+.upcoming-container,
+.chart-container,
+.floating-menu,
+[class*="card"],
+[class*="plan"],
+[class*="goal"],
+[class*="chart"]{
+
+    background-color:var(--bg-card) !important;
+
+    color:var(--text-main) !important;
+
+    border:1px solid var(--border-color) !important;
+
+    box-shadow:var(--card-shadow) !important;
+
+    transition:background-color .3s ease,
+               color .3s ease,
+               border-color .3s ease,
+               box-shadow .3s ease;
+
+}
+
+/*
+=========================================
+TÍTULOS
+=========================================
+*/
+
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content span,
+.main-content p{
+
+    transition:color .3s ease;
+
+}
+
+.main-content h1,
+.main-content h2,
+.main-content h3{
+
+    color:var(--text-title) !important;
+
+}
+
+/*
+=========================================
+MENÚ FLOTANTE
+=========================================
+*/
+
+.floating-menu a,
+[class*="floating"] a,
+[class*="menu"] li{
+
+    background-color:var(--bg-card) !important;
+
+    color:var(--text-main) !important;
+
+}
+
+.floating-menu a:hover{
+
+    background-color:var(--bg-input) !important;
 
 }

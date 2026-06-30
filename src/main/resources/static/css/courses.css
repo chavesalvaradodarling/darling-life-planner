@@ -6,7 +6,7 @@ CONTENEDOR PRINCIPAL
 
 .activities-container{
 
-    padding:30px;
+    padding:16px;
 
 }
 
@@ -19,9 +19,13 @@ TÍTULO
 
 .activities-container h1{
 
-    color:#7C6A91;
+    color:var(--text-title);
 
-    margin-bottom:25px;
+    margin-bottom:16px;
+
+    font-size:26px;
+
+    transition:color 0.3s ease;
 
 }
 
@@ -42,13 +46,13 @@ BOTÓN NUEVO CURSO
 
     text-decoration:none;
 
-    padding:8px 12px;
+    padding:8px 14px;
 
-    border-radius:15px;
+    border-radius:10px;
 
-    margin-bottom:30px;
+    margin-bottom:16px;
 
-    font-size:16px;
+    font-size:13px;
 
     transition:0.3s;
 
@@ -72,15 +76,17 @@ table{
 
     width:100%;
 
-    background-color:white;
+    background-color:var(--bg-card);
 
-    border-radius:20px;
+    border-radius:14px;
 
     overflow:hidden;
 
     box-shadow:0px 4px 12px rgba(0,0,0,0.08);
 
     border-collapse:collapse;
+
+    transition:background-color 0.3s ease;
 
 }
 
@@ -93,13 +99,16 @@ ENCABEZADOS
 
 th{
 
-    background-color:#F4E7F7;
+    background-color:var(--border-color);
 
-    color:#7C6A91;
+    color:var(--text-title);
 
-    padding:20px;
+    padding:10px;
 
-    font-size:15px;
+    font-size:13px;
+
+    transition:background-color 0.3s ease,
+               color 0.3s ease;
 
 }
 
@@ -112,18 +121,24 @@ FILAS
 
 td{
 
-    padding:20px;
+    padding:10px;
 
     text-align:center;
 
-    color:#666;
+    color:var(--text-main);
+
+    font-size:13px;
+
+    transition:color 0.3s ease;
 
 }
 
 
 tr{
 
-    border-bottom:1px solid #EEE;
+    border-bottom:1px solid var(--border-color);
+
+    transition:border-color 0.3s ease;
 
 }
 
@@ -136,7 +151,7 @@ EFECTO AL PASAR EL MOUSE
 
 tbody tr:hover{
 
-    background-color:#FAF7FC;
+    background-color:var(--bg-input);
 
 }
 
@@ -155,15 +170,17 @@ BOTONES DE ACCIONES
 
     color:#4A73B8;
 
-    padding:8px 12px;
+    padding:6px 10px;
 
-    border-radius:12px;
+    border-radius:8px;
 
     transition:0.3s;
 
     display:inline-block;
 
-    margin-right:10px;
+    margin-right:6px;
+
+    font-size:12px;
 
 }
 
@@ -183,13 +200,15 @@ BOTONES DE ACCIONES
 
     color:#D84B4B;
 
-    padding:8px 12px;
+    padding:6px 10px;
 
-    border-radius:12px;
+    border-radius:8px;
 
     transition:0.3s;
 
     display:inline-block;
+
+    font-size:12px;
 
 }
 

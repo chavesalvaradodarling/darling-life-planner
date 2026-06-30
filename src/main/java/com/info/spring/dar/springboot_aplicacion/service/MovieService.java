@@ -1,86 +1,111 @@
 package com.info.spring.dar.springboot_aplicacion.service;
 
-// Indica que esta clase pertenece a la capa de servicios
-import org.springframework.stereotype.Service;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa la entidad Movie
+import org.springframework.stereotype.Service;
+import com.info.spring.dar.springboot_aplicacion.entity.Activity;
 import com.info.spring.dar.springboot_aplicacion.entity.Movie;
-
-// Importa el repositorio
+import com.info.spring.dar.springboot_aplicacion.entity.User;
+import com.info.spring.dar.springboot_aplicacion.repository.ActivityRepository;
 import com.info.spring.dar.springboot_aplicacion.repository.MovieRepository;
 
-/*
- * Esta clase contiene la lógica relacionada con las películas.
- *
- * Se comunica con MovieRepository para acceder a la base de datos.
+/**
+ * Service class that contains the business logic for managing movies.
+ * Communicates with MovieRepository and ActivityRepository to access the database.
  */
 @Service
 public class MovieService {
 
-    // Objeto que permite acceder a la tabla movies
     private final MovieRepository movieRepository;
+    private final ActivityRepository activityRepository;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param movieRepository    the repository used to access the movies table
+     * @param activityRepository the repository used to disassociate activities before deletion
      */
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository,
+            ActivityRepository activityRepository) {
         this.movieRepository = movieRepository;
+        this.activityRepository = activityRepository;
     }
 
-    /*
-     * Guarda una película en la base de datos.
+    /**
+     * Saves a movie to the database.
+     *
+     * @param movie the movie to save
+     * @return the saved movie
      */
     public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
     }
 
-    /*
-     * Devuelve todas las películas registradas.
+    /**
+     * Returns all movies in the system.
+     *
+     * @return list of all movies
      */
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
 
-    /*
-     * Busca una película por su id.
+    /**
+     * Returns all movies belonging to a specific user.
      *
-     * Si no existe, devuelve null.
+     * @param user the user to filter by
+     * @return list of movies for that user
+     */
+    public List<Movie> getMoviesByUser(User user) {
+        return movieRepository.findByUser(user);
+    }
+
+    /**
+     * Returns a single movie by its ID, or null if not found.
+     *
+     * @param id the movie ID
+     * @return the matching movie or null
      */
     public Movie getMovieById(Long id) {
         return movieRepository.findById(id).orElse(null);
     }
 
-    /*
-     * Busca películas por título.
+    /**
+     * Returns all movies matching the given title.
      *
-     * Ejemplo:
-     * Interstellar
-     * Inception
+     * @param title the title to search for
+     * @return list of matching movies
      */
     public List<Movie> getMoviesByTitle(String title) {
         return movieRepository.findByTitle(title);
     }
 
-    /*
-     * Busca películas por género.
+    /**
+     * Returns all movies matching the given genre.
      *
-     * Ejemplo:
-     * Acción
-     * Drama
-     * Ciencia ficción
+     * @param genre the genre to filter by
+     * @return list of matching movies
      */
     public List<Movie> getMoviesByGenre(String genre) {
         return movieRepository.findByGenre(genre);
     }
 
-    /*
-     * Elimina una película por su id.
+    /**
+     * Deletes a movie by its ID.
+     * Before deleting, sets the movie field to null on all associated activities
+     * to avoid a foreign key constraint violation.
+     *
+     * @param id the ID of the movie to delete
      */
     public void deleteMovie(Long id) {
+        Movie movie = getMovieById(id);
+        if (movie == null) {
+            return;
+        }
+        List<Activity> activities = activityRepository.findByMovie(movie);
+        for (Activity activity : activities) {
+            activity.setMovie(null);
+        }
+        activityRepository.saveAll(activities);
         movieRepository.deleteById(id);
     }
-
 }

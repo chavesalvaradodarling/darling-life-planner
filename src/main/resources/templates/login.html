@@ -1,3 +1,33 @@
+<!--
+==============================================================================
+File: login.html
+Project: Darling Life Planner
+------------------------------------------------------------------------------
+Description:
+This page provides the user authentication interface for the Darling Life
+Planner application. It allows registered users to securely sign in using
+their email address and password. The page is integrated with Spring Security
+and Thymeleaf to process authentication requests and display status messages
+based on the login result.
+
+Main Features:
+- Displays the user login form.
+- Allows users to authenticate using their email address and password.
+- Submits login credentials securely to the Spring Security authentication
+  endpoint.
+- Displays an error message when the authentication process fails.
+- Displays a confirmation message after a successful logout.
+- Provides a navigation link to the user registration page for new users.
+- Uses Thymeleaf to dynamically display authentication status messages.
+
+
+==============================================================================
+-->
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -43,6 +73,13 @@
             th:if="${param.error}">
 
             Correo o contraseña incorrectos
+
+        </p>
+        <p
+            style="color:green"
+            th:if="${param.logout}">
+
+            Sesión cerrada correctamente
 
         </p>
 

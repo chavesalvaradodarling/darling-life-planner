@@ -8,9 +8,9 @@ MENÚ FLOTANTE
 
     position:fixed;
 
-    bottom:40px;
+    bottom:24px;
 
-    right:40px;
+    right:24px;
 
 }
 
@@ -21,9 +21,9 @@ BOTÓN +
 
 .floating-button{
 
-    width:70px;
+    width:50px;
 
-    height:70px;
+    height:50px;
 
     background-color:#C9A7EB;
 
@@ -37,7 +37,7 @@ BOTÓN +
 
     align-items:center;
 
-    font-size:40px;
+    font-size:26px;
 
     cursor:pointer;
 
@@ -56,9 +56,9 @@ OPCIONES
 
     flex-direction:column;
 
-    gap:10px;
+    gap:6px;
 
-    margin-bottom:20px;
+    margin-bottom:12px;
 
 }
 
@@ -71,17 +71,23 @@ CADA OPCIÓN
 
     background:white;
 
-    padding:15px;
+    padding:10px;
 
-    border-radius:15px;
+    border-radius:10px;
 
     box-shadow:0px 4px 10px rgba(0,0,0,0.1);
 
     color:#666;
 
+    font-size:13px;
+
     cursor:pointer;
 
     transition:0.3s;
+
+    text-decoration:none;
+
+    color:inherit;
 
 }
 

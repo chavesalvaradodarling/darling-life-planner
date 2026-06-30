@@ -1,43 +1,50 @@
 <!--
-=========================================
-BARRA SUPERIOR DEL DASHBOARD
-=========================================
+  Top navbar fragment.
+
+  Greets the user by name (preferring the Profile's fullName if one
+  exists, falling back to the Spring Security authentication name),
+  shows today's date formatted in Spanish, and displays the user's
+  avatar/name pill on the right. The avatar image falls back to a
+  default placeholder if the active profile has no uploaded image.
+
+  Included via: th:replace="~{fragments/navbar :: navbar}"
 -->
 
-<div class="navbar"
-     th:fragment="navbar">
 
-    <!-- Saludo -->
+<div class="navbar" th:fragment="navbar">
+
     <div class="welcome">
-
         <h1>
+            ¡Hola,
+            <span th:if="${activeProfile != null}"
+                  th:text="${activeProfile.fullName}"></span>
 
-            ¡Hola, Darling! 👋
-
+            <span th:unless="${activeProfile != null}"
+                  sec:authentication="name"></span>
+            ! 👋
         </h1>
 
-        <p>
-
-            Bienvenido a tu Life Planner
-
-        </p>
-
+        <p>Bienvenido a tu Life Planner</p>
     </div>
 
-    <!-- Parte derecha -->
     <div class="navbar-right">
+<span th:text="${#temporals.format(#temporals.createNow(), 'dd ''de'' MMMM ''de'' yyyy', new java.util.Locale('es'))}"></span>
 
-        <!-- Fecha -->
-        <span>
-
-            21 de junio de 2026
-
-        </span>
-
-        <!-- Usuario -->
         <div class="profile">
 
-            👤 Darling
+            <img th:src="@{${activeProfile != null && activeProfile.image != null ? '/uploads/' + activeProfile.image : '/images/default-avatar.png'}}"
+                 alt="Avatar"
+                 style="width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 10px;">
+
+            <span th:if="${activeProfile != null}"
+                  th:text="${activeProfile.fullName}"></span>
+
+            <span th:unless="${activeProfile != null}"
+                  sec:authentication="name"></span>
 
         </div>
 

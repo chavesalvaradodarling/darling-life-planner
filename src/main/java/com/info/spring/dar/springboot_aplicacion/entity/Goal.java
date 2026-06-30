@@ -1,108 +1,104 @@
 package com.info.spring.dar.springboot_aplicacion.entity;
 
-// Importa las anotaciones necesarias de JPA
 import jakarta.persistence.*;
 
-/*
- * Esta clase representa las metas del usuario.
+/**
+ * Entity representing a user goal stored in the 'goals' table.
  *
- * Ejemplos:
- * - Estudiar 300 horas
- * - Ir al gimnasio 3 veces por semana
- * - Ver 20 películas
+ * A goal tracks progress toward a target number of hours for a given category.
+ * Progress is calculated automatically based on completed activities.
+ * Each goal belongs to one user.
  */
 @Entity
-
-// Nombre de la tabla
 @Table(name = "goals")
 public class Goal {
 
-    // Llave primaria
+    /** Primary key, auto-generated. */
     @Id
-
-    // El id se genera automáticamente
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Nombre de la meta
+    /**
+     * Title or description of the goal.
+     * Example: "Study 50 hours this semester"
+     */
     private String title;
 
-    // Cantidad objetivo
+    /**
+     * Name of the category this goal is linked to.
+     * Must match an existing category name created by the user.
+     * Example: "Bailar", "Estudiar"
+     */
+    private String categoryName;
+
+    /** Target number of hours the user wants to reach. */
     private Double target;
 
-    // Cantidad alcanzada
+    /**
+     * Number of real hours completed so far.
+     * Calculated automatically from completed or partially completed activities.
+     */
     private Double progress;
 
-    /*
-     * MANY TO ONE
-     *
-     * Muchas metas pueden pertenecer
-     * a un mismo usuario.
+    /**
+     * Progress as a percentage (0–100).
+     * Calculated as: (progress / target) * 100, capped at 100.
+     */
+    private Double progressPercentage;
+
+    /**
+     * The user this goal belongs to.
+     * Many goals can belong to one user.
      */
     @ManyToOne
-
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Constructor vacío requerido por JPA
+    /** No-argument constructor required by JPA. */
     public Goal() {
     }
 
-    // Constructor
-    public Goal(
-            Long id,
-            String title,
-            Double target,
-            Double progress,
-            User user) {
-
+    /**
+     * Full constructor.
+     *
+     * @param id                 the goal ID
+     * @param title              the goal title
+     * @param categoryName       the category name to track
+     * @param target             the target number of hours
+     * @param progress           the real hours completed so far
+     * @param progressPercentage the completion percentage
+     * @param user               the owner of this goal
+     */
+    public Goal(Long id, String title, String categoryName,
+            Double target, Double progress,
+            Double progressPercentage, User user) {
         this.id = id;
         this.title = title;
+        this.categoryName = categoryName;
         this.target = target;
         this.progress = progress;
+        this.progressPercentage = progressPercentage;
         this.user = user;
     }
 
-    // ===== GETTERS Y SETTERS =====
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getCategoryName() { return categoryName; }
+    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
 
-    public String getTitle() {
-        return title;
-    }
+    public Double getTarget() { return target; }
+    public void setTarget(Double target) { this.target = target; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public Double getProgress() { return progress; }
+    public void setProgress(Double progress) { this.progress = progress; }
 
-    public Double getTarget() {
-        return target;
-    }
+    public Double getProgressPercentage() { return progressPercentage; }
+    public void setProgressPercentage(Double progressPercentage) { this.progressPercentage = progressPercentage; }
 
-    public void setTarget(Double target) {
-        this.target = target;
-    }
-
-    public Double getProgress() {
-        return progress;
-    }
-
-    public void setProgress(Double progress) {
-        this.progress = progress;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

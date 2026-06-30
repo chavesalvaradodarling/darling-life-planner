@@ -1,50 +1,39 @@
 package com.info.spring.dar.springboot_aplicacion.repository;
 
-// Importa List para devolver varias películas
 import java.util.List;
-
-// Importa JpaRepository
 import org.springframework.data.jpa.repository.JpaRepository;
-
-// Importa la entidad Movie
 import com.info.spring.dar.springboot_aplicacion.entity.Movie;
+import com.info.spring.dar.springboot_aplicacion.entity.User;
 
-/*
- * Esta interfaz se encargará de acceder a la tabla movies
- * de la base de datos.
+/**
+ * Repository interface for the Movie entity.
  *
- * Long indica que la llave primaria (id)
- * es de tipo Long.
+ * Extends JpaRepository to inherit standard CRUD operations:
+ * save(), findById(), findAll(), deleteById(), existsById().
  */
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    /*
-     * JpaRepository ya proporciona automáticamente:
+    /**
+     * Returns all movies belonging to a specific user.
      *
-     * save()
-     * findById()
-     * findAll()
-     * deleteById()
-     * existsById()
+     * @param user the user to filter by
+     * @return list of movies for that user
      */
+    List<Movie> findByUser(User user);
 
-    /*
-     * Permite buscar películas por título.
+    /**
+     * Returns all movies matching the given title.
      *
-     * Ejemplos:
-     * Interstellar
-     * Inception
+     * @param title the movie title to search for
+     * @return list of matching movies
      */
     List<Movie> findByTitle(String title);
 
-    /*
-     * Permite buscar películas por género.
+    /**
+     * Returns all movies matching the given genre.
      *
-     * Ejemplos:
-     * Ciencia ficción
-     * Acción
-     * Drama
+     * @param genre the genre to filter by
+     * @return list of matching movies
      */
     List<Movie> findByGenre(String genre);
-
 }

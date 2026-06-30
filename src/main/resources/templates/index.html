@@ -1,3 +1,21 @@
+
+<!--
+  Home dashboard page.
+
+  Provided model attributes (from IndexController):
+    - categoryCards   : List<CategoryCardDTO>, used to render one colored
+                         stat card per category with logged real hours
+                         (status COMPLETED or PARTIALLY_COMPLETED only)
+    - totalActivities : total number of the user's activities (any status)
+    - categoryLabels / categoryValues : parallel lists feeding the
+                         Chart.js pie chart at the bottom of the page
+
+  Each card's background color comes from a CSS class built dynamically
+  as "card card-<lowercased category.color>" (e.g. card-azul), matched
+  against the named classes in cards.css. If a category has no color set,
+  it falls back to "morado" (purple).
+-->
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,55 +25,43 @@
     <meta charset="UTF-8">
 
     <!-- Responsive -->
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Título -->
     <title>Darling Life Planner</title>
 
     <!-- CSS principal -->
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <!-- CSS del menú lateral -->
-    <link rel="stylesheet"
-          th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
 
     <!-- CSS de la barra superior -->
-    <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
 
     <!-- CSS de las tarjetas -->
-    <link rel="stylesheet"
-          th:href="@{/css/cards.css}">
+    <link rel="stylesheet" th:href="@{/css/cards.css}">
 
     <!-- CSS del plan del día -->
-    <link rel="stylesheet"
-          th:href="@{/css/dailyplan.css}">
+    <link rel="stylesheet" th:href="@{/css/dailyplan.css}">
 
     <!-- CSS de metas -->
-    <link rel="stylesheet"
-          th:href="@{/css/goals.css}">
+    <link rel="stylesheet" th:href="@{/css/goals.css}">
 
     <!-- CSS de próximas actividades -->
-    <link rel="stylesheet"
-          th:href="@{/css/upcoming.css}">
+    <link rel="stylesheet" th:href="@{/css/upcoming.css}">
 
     <!-- CSS del dashboard -->
-    <link rel="stylesheet"
-          th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 
     <!-- CSS del calendario -->
-    <link rel="stylesheet"
-          th:href="@{/css/calendar.css}">
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
 
     <!-- CSS del botón flotante -->
-    <link rel="stylesheet"
-          th:href="@{/css/floatingButton.css}">
-    
+    <link rel="stylesheet" th:href="@{/css/floatingButton.css}">
+
     <!-- CSS del gráfico -->
-    <link rel="stylesheet"
-      th:href="@{/css/chart.css}">
+    <link rel="stylesheet" th:href="@{/css/chart.css}">
 
 </head>
 
@@ -78,52 +84,17 @@
             <!-- Tarjetas estadísticas -->
             <div class="cards">
 
-                <!-- Horas de estudio -->
-                <div class="card">
+               <div th:each="card : ${categoryCards}"
+     th:if="${card != null}"
+     th:class="'card card-' + ${#strings.toLowerCase(card.color ?: 'morado')}">
 
-                    <div class="card-icon">
-                        📚
-                    </div>
+    <div class="card-icon" th:text="${card.icon}"></div>
+    <h3 th:text="${card.name}"></h3>
+    <h2 th:text="${card.hours} + ' h'"></h2>
 
-                    <h3>Horas de estudio</h3>
+</div>
 
-                    <h2 th:text="${studyHours} + ' h'">
-                    </h2>
-
-                </div>
-
-
-                <!-- Horas de ejercicio -->
-                <div class="card">
-
-                    <div class="card-icon">
-                        💪
-                    </div>
-
-                    <h3>Horas de ejercicio</h3>
-
-                    <h2 th:text="${exerciseHours} + ' h'">
-                    </h2>
-
-                </div>
-
-
-                <!-- Horas de ocio -->
-                <div class="card">
-
-                    <div class="card-icon">
-                        🎬
-                    </div>
-
-                    <h3>Horas de ocio</h3>
-
-                    <h2 th:text="${leisureHours} + ' h'">
-                    </h2>
-
-                </div>
-
-
-                <!-- Total de actividades -->
+                <!-- Total actividades -->
                 <div class="card">
 
                     <div class="card-icon">
@@ -164,9 +135,7 @@
             </div>
 
 
-            <!-- Calendario semanal -->
-            <div th:replace="~{fragments/calendar :: calendar}">
-            </div>
+
 
 
             <!-- Gráfico -->
@@ -186,16 +155,24 @@
     <!-- Librería Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-    <!-- Crear gráfico -->
     <script th:inline="javascript">
 
-        const studyHours = /*[[${studyHours}]]*/ 0;
+        const labels = /*[[${categoryLabels}]]*/[];
 
-        const exerciseHours = /*[[${exerciseHours}]]*/ 0;
+        const data = /*[[${categoryValues}]]*/[];
 
-        const leisureHours = /*[[${leisureHours}]]*/ 0;
-
+        const colors = [
+            "#C9A7EB",
+            "#A8D8EA",
+            "#FFD6A5",
+            "#FFCAD4",
+            "#B5EAD7",
+            "#F7D6E0",
+            "#CDE7BE",
+            "#BDE0FE",
+            "#E4C1F9",
+            "#FFC8A2"
+        ];
 
         new Chart(
 
@@ -207,39 +184,17 @@
 
                 data: {
 
-                    labels: [
-
-                        "Estudio",
-
-                        "Ejercicio",
-
-                        "Ocio"
-
-                    ],
+                    labels: labels,
 
                     datasets: [
 
                         {
 
-                            data: [
+                            data: data,
 
-                                studyHours,
-
-                                exerciseHours,
-
-                                leisureHours
-
-                            ],
-
-                            backgroundColor: [
-
-                                "#C9A7EB",
-
-                                "#A8D8EA",
-
-                                "#FFD6A5"
-
-                            ]
+                            backgroundColor:
+                                labels.map((x, i) =>
+                                    colors[i % colors.length])
 
                         }
 
@@ -249,11 +204,11 @@
 
                 options: {
 
-            responsive: true,
+                    responsive: true,
 
-            maintainAspectRatio: true
+                    maintainAspectRatio: true
 
-            }
+                }
 
             }
 

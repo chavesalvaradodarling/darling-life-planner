@@ -1,76 +1,71 @@
 package com.info.spring.dar.springboot_aplicacion.entity;
 
-// Importa las anotaciones necesarias de JPA
 import jakarta.persistence.*;
 
-/*
- * Esta clase representa el perfil del usuario.
+/**
+ * Entity representing a user profile stored in the 'profiles' table.
  *
- * Ejemplos:
- * - Nombre
- * - Correo
- * - Universidad
- * - Carrera
- * - Descripción personal
- * - Foto de perfil
+ * A profile contains personal information about the user such as
+ * their full name, university, career, a personal description, and a profile picture.
+ * Each profile belongs to one user.
  */
 @Entity
-
-// Nombre de la tabla
 @Table(name = "profiles")
 public class Profile {
 
-    // Llave primaria
+    /** Primary key, auto-generated. */
     @Id
-
-    // El id se genera automáticamente
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Nombre completo
+    /** Full name of the user. */
     private String fullName;
 
-    // Correo electrónico
+    /** Email address associated with this profile. */
     private String email;
 
-    // Universidad
+    /** University the user attends. */
     private String university;
 
-    // Carrera
+    /** Academic career or major. */
     private String career;
 
-    // Descripción personal
+    /** Short personal description written by the user. */
     private String description;
 
-    // Imagen o foto de perfil
+    /**
+     * Filename of the uploaded profile picture.
+     * Stored in the uploads/ directory and accessed via /uploads/{filename}.
+     */
     private String image;
 
-    /*
-     * MANY TO ONE
-     *
-     * Muchos perfiles pueden pertenecer
-     * a un mismo usuario.
+    /**
+     * The user this profile belongs to.
+     * Many profiles can belong to one user.
      */
     @ManyToOne
-
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Constructor vacío requerido por JPA
+    /** No-argument constructor required by JPA. */
     public Profile() {
     }
 
-    // Constructor
-    public Profile(
-            Long id,
-            String fullName,
-            String email,
-            String university,
-            String career,
-            String description,
-            String image,
-            User user) {
-
+    /**
+     * Full constructor.
+     *
+     * @param id          the profile ID
+     * @param fullName    the user's full name
+     * @param email       the user's email
+     * @param university  the university name
+     * @param career      the academic career
+     * @param description a personal description
+     * @param image       the profile picture filename
+     * @param user        the owner of this profile
+     */
+    public Profile(Long id, String fullName, String email,
+            String university, String career,
+            String description, String image, User user) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
@@ -81,70 +76,27 @@ public class Profile {
         this.user = user;
     }
 
-    // ===== GETTERS Y SETTERS =====
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getFullName() {
-        return fullName;
-    }
+    public String getUniversity() { return university; }
+    public void setUniversity(String university) { this.university = university; }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    public String getCareer() { return career; }
+    public void setCareer(String career) { this.career = career; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
 
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public String getCareer() {
-        return career;
-    }
-
-    public void setCareer(String career) {
-        this.career = career;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

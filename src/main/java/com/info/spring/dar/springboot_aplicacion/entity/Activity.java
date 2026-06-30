@@ -1,129 +1,139 @@
 package com.info.spring.dar.springboot_aplicacion.entity;
 
-// Importa las anotaciones necesarias de JPA
 import jakarta.persistence.*;
 
-// Indica que esta clase será una tabla en la base de datos
+/**
+ * Entity representing a user activity stored in the 'activities' table.
+ *
+ * An activity is the core unit of the planner. It can optionally be linked
+ * to a planning, category, course, movie, or trip.
+ * Every activity belongs to exactly one user.
+ */
 @Entity
-
-// Nombre que tendrá la tabla en MySQL
 @Table(name = "activities")
 public class Activity {
 
-    // Llave primaria de la tabla
+    /** Primary key, auto-generated. */
     @Id
-
-    // El id se generará automáticamente (1,2,3,4...)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Título de la actividad
-    // Ejemplos:
-    // "Estudiar Cálculo"
-    // "Ir al gimnasio"
-    // "Ver Interstellar"
+    /** Title or name of the activity. */
     private String title;
 
-    // Descripción de la actividad
+    /** Optional description of what the activity involves. */
     private String description;
 
-    // Fecha en la que se realizará la actividad
+    /** Date the activity is scheduled for (format: yyyy-MM-dd). */
     private String activityDate;
 
-    // Hora de inicio
+    /** Time the activity starts (format: HH:mm). */
     private String startTime;
 
-    // Hora de finalización
+    /** Time the activity ends (format: HH:mm). */
     private String endTime;
 
-    // Horas que se planificaron inicialmente
+    /** Number of hours the user planned to spend on this activity. */
     private Double plannedHours;
 
-    // Horas realmente realizadas
+    /** Number of hours the user actually spent on this activity. */
     private Double realHours;
 
-    // Estado de la actividad
-    // COMPLETED
-    // PARTIALLY_COMPLETED
-    // NOT_COMPLETED
+    /**
+     * Current status of the activity.
+     * Possible values: PENDING, COMPLETED, PARTIALLY_COMPLETED, NOT_COMPLETED.
+     */
     private String status;
 
-    // Prioridad de la actividad
-    // LOW
-    // MEDIUM
-    // HIGH
+    /**
+     * Priority level of the activity.
+     * Possible values: LOW, MEDIUM, HIGH.
+     */
     private String priority;
 
-    // Si la actividad fue parcialmente completada,
-    // aquí se almacena qué quedó pendiente
+    /** Optional note describing why the activity was not completed. */
     private String pendingDescription;
 
-    /*
-     * RELACIÓN MANY TO ONE
-     *
-     * Muchas actividades pueden pertenecer
-     * a una misma planificación.
-     *
-     * Planning 1 -------- * Activity
-     *
-     * Se creará una llave foránea planning_id
-     * en la tabla activities.
+    /**
+     * The planning this activity belongs to (optional).
+     * Many activities can belong to one planning.
      */
     @ManyToOne
-
-    // Nombre de la llave foránea
     @JoinColumn(name = "planning_id")
     private Planning planning;
 
-    /*
-     * RELACIÓN MANY TO ONE
-     *
-     * Muchas actividades pueden pertenecer
-     * a una misma categoría.
-     *
-     * Category 1 -------- * Activity
-     *
-     * Se creará una llave foránea category_id
-     * en la tabla activities.
+    /**
+     * The category this activity belongs to (required).
+     * Many activities can belong to one category.
      */
     @ManyToOne
-
-    // Nombre de la llave foránea
     @JoinColumn(name = "category_id")
     private Category category;
 
-    /*
-     * RELACIÓN MANY TO ONE
-     *
-     * Muchas actividades pueden pertenecer
-     * a un mismo curso.
-     *
-     * Esta relación es opcional porque no
-     * todas las actividades son académicas.
-     *
-     * Course 1 -------- * Activity
-     *
-     * Se creará una llave foránea course_id
-     * en la tabla activities.
+    /**
+     * The course this activity is associated with (optional).
+     * Many activities can be linked to one course.
      */
     @ManyToOne
-
-    // Nombre de la llave foránea
     @JoinColumn(name = "course_id")
     private Course course;
 
-    // Constructor vacío requerido por JPA
+    /**
+     * The movie this activity is associated with (optional).
+     * Many activities can be linked to one movie.
+     */
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
+
+    /**
+     * The trip this activity is associated with (optional).
+     * Many activities can be linked to one trip.
+     */
+    @ManyToOne
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
+
+    /**
+     * The user this activity belongs to.
+     * Many activities can belong to one user.
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    /** No-argument constructor required by JPA. */
     public Activity() {
     }
 
-    // Constructor con todos los atributos principales
-    public Activity(Long id, String title, String description,
-            String activityDate, String startTime,
-            String endTime, Double plannedHours,
-            Double realHours, String status,
-            String priority, String pendingDescription,
+    /**
+     * Full constructor.
+     *
+     * @param id                 the activity ID
+     * @param title              the activity title
+     * @param description        optional description
+     * @param activityDate       scheduled date (yyyy-MM-dd)
+     * @param startTime          start time (HH:mm)
+     * @param endTime            end time (HH:mm)
+     * @param plannedHours       planned hours
+     * @param realHours          actual hours spent
+     * @param status             current status
+     * @param priority           priority level
+     * @param pendingDescription note if not completed
+     * @param planning           associated planning
+     * @param category           associated category
+     * @param course             associated course
+     * @param movie              associated movie
+     * @param trip               associated trip
+     * @param user               owner of this activity
+     */
+    public Activity(
+            Long id, String title, String description,
+            String activityDate, String startTime, String endTime,
+            Double plannedHours, Double realHours,
+            String status, String priority, String pendingDescription,
             Planning planning, Category category,
-            Course course) {
+            Course course, Movie movie, Trip trip, User user) {
 
         this.id = id;
         this.title = title;
@@ -139,126 +149,59 @@ public class Activity {
         this.planning = planning;
         this.category = category;
         this.course = course;
+        this.movie = movie;
+        this.trip = trip;
+        this.user = user;
     }
 
-    // ===== GETTERS Y SETTERS =====
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getActivityDate() { return activityDate; }
+    public void setActivityDate(String activityDate) { this.activityDate = activityDate; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getStartTime() { return startTime; }
+    public void setStartTime(String startTime) { this.startTime = startTime; }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getEndTime() { return endTime; }
+    public void setEndTime(String endTime) { this.endTime = endTime; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public Double getPlannedHours() { return plannedHours; }
+    public void setPlannedHours(Double plannedHours) { this.plannedHours = plannedHours; }
 
-    public String getActivityDate() {
-        return activityDate;
-    }
+    public Double getRealHours() { return realHours; }
+    public void setRealHours(Double realHours) { this.realHours = realHours; }
 
-    public void setActivityDate(String activityDate) {
-        this.activityDate = activityDate;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public String getStartTime() {
-        return startTime;
-    }
+    public String getPriority() { return priority; }
+    public void setPriority(String priority) { this.priority = priority; }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
+    public String getPendingDescription() { return pendingDescription; }
+    public void setPendingDescription(String pendingDescription) { this.pendingDescription = pendingDescription; }
 
-    public String getEndTime() {
-        return endTime;
-    }
+    public Planning getPlanning() { return planning; }
+    public void setPlanning(Planning planning) { this.planning = planning; }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
+    public Category getCategory() { return category; }
+    public void setCategory(Category category) { this.category = category; }
 
-    public Double getPlannedHours() {
-        return plannedHours;
-    }
+    public Course getCourse() { return course; }
+    public void setCourse(Course course) { this.course = course; }
 
-    public void setPlannedHours(Double plannedHours) {
-        this.plannedHours = plannedHours;
-    }
+    public Movie getMovie() { return movie; }
+    public void setMovie(Movie movie) { this.movie = movie; }
 
-    public Double getRealHours() {
-        return realHours;
-    }
+    public Trip getTrip() { return trip; }
+    public void setTrip(Trip trip) { this.trip = trip; }
 
-    public void setRealHours(Double realHours) {
-        this.realHours = realHours;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
-
-    public String getPendingDescription() {
-        return pendingDescription;
-    }
-
-    public void setPendingDescription(String pendingDescription) {
-        this.pendingDescription = pendingDescription;
-    }
-
-    // Getter de planning
-    public Planning getPlanning() {
-        return planning;
-    }
-
-    // Setter de planning
-    public void setPlanning(Planning planning) {
-        this.planning = planning;
-    }
-
-    // Getter de category
-    public Category getCategory() {
-        return category;
-    }
-
-    // Setter de category
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    // Getter de course
-    public Course getCourse() {
-        return course;
-    }
-
-    // Setter de course
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

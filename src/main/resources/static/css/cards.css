@@ -10,9 +10,9 @@ CONTENEDOR DE TARJETAS
 
     grid-template-columns:repeat(4,1fr);
 
-    gap:25px;
+    gap:10px;
 
-    padding:30px;
+    padding:10px;
 
 }
 
@@ -27,9 +27,9 @@ TARJETAS
 
     background-color:white;
 
-    padding:25px;
+    padding:10px;
 
-    border-radius:20px;
+    border-radius:10px;
 
     box-shadow:0px 4px 12px rgba(0,0,0,0.08);
 
@@ -46,41 +46,57 @@ TARJETAS
 
 
 /*
+=========================================
 ICONO
+=========================================
 */
 
 .card-icon{
 
-    font-size:25px;
+    font-size:14px;
 
-    margin-bottom:15px;
+    margin-bottom:5px;
 
 }
 
 
 /*
+=========================================
 TÍTULO
+=========================================
 */
 
 .card h3{
 
     color:#8B7AA8;
 
-    font-size:16px;
+    font-size:11px;
 
-    margin-bottom:15px;
+    margin-bottom:5px;
 
 }
 
 
 /*
+=========================================
 VALOR
+=========================================
 */
 
 .card h2{
 
     color:#444;
 
-    font-size:35px;
+    font-size:18px;
 
 }
+.card-amarillo { background-color: #FFF9E0 !important; border-left: 3px solid #F5C542 !important; }
+.card-rosa     { background-color: #FFF0F5 !important; border-left: 3px solid #F472B6 !important; }
+.card-morado   { background-color: #F3F0FF !important; border-left: 3px solid #A78BFA !important; }
+.card-azul     { background-color: #EFF6FF !important; border-left: 3px solid #60A5FA !important; }
+.card-verde    { background-color: #F0FFF4 !important; border-left: 3px solid #4ADE80 !important; }
+.card-rojo     { background-color: #FFF5F5 !important; border-left: 3px solid #F87171 !important; }
+.card-naranja  { background-color: #FFF7ED !important; border-left: 3px solid #FB923C !important; }
+.card-cafe     { background-color: #FDF6EC !important; border-left: 3px solid #B45309 !important; }
+.card-gris     { background-color: #F9FAFB !important; border-left: 3px solid #9CA3AF !important; }
+.card-celeste  { background-color: #E0F7FA !important; border-left: 3px solid #22D3EE !important; }

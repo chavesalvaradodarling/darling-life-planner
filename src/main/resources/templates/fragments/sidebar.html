@@ -3,191 +3,126 @@
 MENÚ LATERAL DE LA APLICACIÓN
 =======================================
 -->
+<!--
+  Application sidebar / main navigation fragment.
 
-<div class="sidebar"
-     th:fragment="sidebar">
+  Includes an inline immediate-execution script that reads the saved
+  theme preference from localStorage and applies the [data-theme="Oscuro"]
+  attribute to <html> BEFORE the rest of the page renders. This prevents
+  a flash of the light theme on page load when the user has dark mode
+  selected.
+
+  Navigation is grouped into four sections: Home, Categories (the user's
+  trackable entities), Analysis, and User account actions.
+
+  Included via: th:replace="~{fragments/sidebar :: sidebar}"
+-->
+<div class="sidebar" th:fragment="sidebar">
+
+    <!-- SCRIPT DE EJECUCIÓN INMEDIATA PARA EVITAR EL PARPADEO BLANCO -->
+    <script>
+        (function () {
+            const temaGlobal = localStorage.getItem('theme');
+            if (temaGlobal === 'Oscuro') {
+                document.documentElement.setAttribute('data-theme', 'Oscuro');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        })();
+    </script>
 
     <!-- Nombre de la aplicación -->
     <h2>
-
         Darling Life Planner 🌸
-
     </h2>
-
 
     <!-- SECCIÓN INICIO -->
     <h4>
-
         INICIO
-
     </h4>
-
     <ul>
-
         <li>
-
             <a th:href="@{/}">
-
                 🏠 Inicio
-
             </a>
-
         </li>
-
+       
         <li>
-
-            <a th:href="@{/planningsPage}">
-
-                📅 Mis Planificaciones
-
-            </a>
-
-        </li>
-
-        <li>
-
-            <a th:href="@{/}">
-
+            <a th:href="@{/calendar}">
                 🗓 Calendario
-
             </a>
-
         </li>
-
     </ul>
-
 
     <!-- SECCIÓN CATEGORÍAS -->
     <h4>
-
         CATEGORÍAS
-
     </h4>
-
     <ul>
-
         <li>
-
             <a th:href="@{/activitiesPage}">
-
                 📋 Actividades
-
             </a>
-
         </li>
-
         <li>
-
             <a th:href="@{/coursesPage}">
-
                 📚 Cursos
-
             </a>
-
         </li>
-
         <li>
-
             <a th:href="@{/moviesPage}">
-
                 🎬 Películas
-
             </a>
-
         </li>
-
         <li>
-
             <a th:href="@{/tripsPage}">
-
                 ✈ Viajes
-
             </a>
-
         </li>
-
         <li>
-
             <a th:href="@{/categoriesPage}">
-
                 🏷 Categorías
-
             </a>
-
         </li>
-
     </ul>
-
 
     <!-- SECCIÓN ANÁLISIS -->
     <h4>
-
         ANÁLISIS
-
     </h4>
-
     <ul>
-
         <li>
-
             <a th:href="@{/goalsPage}">
-
                 🎯 Metas
-
             </a>
-
         </li>
-
         <li>
-
             <a th:href="@{/reportsPage}">
-
                 📊 Reportes
-
             </a>
-
         </li>
-
     </ul>
-
 
     <!-- SECCIÓN USUARIO -->
     <h4>
-
         USUARIO
-
     </h4>
-
     <ul>
-
         <li>
-
             <a th:href="@{/profilesPage}">
-
                 👤 Perfil
-
             </a>
-
         </li>
-
         <li>
-
-         <a th:href="@{/settingsPage}">
-
-        ⚙ Configuración
-
-         </a>
-
-        </li>
-
-        <li>
-
-            <a th:href="@{/login}">
-        🚪 Cerrar sesión
+            <a th:href="@{/settingsPage}">
+                ⚙ Configuración
             </a>
-
         </li>
-
+        <li>
+            <a th:href="@{/logout}">
+                🚪 Cerrar sesión
+            </a>
+        </li>
     </ul>
 
 </div>

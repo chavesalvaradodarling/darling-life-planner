@@ -1,183 +1,140 @@
 <!DOCTYPE html>
 <html lang="es">
+<!--
+  Activity create/edit form.
 
+  Bound to the "activity" model attribute (a new Activity for creation,
+  or an existing one populated by ActivityViewController.editActivity for editing).
+
+  Category is the only required association. Course, Movie, and Trip are
+  optional one-of associations: the controller clears all three before
+  applying the one selected, so picking one logically implies "none" for
+  the other two even though the form does not enforce mutual exclusivity
+  client-side.
+-->
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Activity</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Nueva Actividad</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
-
-    <link rel="stylesheet"
-          th:href="@{/css/sidebar.css}">
-
-    <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
-
-    <link rel="stylesheet"
-          th:href="@{/css/activityForm.css}">
-
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/activityForm.css}">
 </head>
 
 <body>
 
     <div class="container">
 
-        <!-- Sidebar -->
         <div th:replace="~{fragments/sidebar :: sidebar}">
         </div>
 
-        <!-- Contenido principal -->
         <div class="main-content">
 
-            <!-- Navbar -->
             <div th:replace="~{fragments/navbar :: navbar}">
             </div>
 
-            <!-- Formulario -->
             <div class="form-container">
 
                 <h1>
-                    📋 Nueva Actividad
+                    📋 New Activity
                 </h1>
 
                 <form th:action="@{/saveActivity}"
                       th:object="${activity}"
                       method="post">
 
-                    <!-- Id oculto -->
-                    <input type="hidden"
-                           th:field="*{id}">
+                    <!-- Hidden id: empty for a new activity, populated when editing -->
+                    <input type="hidden" th:field="*{id}">
 
+                    <label>Title</label>
+                    <input type="text" th:field="*{title}" required>
 
-                    <!-- Título -->
-                    <label>Título</label>
+                    <label>Description</label>
+                    <input type="text" th:field="*{description}">
 
-                    <input type="text"
-                           th:field="*{title}"
-                           required>
+                    <label>Date</label>
+                    <input type="date" th:field="*{activityDate}" required>
 
+                    <label>Start time</label>
+                    <input type="time" th:field="*{startTime}" required>
 
-                    <!-- Descripción -->
-                    <label>Descripción</label>
+                    <label>End time</label>
+                    <input type="time" th:field="*{endTime}" required>
 
-                    <input type="text"
-                           th:field="*{description}">
+                    <label>Planned hours</label>
+                    <input type="number" step="0.5" th:field="*{plannedHours}">
 
+                    <label>Real hours</label>
+                    <input type="number" step="0.5" th:field="*{realHours}">
 
-                    <!-- Fecha -->
-                    <label>Fecha</label>
-
-                    <input type="date"
-                           th:field="*{activityDate}">
-
-
-                    <!-- Hora de inicio -->
-                    <label>Hora de inicio</label>
-
-                    <input type="time"
-                           th:field="*{startTime}">
-
-
-                    <!-- Hora final -->
-                    <label>Hora final</label>
-
-                    <input type="time"
-                           th:field="*{endTime}">
-
-
-                    <!-- Horas planificadas -->
-                    <label>Horas planificadas</label>
-
-                    <input type="number"
-                           step="0.5"
-                           th:field="*{plannedHours}">
-
-
-                    <!-- Horas reales -->
-                    <label>Horas reales</label>
-
-                    <input type="number"
-                           step="0.5"
-                           th:field="*{realHours}">
-
-
-                    <!-- Categoría -->
-                    <label>Categoría</label>
-
-                    <select th:field="*{category.id}">
-
+                    <!-- Category: required association, populated from CategoryService.getAllCategories() -->
+                    <label>Category</label>
+                    <select th:field="*{category.id}" required>
                         <option value="">
-                            Seleccione una categoría
+                            Select a category
                         </option>
-
                         <option th:each="category : ${categories}"
                                 th:value="${category.id}"
                                 th:text="${category.icon + ' ' + category.name}">
                         </option>
-
                     </select>
 
+                    <!-- Course: optional association, scoped to the current user -->
+                    <label>Course</label>
+                    <select name="course.id">
+                        <option value="">
+                            No course
+                        </option>
+                        <option th:each="course : ${courses}"
+                                th:value="${course.id}"
+                                th:text="${course.name}">
+                        </option>
+                    </select>
 
-                    <!-- Prioridad -->
-                    <label>Prioridad</label>
+                    <!-- Movie: optional association, scoped to the current user -->
+                    <label>Movie</label>
+                    <select name="movie.id">
+                        <option value="">
+                            No movie
+                        </option>
+                        <option th:each="movie : ${movies}"
+                                th:value="${movie.id}"
+                                th:text="${movie.title}">
+                        </option>
+                    </select>
 
+                    <!-- Trip: optional association, scoped to the current user. If selected and no
+                         date was provided, the controller auto-fills activityDate from the trip's
+                         departure date. -->
+                    <label>Trip</label>
+                    <select name="trip.id">
+                        <option value="">
+                            No trip
+                        </option>
+                        <option th:each="trip : ${trips}"
+                                th:value="${trip.id}"
+                                th:text="${trip.destination}">
+                        </option>
+                    </select>
+
+                    <label>Priority</label>
                     <select th:field="*{priority}">
-
-                        <option value="LOW">
-                            Baja
-                        </option>
-
-                        <option value="MEDIUM">
-                            Media
-                        </option>
-
-                        <option value="HIGH">
-                            Alta
-                        </option>
-
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
                     </select>
 
+                    <!-- Hidden default status: overridden in editActivity if the activity already has a different status -->
+                    <input type="hidden" th:field="*{status}" value="PENDING">
 
-                    <!-- Estado -->
-                    <label>Estado</label>
-
-                    <select th:field="*{status}">
-
-                        <option value="NOT_COMPLETED">
-                            No completada
-                        </option>
-
-                        <option value="PARTIALLY_COMPLETED">
-                            Parcialmente completada
-                        </option>
-
-                        <option value="COMPLETED">
-                            Completada
-                        </option>
-
-                    </select>
-
-
-                    <!-- Botón Guardar -->
                     <button type="submit">
-
-                        Guardar actividad
-
+                        Save activity
                     </button>
 
-
-                    <!-- Regresar -->
                     <a th:href="@{/activitiesPage}">
-
-                        Volver a actividades
-
+                        Back to activities
                     </a>
 
                 </form>

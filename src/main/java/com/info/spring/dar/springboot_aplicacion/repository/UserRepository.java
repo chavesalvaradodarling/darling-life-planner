@@ -1,40 +1,26 @@
 package com.info.spring.dar.springboot_aplicacion.repository;
 
-// Importa JpaRepository
 import org.springframework.data.jpa.repository.JpaRepository;
-
-// Importa la entidad User
 import com.info.spring.dar.springboot_aplicacion.entity.User;
 
-// Indica que esta interfaz se encargará de acceder
-// a la tabla users de la base de datos
+/**
+ * Repository interface for the User entity.
+ *
+ * Extends JpaRepository to inherit standard CRUD operations:
+ * save(), findById(), findAll(), deleteById(), existsById().
+ *
+ * Spring Data JPA generates the SQL query automatically from the method name.
+ * Example: findByEmail("darling@gmail.com") → SELECT * FROM users WHERE email = ?
+ */
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    /*
-     * JpaRepository ya proporciona automáticamente:
+    /**
+     * Returns the user with the given email address.
+     * Used by Spring Security for authentication and by UserService
+     * to retrieve the currently logged-in user.
      *
-     * save()
-     * findById()
-     * findAll()
-     * deleteById()
-     * existsById()
-     *
-     * No es necesario programarlos.
-     */
-
-    /*
-     * Método personalizado.
-     *
-     * Permite buscar un usuario por su correo electrónico.
-     *
-     * Ejemplo:
-     *
-     * User user = userRepository.findByEmail("darling@gmail.com");
-     *
-     * Spring genera automáticamente la consulta:
-     *
-     * SELECT * FROM users WHERE email = ?
+     * @param email the email address to search for
+     * @return the matching user, or null if not found
      */
     User findByEmail(String email);
-
 }

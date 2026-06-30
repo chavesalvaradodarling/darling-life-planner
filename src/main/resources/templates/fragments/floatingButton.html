@@ -1,3 +1,15 @@
+
+<!--
+  Floating action menu fragment.
+
+  A fixed-position "+" button that expands into quick-create shortcuts
+  for the most commonly added entities. Note: "New planning" was removed
+  from this menu since Planning is not currently surfaced in the UI.
+
+  Included via: th:replace="~{fragments/floatingButton :: floatingButton}"
+-->
+
+
 <div class="floating-menu"
      th:fragment="floatingButton">
 
@@ -8,43 +20,43 @@
 
     </div>
 
-
     <!-- Menú -->
     <div class="floating-options">
 
-        <div class="option">
+        <a
+           th:href="@{/newActivity}"
+           class="option">
 
             📋 Nueva actividad
 
-        </div>
+        </a>
 
 
-        <div class="option">
+        <a
+           th:href="@{/newCourse}"
+           class="option">
 
             📚 Nuevo curso
 
-        </div>
+        </a>
 
 
-        <div class="option">
+        <a
+           th:href="@{/newMovie}"
+           class="option">
 
             🎬 Nueva película
 
-        </div>
+        </a>
 
 
-        <div class="option">
+        <a
+           th:href="@{/newTrip}"
+           class="option">
 
-            ✈ Nuevo viaje
+            ✈️ Nuevo viaje
 
-        </div>
-
-
-        <div class="option">
-
-            📅 Nueva planificación
-
-        </div>
+        </a>
 
     </div>
 

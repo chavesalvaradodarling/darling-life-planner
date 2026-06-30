@@ -4,126 +4,264 @@ CALENDARIO SEMANAL
 =====================================
 */
 
-.calendar{
+.calendar-container{
 
-    background:white;
+    background-color:var(--bg-card);
 
-    margin:25px;
+    margin:4px 14px 14px 14px;
 
-    padding:25px;
+    padding:16px;
 
-    border-radius:20px;
+    border-radius:16px;
 
-    box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
 
-}
+    overflow-x:auto;
 
-
-/*
-SEMANA
-*/
-
-.week{
-
-    display:grid;
-
-    grid-template-columns:repeat(7,1fr);
-
-    gap:20px;
-
-    margin-top:25px;
+    transition:background-color 0.3s ease;
 
 }
 
 
 /*
-DÍAS
+=====================================
+TÍTULO
+=====================================
 */
 
-.day{
+.calendar-header{
 
-    padding:20px;
-
-    border-radius:20px;
+    margin-bottom:14px;
 
 }
 
 
-.day h3{
+.calendar-header h1{
 
-    color:#7C6A91;
+    color:var(--text-title);
 
-    margin-bottom:15px;
+    font-size:22px;
 
-}
+    font-weight:bold;
 
-
-.day span{
-
-    color:#888;
-
-    font-size:14px;
-
-}
-
-
-.day p{
-
-    margin-top:15px;
-
-    color:#666;
+    transition:color 0.3s ease;
 
 }
 
 
 /*
-COLORES PASTEL
+=====================================
+TABLA
+=====================================
 */
 
-.monday{
+.calendar-table{
 
-    background-color:#F4E7F7;
+    width:100%;
 
-}
+    border-collapse:collapse;
 
-
-.tuesday{
-
-    background-color:#EAF7E7;
+    table-layout:fixed;
 
 }
 
 
-.wednesday{
+/*
+=====================================
+ENCABEZADOS
+=====================================
+*/
 
-    background-color:#E7F0FF;
+.calendar-table th{
+
+    background-color:var(--border-color);
+
+    color:var(--text-title);
+
+    font-size:11px;
+
+    font-weight:600;
+
+    padding:6px;
+
+    border:1px solid var(--border-color);
+
+    transition:background-color 0.3s ease,
+               color 0.3s ease,
+               border-color 0.3s ease;
 
 }
 
 
-.thursday{
+/*
+=====================================
+HORAS Y CELDAS
+=====================================
+*/
 
-    background-color:#FFEAF4;
+.calendar-table td{
+
+    border:1px solid var(--border-color);
+
+    height:32px;
+
+    vertical-align:top;
+
+    padding:3px;
+
+    background-color:var(--bg-card);
+
+    transition:background-color 0.3s ease,
+               border-color 0.3s ease;
 
 }
 
 
-.friday{
+/*
+=====================================
+COLUMNA HORA
+=====================================
+*/
 
-    background-color:#EAF7FF;
+.calendar-table td:first-child{
+
+    width:42px;
+
+    text-align:center;
+
+    font-weight:bold;
+
+    font-size:10px;
+
+    color:var(--text-main);
+
+    background-color:var(--bg-input);
+
+    transition:background-color 0.3s ease,
+               color 0.3s ease;
 
 }
 
 
-.saturday{
+/*
+=====================================
+EFECTO HOVER
+=====================================
+*/
 
-    background-color:#FFF5E7;
+.calendar-table td:hover{
+
+    background-color:var(--bg-input);
 
 }
 
 
-.sunday{
+/*
+=====================================
+EVENTOS
+=====================================
+*/
 
-    background-color:#F3F3F3;
+.event{
+
+    padding:5px;
+
+    border-radius:8px;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    margin-bottom:4px;
+
+    text-align:center;
+
+    word-wrap:break-word;
+
+    overflow:hidden;
+
+}
+
+
+/*
+=====================================
+CATEGORÍAS
+=====================================
+*/
+
+.academic{
+
+    background-color:#EEE7FF;
+
+    color:#5B3FA6;
+
+}
+
+
+.personal{
+
+    background-color:#FFE8F2;
+
+    color:#C2558A;
+
+}
+
+
+.health{
+
+    background-color:#E8F8E8;
+
+    color:#4D8A4D;
+
+}
+
+
+.leisure{
+
+    background-color:#E8F2FF;
+
+    color:#4D79B8;
+
+}
+
+
+/*
+=====================================
+IMAGEN DE PELÍCULA
+=====================================
+*/
+
+.event img{
+
+    width:22px;
+
+    height:30px;
+
+    object-fit:cover;
+
+    border-radius:6px;
+
+    margin-top:4px;
+
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+
+}
+
+
+/*
+=====================================
+TEXTO DEL EVENTO
+=====================================
+*/
+
+.event span{
+
+    display:block;
+
+    font-weight:bold;
+
+    color:var(--text-main);
+
+    font-size:11px;
 
 }

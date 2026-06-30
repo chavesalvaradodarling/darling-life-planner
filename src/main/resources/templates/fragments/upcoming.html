@@ -1,12 +1,29 @@
-<div class="upcoming"
-     th:fragment="upcoming">
 
-    <h2>
+<!--
+  Upcoming activities widget fragment (home dashboard).
 
-        📅 Próximas actividades
+  Lists every activity in ${activities} with its date and title.
+  Note: this currently shows ALL activities, not filtered or sorted
+  by future date — the name "upcoming" describes its intended purpose
+  rather than its current filtering behavior.
 
-    </h2>
+  Included via: th:replace="~{fragments/upcoming :: upcoming}"
+-->
 
+
+<div class="upcoming" th:fragment="upcoming">
+
+    <h2>📅 Próximas actividades</h2>
+
+    <div class="upcoming-item" th:each="activity : ${activities}">
+        <span class="upcoming-date" th:text="${activity.activityDate}"></span>
+        <span class="upcoming-name">
+            <span th:if="${activity.category != null}" th:text="${activity.category.icon + ' '}"></span>
+            <span th:text="${activity.title}"></span>
+        </span>
+    </div>
+
+</div>
 
     <!-- Recorrer actividades -->
     <div class="event"

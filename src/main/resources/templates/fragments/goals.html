@@ -1,136 +1,25 @@
-<div class="goals"
-     th:fragment="goals">
+<!--
+  Goals widget fragment (home dashboard).
 
-    <h2>
+  Currently always renders the empty-state variant regardless of whether
+  the user has goals, inviting them to create their first one. To show
+  real goal progress here, this fragment would need to receive an
+  "activeGoals"/"completedGoals" attribute similar to GoalViewController's
+  /goalsPage logic.
 
-        ⭐ Metas
+  Included via: th:replace="~{fragments/goals :: goals}"
+-->
 
-    </h2>
 
+<div class="goals" th:fragment="goals">
 
-    <!-- Ejercicio -->
-    <div class="goal">
+    <h2>⭐ Mis metas</h2>
 
-        <div class="goal-info">
-
-            <h4>
-
-                💪 Horas de ejercicio
-
-            </h4>
-
-            <span>
-
-                <span th:text="${exerciseHours}">
-                </span>
-
-                h
-
-            </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-            <div class="progress gym-progress">
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Ocio -->
-    <div class="goal">
-
-        <div class="goal-info">
-
-            <h4>
-
-                🎬 Horas de ocio
-
-            </h4>
-
-            <span>
-
-                <span th:text="${leisureHours}">
-                </span>
-
-                h
-
-            </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-            <div class="progress movie-progress">
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Estudio -->
-    <div class="goal">
-
-        <div class="goal-info">
-
-            <h4>
-
-                📚 Horas de estudio
-
-            </h4>
-
-            <span>
-
-                <span th:text="${studyHours}">
-                </span>
-
-                h
-
-            </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-            <div class="progress study-progress">
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Actividades -->
-    <div class="goal">
-
-        <div class="goal-info">
-
-            <h4>
-
-                ✅ Total de actividades
-
-            </h4>
-
-            <span th:text="${totalActivities}">
-            </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-            <div class="progress gym-progress">
-
-            </div>
-
-        </div>
-
+    <div class="goals-empty">
+        <span class="goals-empty-icon">🎯</span>
+        <p class="goals-empty-title">Sin metas aún</p>
+        <p class="goals-empty-sub">Agrega tu primera meta para ver el progreso aquí</p>
+        <a th:href="@{/goalsPage}" class="goals-button">+ Nueva meta</a>
     </div>
 
 </div>

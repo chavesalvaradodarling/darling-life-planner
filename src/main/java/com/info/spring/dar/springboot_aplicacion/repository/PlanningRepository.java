@@ -1,50 +1,26 @@
 package com.info.spring.dar.springboot_aplicacion.repository;
 
-// Importa List para devolver varias planificaciones
 import java.util.List;
-
-// Importa JpaRepository
 import org.springframework.data.jpa.repository.JpaRepository;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Planning;
 import com.info.spring.dar.springboot_aplicacion.entity.User;
 
-/*
- * Esta interfaz se encargará de comunicarse con la tabla planning
- * de la base de datos.
+/**
+ * Repository interface for the Planning entity.
  *
- * Long indica que la llave primaria (id)
- * es de tipo Long.
+ * Extends JpaRepository to inherit standard CRUD operations:
+ * save(), findById(), findAll(), deleteById(), existsById().
+ *
+ * Spring Data JPA generates the SQL query automatically from the method name.
+ * Example: findByUser(user) → SELECT * FROM planning WHERE user_id = ?
  */
 public interface PlanningRepository extends JpaRepository<Planning, Long> {
 
-    /*
-     * JpaRepository ya proporciona automáticamente:
+    /**
+     * Returns all plannings belonging to a specific user.
      *
-     * save()
-     * findById()
-     * findAll()
-     * deleteById()
-     * existsById()
-     */
-
-    /*
-     * Método personalizado.
-     *
-     * Permite obtener todas las planificaciones
-     * pertenecientes a un usuario.
-     *
-     * Ejemplo:
-     *
-     * List<Planning> plannings =
-     * planningRepository.findByUser(user);
-     *
-     * Spring generará automáticamente:
-     *
-     * SELECT * FROM planning
-     * WHERE user_id = ?
+     * @param user the user to filter by
+     * @return list of plannings for that user
      */
     List<Planning> findByUser(User user);
-
 }

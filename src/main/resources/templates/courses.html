@@ -1,132 +1,74 @@
+<!--
+========================================================
+COURSES LIST PAGE
+
+Displays a table of all courses belonging to the
+logged-in user, with action buttons (edit, delete).
+========================================================
+-->
+
+
+
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Cursos</title>
-
-    <link rel="stylesheet"
-          th:href="@{/css/style.css}">
-
-    <link rel="stylesheet"
-          th:href="@{/css/sidebar.css}">
-
-    <link rel="stylesheet"
-          th:href="@{/css/navbar.css}">
-
-    <link rel="stylesheet"
-          th:href="@{/css/courses.css}">
-
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/courses.css}">
 </head>
-
 <body>
 
 <div class="container">
-
-    <!-- Sidebar -->
-    <div th:replace="~{fragments/sidebar :: sidebar}">
-    </div>
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
 
     <div class="main-content">
-
-        <!-- Navbar -->
-        <div th:replace="~{fragments/navbar :: navbar}">
-        </div>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
 
         <div class="activities-container">
-
-            <h1>
-
+            <h1 style="color: var(--text-title); transition: color 0.3s ease;">
                 📚 Mis Cursos
-
             </h1>
 
-
-            <!-- Botón -->
-            <a th:href="@{/newCourse}"
-               class="new-activity">
-
+            <a th:href="@{/newCourse}" class="new-activity">
                 + Nuevo curso
-
             </a>
 
-
-            <!-- Tabla -->
             <table>
-
                 <thead>
-
                     <tr>
-
                         <th>Curso</th>
-
                         <th>Código</th>
-
                         <th>Créditos</th>
-
                         <th>Profesor</th>
-
                         <th>Acciones</th>
-
                     </tr>
-
                 </thead>
-
                 <tbody>
-
                     <tr th:each="course : ${courses}">
-
-                        <td th:text="${course.name}">
-                        </td>
-
-                        <td th:text="${course.code}">
-                        </td>
-
-                        <td th:text="${course.credits}">
-                        </td>
-
-                        <td th:text="${course.teacher}">
-                        </td>
-
+                        <td th:text="${course.name}"></td>
+                        <td th:text="${course.code}"></td>
+                        <td th:text="${course.credits}"></td>
+                        <td th:text="${course.teacher}"></td>
                         <td>
-
-                            <a class="action-edit"
-                               th:href="@{/editCourse/{id}(id=${course.id})}">
-
+                            <a class="action-edit" th:href="@{/editCourse/{id}(id=${course.id})}">
                                 ✏️ Editar
-
                             </a>
-
                             &nbsp;
-
-                            <a class="action-delete"
-                               th:href="@{/deleteCourse/{id}(id=${course.id})}"
-
+                            <a class="action-delete" th:href="@{/deleteCourse/{id}(id=${course.id})}"
                                onclick="return confirm('¿Desea eliminar este curso?')">
-
                                 🗑️ Eliminar
-
                             </a>
-
                         </td>
-
                     </tr>
-
                 </tbody>
-
             </table>
-
         </div>
-
     </div>
-
 </div>
 
 </body>
-
 </html>

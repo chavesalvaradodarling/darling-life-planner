@@ -1,134 +1,146 @@
 package com.info.spring.dar.springboot_aplicacion.controller;
 
-// Importa las anotaciones necesarias de Spring Boot
 import org.springframework.web.bind.annotation.*;
-
-// Permite trabajar con listas
 import java.util.List;
-
-// Importa las entidades necesarias
 import com.info.spring.dar.springboot_aplicacion.entity.Activity;
 import com.info.spring.dar.springboot_aplicacion.entity.Category;
 import com.info.spring.dar.springboot_aplicacion.entity.Course;
 import com.info.spring.dar.springboot_aplicacion.entity.Planning;
-
-// Importa el servicio
 import com.info.spring.dar.springboot_aplicacion.service.ActivityService;
 
-/*
- * Esta clase se encargará de recibir las peticiones HTTP
- * relacionadas con las actividades.
+/**
+ * REST controller that exposes API endpoints for managing activities.
+ * Base URL: /activities
  */
 @RestController
-
-// Ruta principal para las actividades
 @RequestMapping("/activities")
 public class ActivityController {
 
-    // Objeto que permitirá acceder a la lógica del servicio
+    /** Service that handles all activity-related business logic. */
     private final ActivityService activityService;
 
-    /*
-     * Constructor con inyección de dependencias.
+    /**
+     * Constructor with dependency injection.
+     *
+     * @param activityService the service used to manage activities
      */
     public ActivityController(ActivityService activityService) {
         this.activityService = activityService;
     }
 
-    /*
-     * GET
+    /**
+     * Returns all activities in the system.
+     * GET /activities
      *
-     * Devuelve todas las actividades.
-     *
-     * URL:
-     * http://localhost:8080/activities
+     * @return list of all activities
      */
     @GetMapping
     public List<Activity> getAllActivities() {
         return activityService.getAllActivities();
     }
 
-    /*
-     * GET
+    /**
+     * Returns a single activity by its ID.
+     * GET /activities/{id}
      *
-     * Devuelve una actividad según su id.
-     *
-     * Ejemplo:
-     * http://localhost:8080/activities/1
+     * @param id the activity ID
+     * @return the matching activity, or null if not found
      */
     @GetMapping("/{id}")
     public Activity getActivityById(@PathVariable Long id) {
         return activityService.getActivityById(id);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all activities associated with a given planning.
+     * GET /activities/planning
      *
-     * Devuelve todas las actividades
-     * pertenecientes a una planificación.
+     * @param planning the planning object sent in the request body
+     * @return list of matching activities
      */
     @GetMapping("/planning")
     public List<Activity> getActivitiesByPlanning(@RequestBody Planning planning) {
         return activityService.getActivitiesByPlanning(planning);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all activities associated with a given category.
+     * GET /activities/category
      *
-     * Devuelve todas las actividades
-     * pertenecientes a una categoría.
+     * @param category the category object sent in the request body
+     * @return list of matching activities
      */
     @GetMapping("/category")
     public List<Activity> getActivitiesByCategory(@RequestBody Category category) {
         return activityService.getActivitiesByCategory(category);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all activities associated with a given course.
+     * GET /activities/course
      *
-     * Devuelve todas las actividades
-     * asociadas a un curso.
+     * @param course the course object sent in the request body
+     * @return list of matching activities
      */
     @GetMapping("/course")
     public List<Activity> getActivitiesByCourse(@RequestBody Course course) {
         return activityService.getActivitiesByCourse(course);
     }
 
-    /*
-     * GET
+    /**
+     * Returns all activities with a specific status.
+     * GET /activities/status/{status}
      *
-     * Devuelve todas las actividades
-     * según su estado.
-     *
-     * Ejemplo:
-     * http://localhost:8080/activities/status/COMPLETED
+     * @param status the status string (e.g. PENDING, COMPLETED)
+     * @return list of activities with the given status
      */
     @GetMapping("/status/{status}")
     public List<Activity> getActivitiesByStatus(@PathVariable String status) {
         return activityService.getActivitiesByStatus(status);
     }
 
-    /*
-     * POST
+    /**
+     * Returns all activities that are still pending (not completed).
+     * GET /activities/pending
      *
-     * Guarda una nueva actividad.
+     * @return list of pending activities
+     */
+    @GetMapping("/pending")
+    public List<Activity> getPendingActivities() {
+        return activityService.getPendingActivities();
+    }
+
+    /**
+     * Saves a new activity.
+     * POST /activities
+     *
+     * @param activity the activity object received in the request body
+     * @return the saved activity
      */
     @PostMapping
     public Activity saveActivity(@RequestBody Activity activity) {
         return activityService.saveActivity(activity);
     }
 
-    /*
-     * DELETE
+    /**
+     * Marks an activity as completed without deleting it.
+     * PUT /activities/complete/{id}
      *
-     * Elimina una actividad según su id.
+     * @param id the ID of the activity to complete
+     */
+    @PutMapping("/complete/{id}")
+    public void completeActivity(@PathVariable Long id) {
+        activityService.completeActivity(id);
+    }
+
+    /**
+     * Deletes an activity by its ID.
+     * DELETE /activities/{id}
      *
-     * Ejemplo:
-     * http://localhost:8080/activities/1
+     * @param id the ID of the activity to delete
      */
     @DeleteMapping("/{id}")
     public void deleteActivity(@PathVariable Long id) {
         activityService.deleteActivity(id);
     }
-
 }

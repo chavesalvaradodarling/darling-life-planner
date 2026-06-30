@@ -1,3 +1,29 @@
+<!--
+==============================================================================
+File: reports.html
+Project: Darling Life Planner
+------------------------------------------------------------------------------
+Description:
+This page displays the Reports dashboard of the Darling Life Planner
+application. It provides users with a summarized overview of their planning
+performance by presenting key statistics and productivity metrics. The report
+information is dynamically generated using Spring Boot and Thymeleaf, allowing
+real-time visualization of activity data retrieved from the system.
+
+Main Features:
+- Displays the total number of registered activities.
+- Shows the number of completed and pending activities.
+- Presents the total hours dedicated to each category.
+- Calculates and displays the overall completion percentage.
+- Integrates the common sidebar and navigation bar fragments.
+- Uses Thymeleaf expressions to render dynamic report data from the backend.
+
+
+==============================================================================
+-->
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -42,180 +68,69 @@
             <div class="reports-container">
 
                 <h1>
-
                     📊 Reportes
-
                 </h1>
-
 
                 <!-- Total de actividades -->
                 <div class="report-card">
 
                     <h3>
-
                         📋 Total de actividades
-
                     </h3>
 
-                    <h2 th:text="${totalActivities}">
+                    <h2 th:text="${report.totalActivities}">
                     </h2>
 
                 </div>
-
 
                 <!-- Actividades completadas -->
                 <div class="report-card">
 
                     <h3>
-
                         ✅ Actividades completadas
-
                     </h3>
 
-                    <h2 th:text="${completedActivities}">
+                    <h2 th:text="${report.completedActivities}">
                     </h2>
 
                 </div>
-
-
-                <!-- Actividades parciales -->
-                <div class="report-card">
-
-                    <h3>
-
-                        🟡 Actividades parciales
-
-                    </h3>
-
-                    <h2 th:text="${partialActivities}">
-                    </h2>
-
-                </div>
-
 
                 <!-- Actividades pendientes -->
                 <div class="report-card">
 
                     <h3>
-
                         ❌ Actividades pendientes
-
                     </h3>
 
-                    <h2 th:text="${pendingActivities}">
+                    <h2 th:text="${report.pendingActivities}">
                     </h2>
 
                 </div>
 
-
-                <!-- Horas de estudio -->
-                <div class="report-card">
-
-                    <h3>
-
-                        📚 Horas de estudio
-
-                    </h3>
-
-                    <h2 th:text="${studyHours} + ' h'">
-                    </h2>
-
-                </div>
-
-
-                <!-- Horas de ejercicio -->
-                <div class="report-card">
+                <!-- Horas por categoría (DINÁMICO) -->
+                <div class="report-card"
+                     th:each="category : ${report.hoursPerCategory}">
 
                     <h3>
 
-                        💪 Horas de ejercicio
-
-                    </h3>
-
-                    <h2 th:text="${exerciseHours} + ' h'">
-                    </h2>
-
-                </div>
-
-
-                <!-- Horas de ocio -->
-                <div class="report-card">
-
-                    <h3>
-
-                        🎬 Horas de ocio
-
-                    </h3>
-
-                    <h2 th:text="${leisureHours} + ' h'">
-                    </h2>
-
-                </div>
-
-
-                <!-- Estadísticas generales -->
-                <h1>
-
-                    📈 Estadísticas generales
-
-                </h1>
-
-
-                <div class="report-card">
-
-                    <h3>
-
-                        📚 Porcentaje de estudio
-
-                    </h3>
-
-                    <h2>
-
-                        <span th:text="${studyHours}">
+                        ⭐ <span th:text="${category.key}">
                         </span>
 
-                        horas
+                    </h3>
 
+                    <h2 th:text="${category.value} + ' h'">
                     </h2>
 
                 </div>
 
-
+                <!-- Cumplimiento -->
                 <div class="report-card">
 
                     <h3>
-
-                        💪 Porcentaje de ejercicio
-
+                        📈 Porcentaje de cumplimiento
                     </h3>
 
-                    <h2>
-
-                        <span th:text="${exerciseHours}">
-                        </span>
-
-                        horas
-
-                    </h2>
-
-                </div>
-
-
-                <div class="report-card">
-
-                    <h3>
-
-                        🎬 Porcentaje de ocio
-
-                    </h3>
-
-                    <h2>
-
-                        <span th:text="${leisureHours}">
-                        </span>
-
-                        horas
-
+                    <h2 th:text="${#numbers.formatDecimal(report.completionPercentage,1,2)} + '%'">
                     </h2>
 
                 </div>
